@@ -99,7 +99,7 @@ class _loginPageState extends State<loginPage> {
                            context,
                            MaterialPageRoute(
                                builder: (context) {
-                                 return homescreen();
+                                 return HomeScreen();
                                },
                            )
                          );

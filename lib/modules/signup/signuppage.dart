@@ -105,7 +105,7 @@ class _signUpPageState extends State<signUpPage> {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return homescreen();
+                                return HomeScreen();
                               },
                             )
                         );
