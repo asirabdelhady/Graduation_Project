@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 /////////////////////////////// Shared //////////////////////////////////////////////////
@@ -112,33 +114,72 @@ Widget likeAndAddTour({
 
 // Notification container
 Widget notificationItem({required String notification}) => Container(
-      padding: EdgeInsets.symmetric(horizontal: 10),
-      width: double.infinity,
-      height: 75,
-      decoration: BoxDecoration(
-        color: Color(0xff292D32),
-        borderRadius: BorderRadius.circular(35),
+  padding: EdgeInsets.symmetric(horizontal: 10),
+  width: double.infinity,
+  height: 75,
+  decoration: BoxDecoration(
+    color: Color(0xff292D32),
+    borderRadius: BorderRadius.circular(35),
+  ),
+  child: Row(
+    children: [
+      Icon(
+        Icons.notifications,
+        color: Colors.grey,
       ),
-      child: Row(
-        children: [
-          Icon(
-            Icons.notifications,
-            color: Colors.grey,
-          ),
-          SizedBox(
-            width: 10,
-          ),
-          Expanded(
-            child: Text.rich(
-              TextSpan(text: notification),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Colors.white),
-            ),
-          )
-        ],
+      SizedBox(
+        width: 10,
       ),
-    );
+      Expanded(
+        child: Text.rich(
+          TextSpan(text: notification),
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(color: Colors.white),
+        ),
+      )
+    ],
+  ),
+);
+
+Widget slimCardItem({
+  required String text,
+    var color,
+    var  icon,
+    var iconColor,
+
+}) => Container(
+  padding: EdgeInsets.symmetric(horizontal: 10),
+  width: double.infinity,
+  height: 75,
+  decoration: BoxDecoration(
+    color: iconColor,
+    borderRadius: BorderRadius.circular(35),
+  ),
+  child: Row(
+    children: [
+      Icon(
+        icon,
+        color: color,
+      ),
+      SizedBox(
+        width: 10,
+      ),
+      Expanded(
+        child: Text.rich(
+          TextSpan(text: text),
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(color: Colors.white),
+        ),
+      )
+    ],
+  ),
+);
+
+
+Widget buildNotificationItem()=> notificationItem(notification: 'Lets go');
+
 
 
 ////////////////////////  Profile Screen ///////////////////////////////////////////////////

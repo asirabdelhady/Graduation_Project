@@ -24,7 +24,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
               ElevatedButton(onPressed: (){},
                 child: Icon(Icons.notifications_none, size: 30, color: Colors.white,),
                 style: ElevatedButton.styleFrom(
-                    primary: Color(0xff292D32), shape: CircleBorder()
+                    primary: Color(0xff292D32), shape: const CircleBorder()
                 ),)
           ),
         ),
@@ -41,20 +41,56 @@ class _NotificationScreenState extends State<NotificationScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children:[
-                SizedBox(height: 12,),
+                const SizedBox(height: 12,),
+                SizedBox(
+                  height: 75,
+                  child: ListView.separated(itemBuilder:(context, index)=>Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    width: double.infinity,
+                    height: 75,
+                    decoration: BoxDecoration(
+                      color: Color(0xff292D32),
+                      borderRadius: BorderRadius.circular(35),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.notifications,
+                          color: Colors.grey,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: Text.rich(
+                            TextSpan(text: 'notification'),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                    separatorBuilder: (context, index)=> SizedBox(height: 15,),
+                    itemCount: 6,
+                  ),
+                ),
+                const SizedBox(height: 12,),
                 notificationItem(notification: 'Hey! your 5 KM away from the pyramids'),
-                SizedBox(height: 12,),
+                const SizedBox(height: 12,),
                 notificationItem(notification: 'You are mins away from your destination lets go lets go'),
-                SizedBox(height: 12,),
+                const SizedBox(height: 12,),
                 notificationItem(notification: 'You are mins away from your destination lets go lets go'),
-                SizedBox(height: 12,),
+                const SizedBox(height: 12,),
                 notificationItem(notification: 'You are mins away from your destination lets go lets go'),
-                SizedBox(height: 12,),
+                const SizedBox(height: 12,),
                 notificationItem(notification: 'You are mins away from your destination lets go lets go'),
-                SizedBox(height: 12,),
+                const SizedBox(height: 12,),
                 notificationItem(notification: 'You are mins away from your destination lets go lets go'),
-                SizedBox(height: 12,),
+                const SizedBox(height: 12,),
                 notificationItem(notification: 'You are mins away from your destination lets go lets go'),
+
             ]),
           ),
         ),
@@ -84,4 +120,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
     );
   }
+  
+
 }
+
