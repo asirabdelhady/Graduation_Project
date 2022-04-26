@@ -3,7 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+
 import 'package:tour_guide_app/modules/notification/notification_screen.dart';
+import 'package:tour_guide_app/shared/components/components.dart';
 
 class ProfileScreen extends StatefulWidget{
   @override
@@ -97,14 +99,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: Column(children:[
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children:[ Text.rich(TextSpan(text: 'Profile',
                     style: TextStyle(fontWeight: FontWeight.bold,
                         fontSize: 30)
                 )
                 ),
-                 Expanded(child:
-                     Container()
-                 ),
                   Container(
                     width: 50,
                     height: 40,
@@ -115,92 +115,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: IconButton(icon: Icon(Icons.edit_outlined), onPressed: (){})),
               ]),
               SizedBox(height: 12),
-              Center(
-                child: Row(
-                  children: [
-                    Container(
-                      width: 104,
-                        height: 104,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image:  AssetImage('assets/images/Pyramids1.jpg')
-                            )
-                        )
-                    ),
-                    SizedBox(width: 12,),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal:8.0),
-                      child: Container(
-                        height: 104,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children:[ Text.rich(TextSpan(
-                            text: 'Asir Abdelhady',
-                            style: TextStyle(
-                              fontSize: 23,
-                              fontWeight: FontWeight.bold
-                            )
-                          )),
-                        Text('Age: 22'),
-                            Text('Nationality: Egypt')
-
-                          ]),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              DefaultTabController(
-                  length: 3, // length of tabs
-                  //initialIndex: 0,
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children:<Widget>[
-                    Container(
-                      child: TabBar(
-                        labelColor: Color(0xff292D32),
-                        unselectedLabelColor: Colors.grey,
-                        tabs: [
-                          Tab(text: 'Favorites'),
-                          Tab(text: 'History'),
-                          Tab(text: 'Review'),
-
-                        ],
-                      ),
-                    ),
-                     Container(
-                          height: 274,//height of TabBarView
-                            decoration: BoxDecoration(
-                                border: Border(top: BorderSide(color: Colors.grey, width: 0.5))
-                            ),
-                            child: TabBarView(children: <Widget>[
-                              SingleChildScrollView(
-                                child: Column(
-                                  children:[
-                                    SizedBox(height: 12,),
-
-                                ]),
-                              ),
-                              SingleChildScrollView(
-                                child: Column(
-                                    children:[
-                                      SizedBox(height: 12,),
-
-                                    ]),
-                              ),
-                              SingleChildScrollView(
-                                child: Column(
-                                    children:[
-                                      SizedBox(height: 12,),
-
-                                    ]),
-                              ),
-                            ])
-                        ),
-
-
-                  ])
-              ),
+              profileHeader(imagePath: 'assets/images/Pyramids.jpg', name: 'Asir Abdelhady', age: 22, nationality: 'Egypt'),
+              profileBody(),
 
             ]),
           ),

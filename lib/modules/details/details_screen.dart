@@ -121,8 +121,8 @@ class _DetailScreenState extends State<DetailScreen> {
                             child: ElevatedButton(
                               onPressed: () {
                                 setState(() {
-                favClicked=!favClicked;
-              });
+                                favClicked=!favClicked;
+                                });
                               },
                               child: Icon((favClicked==false)? Icons.favorite_border_rounded : Icons.favorite ,
                                 size: 20,

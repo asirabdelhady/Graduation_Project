@@ -1,4 +1,3 @@
-import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
@@ -144,7 +143,7 @@ Widget notificationItem({required String notification}) => Container(
 
 Widget slimCardItem({
   required String text,
-    var color,
+    required Color color ,
     var  icon,
     var iconColor,
 
@@ -153,14 +152,14 @@ Widget slimCardItem({
   width: double.infinity,
   height: 75,
   decoration: BoxDecoration(
-    color: iconColor,
+    color: color,
     borderRadius: BorderRadius.circular(35),
   ),
   child: Row(
     children: [
       Icon(
         icon,
-        color: color,
+        color: iconColor,
       ),
       SizedBox(
         width: 10,
@@ -188,7 +187,7 @@ Widget buildNotificationItem()=> notificationItem(notification: 'Lets go');
 Widget profileHeader({
   required String imagePath,
   required String name,
-  required String age,
+  required int age,
   required String nationality,
 }) => Row(
   children: [
@@ -217,8 +216,8 @@ Widget profileHeader({
                     fontWeight: FontWeight.bold
                 )
             )),
-              Text(age),
-              Text(nationality)
+              Text('Age: $age'),
+              Text('Nationality: $nationality')
 
             ]),
       ),
@@ -260,6 +259,10 @@ Widget profileBody() => DefaultTabController(
               child: Column(
                   children:[
                     SizedBox(height: 12,),
+                    slimCardItem(text: 'Any text',
+                    icon: Icons.car_rental,
+                    iconColor: Colors.black,
+                    color: beige())
 
                   ]),
             ),
