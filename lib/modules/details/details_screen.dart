@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tour_guide_app/shared/components/components.dart';
 
 class DetailScreen extends StatefulWidget {
+  const DetailScreen({Key? key}) : super(key: key);
 
   @override
   _DetailScreenState createState() => _DetailScreenState();
@@ -16,11 +18,11 @@ class _DetailScreenState extends State<DetailScreen> {
         child:SingleChildScrollView(
               child:
                   Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                ClipRRect(
+                const ClipRRect(
                     borderRadius:
                         BorderRadius.vertical(bottom: Radius.circular(30)),
                     child: Image(image: AssetImage('assets/images/Pyramids.jpg'))),
-                SizedBox(
+                const SizedBox(
                   height: 12,
                 ),
                 Padding(
@@ -28,37 +30,14 @@ class _DetailScreenState extends State<DetailScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text.rich(TextSpan(
-                          text: 'The Great Pyramids Of Giza',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 35))),
-                      SizedBox(height: 12,),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text.rich(TextSpan(
-                                text: 'About',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 20))),
-
-                          SizedBox(height: 12,),
-                          Container(
-                            height: 70,
-                            child: Text('Pyramids of Giza, Arabic Ahrāmāt Al-Jīzah, Giza also spelled Gizeh, three 4th-dynasty (c. 2575–c. 2465 BCE) pyramids erected on a rocky ...more',
-                              maxLines: 4,
-                              overflow: TextOverflow.ellipsis,
-                            )
-                          ),
-                        ],
-                      ),
-                      SizedBox(
+                      detailsTitle(title: 'The Great Pyramids Of Giza'),
+                      const SizedBox(height: 12,),
+                      aboutDetails(details: 'Pyramids of Giza, Arabic Ahrāmāt Al-Jīzah, Giza also spelled Gizeh, three 4th-dynasty (c. 2575–c. 2465 BCE) pyramids erected on a rocky ...more'),
+                      const SizedBox(
                         height: 12,
                       ),
-                      Text.rich(TextSpan(
-                            text: 'Images',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 20))),
-                      SizedBox(
+                      subTitle(subTitle: 'Images'),
+                      const SizedBox(
                         height: 12,
                       ),
                       SingleChildScrollView(
@@ -126,66 +105,50 @@ class _DetailScreenState extends State<DetailScreen> {
                                             'assets/images/Pyramids1.jpg')))),
                           ]),
                         ),
-                      SizedBox(
+                      const SizedBox(
                         height: 12,
                       ),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                          child: Container(
-                            width: 400,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              image: DecorationImage(
-                                fit: BoxFit.fitWidth,
-                                image: AssetImage('assets/images/Map.jpeg'),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
+                      mapButton(),
+                      const SizedBox(
                         height: 12,
                       ),
                       Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
-                                width: 50,
-                                height: 50,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      favClicked=!favClicked;
-                                    });
-                                  },
-                                  child: Icon((favClicked==false)? Icons.favorite_border_rounded : Icons.favorite ,
-                                    size: 20,
-                                    color: Colors.white,
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Color(0xff292D32),
-                                    shape: CircleBorder(),
-                                  ),
-                                )),
-                            Container(
-                                width: 225,
-                                height: 50,
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  child: Text.rich(TextSpan(
-                                    text: 'Add to Tour',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 20),
-                                  )),
-                                  style: ElevatedButton.styleFrom(
-                                      shape: StadiumBorder(),
-                                      primary: Color(0xff292D32)),
-                                )),
-                          ]),
-                      SizedBox(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                            width: 50,
+                            height: 50,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                favClicked=!favClicked;
+              });
+                              },
+                              child: Icon((favClicked==false)? Icons.favorite_border_rounded : Icons.favorite ,
+                                size: 20,
+                                color: Colors.white,
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                primary: Color(0xff292D32),
+                                shape: CircleBorder(),
+                              ),
+                            )),
+                        Container(
+                            width: 225,
+                            height: 50,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              child: Text.rich(TextSpan(
+                                text: 'Add to Tour',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              )),
+                              style: ElevatedButton.styleFrom(
+                                  shape: StadiumBorder(),
+                                  primary: Color(0xff292D32)),
+                            )),
+                      ]),
+                      const SizedBox(
                         height: 12,
                       ),
                     ],

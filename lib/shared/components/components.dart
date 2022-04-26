@@ -68,7 +68,8 @@ Widget mapButton() => GestureDetector(
 
 // Fav and add to tour row
 Widget likeAndAddTour({
-  required Function favPressed,
+   favClicked =false,
+  required ,
 }) => Row(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
@@ -76,9 +77,12 @@ Widget likeAndAddTour({
           width: 50,
           height: 50,
           child: ElevatedButton(
-            onPressed: favPressed(),
-            child: Icon(
-              Icons.favorite_border_outlined,
+            onPressed: () {
+              /*setState(() {
+                favClicked=!favClicked;
+              });*/
+            },
+            child: Icon((favClicked==false)? Icons.favorite_border_rounded : Icons.favorite ,
               size: 20,
               color: Colors.white,
             ),
