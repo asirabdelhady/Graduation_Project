@@ -10,16 +10,14 @@ class TourScreen extends StatefulWidget{
 
 class _TourScreenState extends State<TourScreen> {
   int index =1;
-//coadlksnd
   @override
   Widget build(BuildContext context) {
-//asdfghjkl
     return  Scaffold(
       body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children:[
+          children:const [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              padding: EdgeInsets.symmetric(horizontal: 12.0),
               child: Text.rich(TextSpan(text: 'Tour Plan', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30))),
             ),
             /* Expanded(
