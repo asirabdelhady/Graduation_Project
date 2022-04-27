@@ -18,7 +18,12 @@ class _TourScreenState extends State<TourScreen> {
           children:const [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12.0),
-              child: Text.rich(TextSpan(text: 'Tour Plan', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30))),
+              child: Text('Tour Plan',
+                  style: TextStyle(
+                      fontWeight:
+                      FontWeight.bold,
+                      fontSize: 30),
+              )
             ),
             /* Expanded(
           child: Stepper(
