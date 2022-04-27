@@ -10,11 +10,10 @@ class TourScreen extends StatefulWidget{
 
 class _TourScreenState extends State<TourScreen> {
   int index =1;
-//ajsbdjadgjhsfksjghgg nbvfgddfvhg g
+
   @override
   Widget build(BuildContext context) {
-//fkjadhf
-  //ajfkkdsfksdgsj,.gnjfdkvjk
+
     return const Scaffold(
       body: Center(child: Text('Tour Screen')),
 
