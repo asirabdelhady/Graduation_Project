@@ -1,5 +1,8 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
+import 'package:tour_guide_app/shared/styles/colors.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({Key? key}) : super(key: key);
@@ -14,14 +17,38 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+      ),
+
       body: SafeArea(
         child:SingleChildScrollView(
               child:
                   Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                const ClipRRect(
-                    borderRadius:
-                        BorderRadius.vertical(bottom: Radius.circular(30)),
-                    child: Image(image: AssetImage('assets/images/Pyramids.jpg'))),
+                Stack(
+                  children: [
+
+                     ClipRRect(
+                          borderRadius: BorderRadius.only(bottomRight: Radius.circular(30),bottomLeft: Radius.circular(30)
+                          ),
+
+                        child: Image(image: AssetImage('assets/images/Pyramids.jpg'),
+                        fit: BoxFit.fill,)),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircleAvatar(
+                        radius: 22.5,
+                        backgroundColor: tPrimary(),
+                        child: IconButton(onPressed: () {
+                          Navigator.pop(context);
+                        }, icon: Icon(Icons.arrow_back,
+                          color: Colors.white,
+                        ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 const SizedBox(
                   height: 12,
                 ),

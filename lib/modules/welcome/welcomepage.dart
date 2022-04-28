@@ -3,6 +3,8 @@ import 'package:tour_guide_app/modules/login/loginpage.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 
+import '../signup/signuppage.dart';
+
 class welcomepage extends StatefulWidget{
   @override
   State<welcomepage> createState() => _welcomepageState();
@@ -31,30 +33,34 @@ class _welcomepageState extends State<welcomepage> {
                         Text('Welcome,',
                           style: TextStyle(
                             fontSize: 36,
-                            color: navyBlue(),
+                            color: tPrimary(),
                           ),
                         ),
                         Text('Explorer',
                           style: TextStyle(
                             fontSize: 36,
-                            color: navyBlue(),
+                            color: tPrimary(),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(width: 17
+                  SizedBox(width: 70
                     ,),
                   Padding(
                     padding: const EdgeInsetsDirectional.only(top: 20),
-                    child:circleBack(width: 228,height: 228),
+                    child:circleBack(width: 145,height:145),
                   ),
                 ],
               ),
             ),
             SizedBox(height: 15,
             ),
-            SizedBox(height: 12,),
+            Image(
+              image: AssetImage('assets/images/Group 67welcomepageimage.png'),
+              height: 242,
+              width: double.infinity,
+            ),
             Expanded(
               child: Stack(
                 children:
@@ -62,29 +68,43 @@ class _welcomepageState extends State<welcomepage> {
                   Container(
                     decoration: BoxDecoration(
                       color: const Color(0xFF292D32),
-                        borderRadius: BorderRadius.only(
+                      borderRadius: BorderRadius.only(
                           topRight: Radius.circular(30),
                           topLeft: Radius.circular(30)
-                        ),
+                      ),
 
                     ),
                     width: double.infinity,
                   ),
                   Center(
                     child: Padding(
-                      padding: const EdgeInsets.all(28.0),
+                      padding: const EdgeInsets.only(top: 28,right: 28,left: 28),
                       child: Column(
                         children:
                         [
                           Text('lets get started',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white
-                          ),),
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white
+                            ),),
                           SizedBox(height: 16,),
-                          mainButton(minWidth: 222, height: 53, text: 'Create Account', fontSize: 18,onPressed: (){
-                            //signup page
-                          }),
+                          mainButton(
+                              minWidth: 222,
+                              height: 53,
+                              text: 'Create Account',
+                              fontSize: 18,
+                              onPressed: (){
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return signUpPage();
+                                      },
+                                    )
+                                );
+
+
+                              }, imagepath: 'assets/images/arrow.png'),
                           SizedBox(height: 16,
                           ),
                           Text('Already have an',
@@ -98,16 +118,20 @@ class _welcomepageState extends State<welcomepage> {
                                 color: Colors.white
                             ),),
                           SizedBox(height: 16,),
-                          mainButton(minWidth: 222, height: 53, text: 'Login', fontSize: 18, onPressed: (){
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return loginPage();
-                                  },
-                                )
-                            );
-                          }),
+                          mainButton(minWidth: 222,
+                              height: 53,
+                              text: 'Login',
+                              fontSize: 18,
+                              onPressed: (){
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return loginPage();
+                                      },
+                                    )
+                                );
+                              }, imagepath: 'assets/images/arrow.png'),
 
                         ],
                       ),

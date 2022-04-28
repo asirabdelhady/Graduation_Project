@@ -39,7 +39,7 @@ class _NavigationState extends State<Navigation> {
       body: screens[index],
       bottomNavigationBar: CurvedNavigationBar(
         index: 2,
-        color: navyBlue(),
+        color: tPrimary(),
           buttonBackgroundColor: const Color(0xff292D32),
           height: 50,
           backgroundColor: Colors.transparent,
