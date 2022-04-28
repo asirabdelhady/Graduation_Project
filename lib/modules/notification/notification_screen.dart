@@ -12,20 +12,27 @@ class _NotificationScreenState extends State<NotificationScreen> {
   int index =3;
   @override
   Widget build(BuildContext context) {
+    var mediaQueryHeight=MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(title: const Text('Notifications', style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: 30),),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        elevation: 0,
+        title: const Text('Notifications',
+          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: 30),),
         backgroundColor: Colors.white,),
+      extendBody: true,
+      extendBodyBehindAppBar: true,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal:12.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children:[
-                const SizedBox(height: 12,),
+               
                 SizedBox(
-                  height: 75,
+                  height: mediaQueryHeight,
                   child: ListView.separated(itemBuilder:(context, index)=>Container(
+
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     width: double.infinity,
                     height: 75,
@@ -54,23 +61,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     ),
                   ),
                     separatorBuilder: (context, index)=> const SizedBox(height: 15,),
-                    itemCount: 6,
+                    itemCount: 26,
                   ),
                 ),
-                const SizedBox(height: 12,),
-                notificationItem(notification: 'Hey! your 5 KM away from the pyramids'),
-                const SizedBox(height: 12,),
-                notificationItem(notification: 'You are mins away from your destination lets go lets go'),
-                const SizedBox(height: 12,),
-                notificationItem(notification: 'You are mins away from your destination lets go lets go'),
-                const SizedBox(height: 12,),
-                notificationItem(notification: 'You are mins away from your destination lets go lets go'),
-                const SizedBox(height: 12,),
-                notificationItem(notification: 'You are mins away from your destination lets go lets go'),
-                const SizedBox(height: 12,),
-                notificationItem(notification: 'You are mins away from your destination lets go lets go'),
-                const SizedBox(height: 12,),
-                notificationItem(notification: 'You are mins away from your destination lets go lets go'),
 
             ]),
           ),

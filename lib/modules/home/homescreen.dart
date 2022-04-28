@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tour_guide_app/modules/categories/categorypage.dart';
 import 'package:tour_guide_app/modules/details/details_screen.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
@@ -27,6 +28,27 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                height: 26,
+                width: 160,
+                margin: EdgeInsets.only(bottom: 10,),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(3, 0, 0, 0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Icon(
+                      Icons.location_on_outlined,
+                      color: Colors.black,
+                      size: 17,
+                    ),
+                  ),
+                ),
+              ),
               Row(
                 children: [
                   Expanded(
@@ -38,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        height: mediaQueryHeight*0.16,
+                        height: mediaQueryHeight*0.06,
                         width: double.infinity,
                         child: TextFormField(
                           decoration: InputDecoration(
@@ -109,9 +131,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       categorybutton(
                           text: 'All',
                           iconshape: Icons.plus_one_sharp,
-                          ontap: () {
-                            print('pressed');
-                          }),
+                          ontap: (){Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return categorypage();
+                                },
+                              )
+                          );
+                          },),
                       SizedBox(
                         width: 10,
                       ),

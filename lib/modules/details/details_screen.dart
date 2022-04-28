@@ -17,9 +17,6 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-      ),
 
       body: SafeArea(
         child:SingleChildScrollView(

@@ -36,6 +36,7 @@ class _NavigationState extends State<Navigation> {
     ];
 
     return Scaffold(
+      extendBody: true,
       body: screens[index],
       bottomNavigationBar: CurvedNavigationBar(
         index: 2,
