@@ -4,7 +4,7 @@ import 'package:tour_guide_app/shared/styles/colors.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
 
 import '../../navigation.dart';
-
+//bngrb tany
 class loginPage extends StatefulWidget {
   @override
   State<loginPage> createState() => _loginPageState();
@@ -121,6 +121,7 @@ class _loginPageState extends State<loginPage> {
                                 height: 40,
                                 text: 'Login',
                                 fontSize: 13,
+
                                 onPressed: () {
                                   if (formKey.currentState!.validate()) {
                                     print(emailController.text);
