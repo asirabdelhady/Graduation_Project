@@ -95,8 +95,7 @@ class _loginPageState extends State<loginPage> {
                                 passorno: false,
                                 suffixicon: Icon(null),
                                 controller: emailController,
-                                validatorText: 'E-mail must\'t be empty',
-                                suffixPressed: null),
+                                suffixPressed: null, validatorFunction: null, onFieldSubmitted: null, onChanged: null),
                             SizedBox(
                               height: 10,
                             ),
@@ -107,12 +106,11 @@ class _loginPageState extends State<loginPage> {
                                 passorno: passorno,
                                 suffixicon: Icon((passorno==false)? Icons.remove_red_eye : Icons.visibility_off,),
                                 controller: passwordController,
-                                validatorText: 'Password must\'t be empty',
                                 suffixPressed: (){
                                   setState(() {
                                     passorno=!passorno;
                                   });
-                                }),
+                                }, validatorFunction: null, onChanged: null, onFieldSubmitted: null),
                             SizedBox(
                               height: 40,
                             ),

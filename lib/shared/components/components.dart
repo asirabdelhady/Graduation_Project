@@ -401,8 +401,11 @@ Widget mainFormField({
   required bool passorno,
   var suffixicon = const Icon(Icons.remove_red_eye),
   required var controller,
-  required String validatorText,
+
   required suffixPressed,
+  required var onFieldSubmitted,
+  required var validatorFunction,
+  required var onChanged
 }) =>
     Stack(children: [
       Container(
@@ -424,21 +427,13 @@ Widget mainFormField({
           children: [
             //   SizedBox(height: 1,),
             TextFormField(
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return validatorText;
-                }
-                return null;
-              },
+              onFieldSubmitted:onFieldSubmitted ,
+              validator: validatorFunction,
 
               controller: controller,
 
-              onFieldSubmitted: (String value) {
-                print(value);
-              },
-              onChanged: (String value) {
-                print(value);
-              },
+
+              onChanged: onChanged,
 
               decoration: InputDecoration(
                 hintText: hintText,
