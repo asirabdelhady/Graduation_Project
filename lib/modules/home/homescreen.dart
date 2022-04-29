@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/modules/categories/category_screen.dart';
 import 'package:tour_guide_app/modules/categories/categorypage.dart';
 import 'package:tour_guide_app/modules/details/details_screen.dart';
@@ -16,17 +17,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     var mediaQueryHeight=MediaQuery.of(context).size.height;
     var mediaQueryWidth=MediaQuery.of(context).size.width;
 
     print('curent hight is '+mediaQueryHeight.toString());
     print('curent hight is '+mediaQueryWidth.toString());
     return SafeArea(
+      bottom: false,
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 23.0, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
@@ -35,8 +38,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                height: 26,
-                width: 160,
+                height: mediaQueryHeight*0.043,
+                width: mediaQueryWidth*0.5,
                 margin: EdgeInsets.only(bottom: 10,),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(3, 0, 0, 0),
@@ -75,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ), //search
               SizedBox(
-                height:10,
+                height:mediaQueryHeight*0.016,
               ),
               Row(
                 children: [
@@ -121,108 +124,54 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ), //tourTracking
-              SizedBox(
-                height: 24,
-              ),
-              Center(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      categorybutton(
-                          text: 'All',
-                          iconshape: Icons.plus_one_sharp,
-                          ontap: (){Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return CategoryScreen();
-                                },
-                              )
-                          );
-                          },),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      categorybutton(
-                          text: 'Music',
-                          iconshape: Icons.music_note_outlined,
-                          ontap: null),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      categorybutton(
-                          text: 'Transport',
-                          iconshape: Icons.emoji_transportation_outlined,
-                          ontap: null),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      categorybutton(
-                          text: 'Cafe',
-                          iconshape: Icons.local_cafe_outlined,
-                          ontap: null),
-                    ],
-                  ),
-                ),
-              ), //category
-              SizedBox(
-                height: 24,
-              ),
+              SizedBox(height:mediaQueryHeight* 0.016,),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Recommended',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: tPrimary(),
-                    ),
-                  ),
+                  subTitle(subTitle: 'Recommended (nearby)'),
+                  Icon(Icons.keyboard_arrow_right)
                 ],
               ),
-              SizedBox(
-                height: 24,
-              ),
+              SizedBox(height: 24,),
+              cardBuilderWithDotIndicator(),
               Row(
-                children: <Widget>[
-                  homeScreenRecommendedCard(
-                      imagePath: 'assets/images/egypt-cairo-pyramids-of-giza-and camels-2.jpg',
-                      onTap: (){Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return DetailScreen();
-                            },
-                          )
-                      );},
-                      height: mediaQueryHeight*0.2,
-                      width:mediaQueryWidth*0.4),
-                  SizedBox(width: 10,),
-                  homeScreenRecommendedCard(
-                      imagePath: 'assets/images/egypt-cairo-pyramids-of-giza-and camels-2.jpg',
-                      onTap: (){Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return DetailScreen();
-                            },
-                          )
-                      );
-                        },
-                      height: mediaQueryHeight*0.2,
-                      width: mediaQueryWidth*0.4),
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  subTitle(subTitle: 'Categories'),
+                  Container(
+                    height: 30,
+                    width: 60,
+                    child: ElevatedButton(onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context){
+                        return CategoryScreen();
+                      }));
+                    },
+                        style: ElevatedButton.styleFrom(
+                          primary: tPrimary(),
+                          shape: StadiumBorder(),
+                        ),
+                        child: Text('All')),
+                  ),
+
                 ],
               ),
+              cardBuilderWithDotIndicator(),
+              SizedBox(height: mediaQueryHeight*0.016,),
+
+              SizedBox(height: 60,),
 
 
 
-            ],
-          ),
+              //AnimatedSmoothIndicator(activeIndex: activeIndex, count: 4)
+
+
+
+            ],),
         ),
       ),
     );
 
-  }
+    }
 
 }
+

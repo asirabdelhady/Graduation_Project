@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 /////////////////////////////// Shared //////////////////////////////////////////////////
 
@@ -754,14 +755,21 @@ Widget defualtCard ({
             Padding(
               padding: const EdgeInsets.only(
                 right: 25,
-                left: 13,
+                left: 15,
                 top: 90,
                 bottom: 8,
               ),
               child: Container(
-                height: mediaQueryHeight*0.122,
+                height: mediaQueryHeight*0.120,
                 width: mediaQueryWidth*0.781,
                 decoration: BoxDecoration(
+                  boxShadow: const [
+                    BoxShadow(
+                    offset: Offset(5, 5),
+                    blurRadius: 5,
+                    color: Colors.grey,
+                    ),
+                  ],
                   borderRadius: BorderRadius.circular(30),
                   color: Colors.white,
                 ),
@@ -825,3 +833,69 @@ Widget defualtCard ({
     );
   }
 );
+
+Widget backButton()=> Builder(
+
+  builder: (context) {
+    return     Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        width: 50,
+        height: 50,
+        child: ElevatedButton(
+          onPressed: () {
+          Navigator.pop(context);
+        },
+    style: ElevatedButton.styleFrom(
+    primary: tPrimary(),
+    shape: CircleBorder(),
+
+    ),
+    child: Icon(Icons.arrow_back_rounded,
+            color: Colors.white,
+        ),
+    ),
+      )
+    );
+
+  }
+);
+
+Widget cardBuilderWithDotIndicator ()=> Builder(
+  builder: (context) {
+    var mediaQueryHeight= MediaQuery.of(context).size.height;
+    var mediaQueryWidth = MediaQuery.of(context).size.width;
+    PageController pageController = PageController(initialPage: 0);
+    Widget _buildPageItem(int index) {
+      return defualtCard(placeName: 'Pyramids', imagePath: 'assets/images/Pyramids.jpg');
+    }
+    return     Column(
+      children: [
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Container(
+              height: mediaQueryHeight*0.322,
+              width: mediaQueryWidth,
+              child: PageView.builder(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, position) => _buildPageItem(position),
+                itemCount: 3,
+                controller: pageController,
+              )
+          ),
+        ),
+        Center(
+          child: SmoothPageIndicator(
+            controller: pageController,
+            count: 3,
+            effect: WormEffect(
+              dotColor: tGrey(),
+              activeDotColor: tPrimary(),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+);
+

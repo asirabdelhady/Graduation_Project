@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
 
@@ -17,10 +18,10 @@ class CategoryScreen extends StatelessWidget{
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment:MainAxisAlignment.start ,
                   children: [
+                    backButton(),
                     detailsTitle(title: 'Categories'),
-                    Icon(Icons.grid_view)
                   ],
                 ),
                 SizedBox(height: mediaQueryHeight*0.049,),
@@ -30,44 +31,22 @@ class CategoryScreen extends StatelessWidget{
                     subTitle(subTitle: 'Tourist Attractions'),
                     Icon(Icons.keyboard_arrow_right),
                   ],),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(children: [
-                    defualtCard(placeName: 'The Great Pyramids of Giza', imagePath: 'assets/images/Pyramids.jpg'),
-                    defualtCard(placeName: 'The Great Pyramids of Giza', imagePath: 'assets/images/Pyramids1.jpg'),
-                    defualtCard(placeName: 'The Great Pyramids of Giza', imagePath: 'assets/images/Pyramids3.jpg'),
-
-
-                  ],),
-                ),
+                cardBuilderWithDotIndicator(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     subTitle(subTitle: 'Hotels'),
                     Icon(Icons.keyboard_arrow_right),
                   ],),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(children: [
-                    defualtCard(placeName: 'The Great Pyramids of Giza', imagePath: 'assets/images/Pyramids1.jpg'),
-                    defualtCard(placeName: 'The Great Pyramids of Giza', imagePath: 'assets/images/Pyramids2.jpg'),
-                    defualtCard(placeName: 'The Great Pyramids of Giza', imagePath: 'assets/images/Pyramids3.jpg'),
-                  ],),
-                ),
+                cardBuilderWithDotIndicator(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     subTitle(subTitle: 'Entertainment'),
                     Icon(Icons.keyboard_arrow_right),
                   ],),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(children: [
-                    defualtCard(placeName: 'The Great Pyramids of Giza', imagePath: 'assets/images/Pyramids3.jpg'),
-                    defualtCard(placeName: 'The Great Pyramids of Giza', imagePath: 'assets/images/Pyramids3.jpg'),
-                    defualtCard(placeName: 'The Great Pyramids of Giza', imagePath: 'assets/images/Pyramids2.jpg'),
-                  ],),
-                ),
+                cardBuilderWithDotIndicator(),
+                SizedBox(height: 30,)
 
 
               ],

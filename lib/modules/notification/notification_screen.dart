@@ -21,8 +21,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
           style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: 30),),
         backgroundColor: Colors.white,),
       extendBody: true,
-      extendBodyBehindAppBar: true,
       body: SafeArea(
+        bottom: false,
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal:12.0),
