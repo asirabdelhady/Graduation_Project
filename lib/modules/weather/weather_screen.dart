@@ -1,15 +1,16 @@
 import 'dart:ui';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled1/colors.dart';
 
-class Weather extends StatefulWidget
+import '../../shared/styles/colors.dart';
+
+class WeatherScreen extends StatefulWidget
 {
   @override
-  State<Weather> createState() => _Weather();
+  State<WeatherScreen> createState() => _WeatherScreen();
 }
 
-class _Weather extends State<Weather> {
+class _WeatherScreen extends State<WeatherScreen> {
   @override
   Widget build(BuildContext context)
   {

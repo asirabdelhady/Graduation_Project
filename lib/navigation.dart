@@ -18,7 +18,7 @@ class Navigation extends StatefulWidget{
 class _NavigationState extends State<Navigation> {
   int index=2;
   final screens = [
-    const  WeatherScreen(),
+      WeatherScreen(),
     const  TourScreen(),
     const  HomeScreen(),
     const NotificationScreen(),

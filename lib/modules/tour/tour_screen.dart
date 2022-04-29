@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tour_guide_app/shared/styles/colors.dart';
 
 import '../../shared/components/components.dart';
 
@@ -33,51 +34,56 @@ class _TourScreenState extends State<TourScreen> {
                 )
               ),
                Expanded(
-            child: Stepper(
-              type: stepperType,
-              physics: ScrollPhysics(),
-              currentStep: _currentStep,
-              //onStepTapped: (step) => tapped(step),
-              //onStepContinue:  continued,
-              //onStepCancel: cancel,
-              steps: <Step>[
-                Step(
-                  title: Text('The Great Pyramids of Giza'),
-                  content: Column(
-                    children: [
-                      categoryCard(minWidth: 101, height: 37, sightname: 'Pyramids', onPressed: (){}, imagePath: '',)
+            child: Theme(
+              data:ThemeData(
+                primaryColor: tPrimary(),
 
-                    ]
+              ) ,
+              child: Stepper(
+                type: stepperType,
+                physics: ScrollPhysics(),
+                //currentStep: _currentStep,
+                //onStepTapped: (step) => tapped(step),
+                //onStepContinue:  continued,
+                //onStepCancel: cancel,
+                steps: <Step>[
+                  Step(
+                    title: Text('The Great Pyramids of Giza'),
+                    content: Column(
+                      children: [
+                        stepperCard(placeName: 'The Great Pyramids of Giza', imagePath: 'assets/images/Pyramids.jpg')
+
+                      ]
+                    ),
+                    isActive: _currentStep >= 0,
+                    state: _currentStep >= 0 ?
+                   StepState.complete : StepState.disabled,
                   ),
-                  isActive: _currentStep >= 0,
-                  state: _currentStep >= 0 ?
-                 StepState.complete : StepState.disabled,
-                ),
-                Step(
-                  title: new Text('The Nile River'),
-                  content: Column(
-                    children: [
-                      categoryCard(minWidth: 101, height: 37, sightname: 'The Nile', onPressed: (){}, imagePath: '',)
+                  Step(
+                    title: new Text('The Nile River'),
+                    content: Column(
+                      children: [
+                        stepperCard(placeName: 'The Great Pyramids of Giza', imagePath: 'assets/images/Pyramids.jpg')
 
-
-                    ]),
-                  isActive: _currentStep >= 0,
-                  state: _currentStep >= 1 ?
-                  StepState.complete : StepState.disabled,
-                ),
-                Step(
-                  title: new Text('Qasr El Baroon'),
-                  content: Column(
-                    children: [
-                      categoryCard(minWidth: 101, height: 37, sightname: 'Qasr El Baroon', onPressed: (){}, imagePath: '',)
-
-                    ],
+                      ]),
+                    isActive: _currentStep >= 0,
+                    state: _currentStep >= 1 ?
+                    StepState.complete : StepState.disabled,
                   ),
-                  isActive:_currentStep >= 0,
-                  state: _currentStep >= 2 ?
-                  StepState.complete : StepState.disabled,
-                ),
-              ],
+                  Step(
+                    title: new Text('Qasr El Baroon'),
+                    content: Column(
+                      children: [
+                        stepperCard(placeName: 'The Great Pyramids of Giza', imagePath: 'assets/images/Pyramids.jpg')
+
+                      ],
+                    ),
+                    isActive:_currentStep >= 0,
+                    state: _currentStep >= 2 ?
+                    StepState.complete : StepState.disabled,
+                  ),
+                ],
+              ),
             ),
           ),
             ]),

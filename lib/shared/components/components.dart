@@ -634,6 +634,8 @@ Widget defualtCard ({
     required String imagePath,
     IconData icon1 = Icons.star,
     IconData icon3 = Icons.location_on_rounded,
+    // mediaQueryHeight*0.200 + mediaQueryHeight*0.120
+    //mediaQueryWidth*0.85+ mediaQueryWidth*0.781
 
 
 
@@ -811,3 +813,119 @@ Widget cardBuilderWithDotIndicator ()=> Builder(
   }
 );
 
+Widget stepperCard ({
+  required String placeName,
+  required String imagePath,
+  IconData icon1 = Icons.star,
+  IconData icon3 = Icons.location_on_rounded,
+  // mediaQueryHeight*0.200 + mediaQueryHeight*0.120
+  //mediaQueryWidth*0.85+ mediaQueryWidth*0.781
+
+
+
+})=> Builder(
+    builder: (context) {
+      var mediaQueryHeight= MediaQuery.of(context).size.height;
+      var mediaQueryWidth = MediaQuery.of(context).size.width;
+      return GestureDetector(
+        onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context){
+            return DetailScreen();
+          }));
+        },
+        child: Container(
+          margin: EdgeInsets.all(10),
+          child: Stack(
+            children: [
+              Container(
+                height: mediaQueryHeight*0.200,
+                width: mediaQueryWidth*0.95,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  image: DecorationImage(
+                    image: AssetImage(imagePath),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  right: 25,
+                  left: 15,
+                  top: 90,
+                  bottom: 8,
+                ),
+                child: Container(
+                  height: 100,
+                  width: 230,
+                  decoration: BoxDecoration(
+                    boxShadow: const [
+                      BoxShadow(
+                        offset: Offset(5, 5),
+                        blurRadius: 5,
+                        color: Colors.grey,
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(30),
+                    color: Colors.white,
+                  ),
+                  child:Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 8.0,
+                              left: 20,
+                              bottom: 8.0,
+
+                            ),
+                            child: Container(
+                              width: 150,
+                              child: Text(
+                                placeName,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold
+
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],),
+                      Container(
+                        width:mediaQueryWidth*0.75 ,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children:[
+                            SizedBox(width: mediaQueryWidth*0.0400,),
+                            Row(
+                              children: [
+                                Icon(icon1, color: Colors.yellow,),
+                                Text('4.9'),
+
+                              ],
+                            ),
+                            SizedBox(width: mediaQueryWidth*0.0375,),
+                            Row(
+                              children: [
+                                Icon(icon3, color: Colors.lightBlue,),
+                                Text('26 Km'),
+
+                              ],),
+                            SizedBox(width: mediaQueryWidth*0.0375,),
+
+                          ],),
+                      ),
+                    ],),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+);
