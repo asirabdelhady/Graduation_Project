@@ -1,5 +1,4 @@
-
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 /////////////////////////////// Shared //////////////////////////////////////////////////
@@ -545,8 +544,8 @@ Widget homeScreenRecommendedCard({
   required double height,
   required double width,
   required onTap,
-
-}) => GestureDetector(
+}) =>
+    GestureDetector(
       onTap: onTap,
       child: Container(
         height: height,
@@ -555,10 +554,274 @@ Widget homeScreenRecommendedCard({
           color: Colors.black,
           borderRadius: BorderRadius.circular(20),
           image: DecorationImage(
-            image: AssetImage(
-                imagePath),
+            image: AssetImage(imagePath),
             fit: BoxFit.fill,
           ),
         ),
       ),
     );
+
+/*class defualtCard extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    var mediaQueryHeight = MediaQuery.of(context).size.height;
+    var mediaQueryWidth = MediaQuery.of(context).size.width;
+
+    Widget defualtCard({
+      required var placeName,
+      required var imagePath,
+    })=> Stack(
+      children: [
+        Container(
+          height: mediaQueryHeight*0.245,
+          width: mediaQueryWidth*0.95,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            image: DecorationImage(
+              image: AssetImage(imagePath),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(
+            right: 25,
+            left: 25,
+            top: 110,
+            bottom: 8,
+          ),
+          child: Container(
+            height: 75,
+            width: 250,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: Colors.white,
+            ),
+            child:Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 8.0,
+                        left: 20,
+                        bottom: 8.0,
+
+                      ),
+                      child: Container(
+                        width: mediaQueryWidth*0.6875,
+                        child: Text(
+                          'The Great Pyramids of Giza',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold
+
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],),
+                Container(
+                  width:240 ,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children:[
+                      Icon(Icons.star, color: Colors.yellow,),
+                      Text('4.9'),
+                      Icon(Icons.access_time, color: Colors.redAccent,),
+                      Text('9:00 pm'),
+                      Icon(Icons.location_on_rounded, color: Colors.lightBlue,),
+                      Text('26 Km'),
+                    ],),
+                ),
+              ],),
+          ),
+        ),
+      ],
+    );
+
+
+    return Stack(
+      children: [
+        Container(
+          height: mediaQueryHeight*0.245,
+          width: mediaQueryWidth*0.95,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            image: DecorationImage(
+              image: AssetImage('assets/images/Pyramids.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(
+            right: 25,
+            left: 25,
+            top: 110,
+            bottom: 8,
+          ),
+          child: Container(
+            height: 75,
+            width: 250,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: Colors.white,
+            ),
+            child:Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 8.0,
+                        left: 20,
+                        bottom: 8.0,
+
+                      ),
+                      child: Container(
+                        width: mediaQueryWidth*0.6875,
+                        child: Text(
+                          'The Great Pyramids of Giza',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold
+
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],),
+                Container(
+                  width:240 ,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children:[
+                      Icon(Icons.star, color: Colors.yellow,),
+                      Text('4.9'),
+                      Icon(Icons.access_time, color: Colors.redAccent,),
+                      Text('9:00 pm'),
+                      Icon(Icons.location_on_rounded, color: Colors.lightBlue,),
+                      Text('26 Km'),
+                    ],),
+                ),
+              ],),
+          ),
+        ),
+      ],
+    );
+  }
+}*/
+
+Widget defualtCard ({
+    required String placeName,
+    required String imagePath,
+    IconData icon1 = Icons.star,
+    IconData icon2 = Icons.access_time,
+    IconData icon3 = Icons.location_on_rounded,
+
+
+
+})=> Builder(
+  builder: (context) {
+    var mediaQueryHeight= MediaQuery.of(context).size.height;
+    var mediaQueryWidth = MediaQuery.of(context).size.width;
+    return GestureDetector(
+      child: Container(
+        margin: EdgeInsets.all(10),
+        child: Stack(
+          children: [
+            Container(
+              height: mediaQueryHeight*0.200,
+              width: mediaQueryWidth*0.85,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                image: DecorationImage(
+                  image: AssetImage(imagePath),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                right: 25,
+                left: 13,
+                top: 90,
+                bottom: 8,
+              ),
+              child: Container(
+                height: mediaQueryHeight*0.122,
+                width: mediaQueryWidth*0.781,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: Colors.white,
+                ),
+                child:Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 8.0,
+                            left: 20,
+                            bottom: 8.0,
+
+                          ),
+                          child: Container(
+                            width: mediaQueryWidth*0.6875,
+                            child: Text(
+                              placeName,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold
+
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],),
+                    Container(
+                      width:mediaQueryWidth*0.75 ,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children:[
+                          SizedBox(width: mediaQueryWidth*0.0400,),
+                          Row(
+                            children: [
+                              Icon(icon1, color: Colors.yellow,),
+                              Text('4.9'),
+
+                            ],
+                          ),
+                          SizedBox(width: mediaQueryWidth*0.0375,),
+                          Row(
+                            children: [
+                              Icon(icon3, color: Colors.lightBlue,),
+                              Text('26 Km'),
+
+                            ],),
+                          SizedBox(width: mediaQueryWidth*0.0375,),
+
+                        ],),
+                    ),
+                  ],),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+);

@@ -22,12 +22,14 @@ class _categorypageState extends State<categorypage> {
       child: Container(
         color: Colors.white,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 23.0,vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children:
               [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children:
                   [
                     Text('Category',
@@ -36,29 +38,49 @@ class _categorypageState extends State<categorypage> {
                         color: tPrimary(),
                       ),
                     ),
-                    Expanded(child: Container()),
-                    Padding(
-                      padding: const EdgeInsetsDirectional.only(end: 12),
-                      child: Text('Pyramdis',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: tGrey(),
-                        ),
-                      ),
-                    ),
-
                   ],
                 ),
                 SizedBox(height: 16,),
+                Stack(
+                  children: [
+                    Container(
+                      height: 200,
+                      width: 250,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        image: DecorationImage(
+                            image: AssetImage('assets/images/Pyramids1.jpg'),
+                            fit: BoxFit.cover
+                        ),
+                      ),
+                    ),
+                    Align(
+
+                      child: Container(
+                        height: 100,
+                        width: 200,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          image: DecorationImage(
+                              image: AssetImage('assets/images/Pyramids1.jpg'),
+                              fit: BoxFit.cover
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                SizedBox(height: 20,),
 
 
                 SingleChildScrollView(
                   child:
                   Column(
                     children: [
-                      categoryCard(minWidth: 101, height: 37, sightname: 'Pyramids', onPressed: (){}, imagePath: 'images/egypt-cairo-pyramids-of-giza-and camels-2.jpg'),
+                      //categoryCard(minWidth: 101, height: 37, sightname: 'Pyramids', onPressed: (){}, imagePath: 'images/egypt-cairo-pyramids-of-giza-and camels-2.jpg'),
                       SizedBox(height: 10,),
-                      categoryCard(minWidth: 101, height: 37, sightname: 'Cairo Tower', onPressed: (){},imagePath: 'images/egypt-cairo-pyramids-of-giza-and camels-2.jpg'),
+                      //categoryCard(minWidth: 101, height: 37, sightname: 'Cairo Tower', onPressed: (){},imagePath: 'images/egypt-cairo-pyramids-of-giza-and camels-2.jpg'),
                     ],
                   ),
                 ),

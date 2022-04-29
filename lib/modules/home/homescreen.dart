@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tour_guide_app/modules/categories/category_screen.dart';
 import 'package:tour_guide_app/modules/categories/categorypage.dart';
 import 'package:tour_guide_app/modules/details/details_screen.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
@@ -135,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return categorypage();
+                                  return CategoryScreen();
                                 },
                               )
                           );
