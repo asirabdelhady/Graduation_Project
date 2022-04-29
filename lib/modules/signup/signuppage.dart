@@ -234,7 +234,7 @@ class _signUpPageState extends State<signUpPage> {
                                 ));
                               }
                             },
-                            imagepath: 'assets/images/arrow.png')
+                            imagePath: 'assets/images/arrow.png')
                       ],
                     ),
                   )

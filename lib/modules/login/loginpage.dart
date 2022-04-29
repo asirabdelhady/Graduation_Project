@@ -142,7 +142,7 @@ class _loginPageState extends State<loginPage> {
                                   )
                               );*/
                                 },
-                                imagepath: 'assets/images/arrow.png')
+                                imagePath: 'assets/images/arrow.png')
                           ],
                         ),
                       ),

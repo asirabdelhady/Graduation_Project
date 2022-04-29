@@ -104,7 +104,7 @@ class _welcomepageState extends State<welcomepage> {
                                 );
 
 
-                              }, imagepath: 'assets/images/arrow.png'),
+                              }, imagePath: 'assets/images/arrow.png'),
                           SizedBox(height: 16,
                           ),
                           Text('Already have an',
@@ -131,7 +131,7 @@ class _welcomepageState extends State<welcomepage> {
                                       },
                                     )
                                 );
-                              }, imagepath: 'assets/images/arrow.png'),
+                              }, imagePath: 'assets/images/arrow.png'),
 
                         ],
                       ),

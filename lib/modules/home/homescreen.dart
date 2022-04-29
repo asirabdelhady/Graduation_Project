@@ -132,15 +132,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   Icon(Icons.keyboard_arrow_right)
                 ],
               ),
-              SizedBox(height: 24,),
+              SizedBox(height: mediaQueryHeight*0.039,),
               cardBuilderWithDotIndicator(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   subTitle(subTitle: 'Categories'),
                   Container(
-                    height: 30,
-                    width: 60,
+                    height: mediaQueryHeight*0.049,
+                    width: mediaQueryWidth*0.1875,
                     child: ElevatedButton(onPressed: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context){
                         return CategoryScreen();

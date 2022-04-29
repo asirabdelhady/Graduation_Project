@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 
@@ -16,6 +17,13 @@ class _DetailScreenState extends State<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    PageController pageController = PageController();
+    var mediaQueryHeight = MediaQuery.of(context).size.height;
+    var mediaQueryWidth = MediaQuery.of(context).size.height;
+    Widget _buildPageItem(int index) {
+      return defualtCard(placeName: 'Pyramids', imagePath: 'assets/images/Pyramids.jpg');
+    }
+
     return Scaffold(
 
       body: SafeArea(
@@ -24,13 +32,21 @@ class _DetailScreenState extends State<DetailScreen> {
                   Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Stack(
                   children: [
-
-                     ClipRRect(
+                    Container(
+                      width: mediaQueryWidth,
+                      height: mediaQueryHeight*0.327,
+                      child: PageView.builder(
+                        itemBuilder: (context, position)=>ClipRRect(
                           borderRadius: BorderRadius.only(bottomRight: Radius.circular(30),bottomLeft: Radius.circular(30)
                           ),
 
-                        child: Image(image: AssetImage('assets/images/Pyramids.jpg'),
-                        fit: BoxFit.fill,)),
+                          child: Image(image: AssetImage('assets/images/Pyramids.jpg'),
+                            fit: BoxFit.fill,)),
+                        itemCount: 4,
+                        controller: pageController,
+
+                      ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: CircleAvatar(
@@ -46,8 +62,18 @@ class _DetailScreenState extends State<DetailScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 12,
+                SizedBox(height: mediaQueryHeight*0.019,),
+                Center(
+                  child: SmoothPageIndicator(controller: pageController,
+                      count: 4,
+                      effect: WormEffect(
+                        activeDotColor: tPrimary(),
+                      ),
+
+                  ),
+                ),
+                 SizedBox(
+                  height: mediaQueryHeight*0.019,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -55,93 +81,21 @@ class _DetailScreenState extends State<DetailScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       detailsTitle(title: 'The Great Pyramids Of Giza'),
-                      const SizedBox(height: 12,),
+                       SizedBox(height: mediaQueryHeight*0.019,),
                       aboutDetails(details: 'Pyramids of Giza, Arabic Ahrāmāt Al-Jīzah, Giza also spelled Gizeh, three 4th-dynasty (c. 2575–c. 2465 BCE) pyramids erected on a rocky ...more'),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      subTitle(subTitle: 'Images'),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(children: [
-                            SizedBox(
-                              width: 12,
-                            ),
-                            Container(
-                                width: 70, //MediaQuery.of(context).size.width,
-                                height: 70,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    image: DecorationImage(
-                                        fit: BoxFit.fill,
-                                        image: AssetImage(
-                                            'assets/images/Pyramids1.jpg')))),
-                            SizedBox(
-                              width: 12,
-                            ),
-                            Container(
-                                width: 70, //MediaQuery.of(context).size.width,
-                                height: 70,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    image: DecorationImage(
-                                        fit: BoxFit.fill,
-                                        image: AssetImage(
-                                            'assets/images/Pyramids1.jpg')))),
-                            SizedBox(
-                              width: 12,
-                            ),
-                            Container(
-                                width: 70, //MediaQuery.of(context).size.width,
-                                height: 70,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    image: DecorationImage(
-                                        fit: BoxFit.fill,
-                                        image: AssetImage(
-                                            'assets/images/Pyramids1.jpg')))),
-                            SizedBox(
-                              width: 12,
-                            ),
-                            Container(
-                                width: 70, //MediaQuery.of(context).size.width,
-                                height: 70,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    image: DecorationImage(
-                                        fit: BoxFit.fill,
-                                        image: AssetImage(
-                                            'assets/images/Pyramids1.jpg')))),
-                            SizedBox(
-                              width: 12,
-                            ),
-                            Container(
-                                width: 70, //MediaQuery.of(context).size.width,
-                                height: 70,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    image: DecorationImage(
-                                        fit: BoxFit.fill,
-                                        image: AssetImage(
-                                            'assets/images/Pyramids1.jpg')))),
-                          ]),
-                        ),
-                      const SizedBox(
-                        height: 12,
+                       SizedBox(
+                        height: mediaQueryHeight*0.019,
                       ),
                       mapButton(),
-                      const SizedBox(
-                        height: 12,
+                       SizedBox(
+                        height: mediaQueryHeight*0.019,
                       ),
                       Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
-                            width: 50,
-                            height: 50,
+                            width: mediaQueryWidth*0.156,
+                            height: mediaQueryHeight*0.081,
                             child: ElevatedButton(
                               onPressed: () {
                                 setState(() {
@@ -158,8 +112,8 @@ class _DetailScreenState extends State<DetailScreen> {
                               ),
                             )),
                         Container(
-                            width: 225,
-                            height: 50,
+                            width: mediaQueryWidth*0.70,
+                            height: mediaQueryHeight*0.081,
                             child: ElevatedButton(
                               onPressed: () {},
                               child: Text.rich(TextSpan(
@@ -172,9 +126,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   primary: Color(0xff292D32)),
                             )),
                       ]),
-                      const SizedBox(
-                        height: 12,
-                      ),
+                       SizedBox(height: mediaQueryHeight*0.019,),
                     ],
                   ),
                 ),
