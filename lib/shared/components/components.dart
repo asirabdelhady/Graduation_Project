@@ -7,7 +7,7 @@ import 'package:tour_guide_app/shared/styles/colors.dart';
 
 //////////////////////// DetailsScreen///////////////////////////////////////////////////
 // Big Title
-Widget detailsTitle({required String title}) => Text.rich(TextSpan(
+Widget defaultTitle({required String title}) => Text.rich(TextSpan(
     text: title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35)));
 
 //Small title
