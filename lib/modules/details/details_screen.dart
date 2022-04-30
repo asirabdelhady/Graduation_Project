@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
+import 'package:expandable_text/expandable_text.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({Key? key}) : super(key: key);
@@ -82,7 +83,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     children: [
                       detailsTitle(title: 'The Great Pyramids Of Giza'),
                        SizedBox(height: mediaQueryHeight*0.019,),
-                      aboutDetails(details: 'Pyramids of Giza, Arabic Ahrāmāt Al-Jīzah, Giza also spelled Gizeh, three 4th-dynasty (c. 2575–c. 2465 BCE) pyramids erected on a rocky ...more'),
+                      aboutDetails(details: 'Pyramids of Giza, Arabic Ahrāmāt Al-Jīzah, Giza also spelled Gizeh, three 4th-dynasty (c. 2575–c. 2465 BCE) pyramids erected on a rocky asdasdasdasdf fsdfds afsad kj hdfjdshfdsnhfsdhfgdsfnhdsfjdsfdsgmnfdasfjdsfdasbjfdsfdsfdfdsfdsfydsfdstbf adskyfadsh fdsmfmsadgjf'),
                        SizedBox(
                         height: mediaQueryHeight*0.019,
                       ),
@@ -112,7 +113,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               ),
                             )),
                         Container(
-                            width: mediaQueryWidth*0.70,
+                            width: mediaQueryWidth*0.29,
                             height: mediaQueryHeight*0.081,
                             child: ElevatedButton(
                               onPressed: () {},
@@ -123,8 +124,10 @@ class _DetailScreenState extends State<DetailScreen> {
                               )),
                               style: ElevatedButton.styleFrom(
                                   shape: StadiumBorder(),
-                                  primary: Color(0xff292D32)),
-                            )),
+                                  primary: Color(0xff292D32)
+                              ),
+                            )
+                        ),
                       ]),
                        SizedBox(height: mediaQueryHeight*0.019,),
                     ],
