@@ -523,84 +523,115 @@ Widget mainFormField({
       }
     );
 
-Widget categoryCard({
-  required double minWidth,
-  required double height,
+Widget tourPlanCard({
   double elevation = 25,
-  required String sightname,
-  required onPressed,
+  required String sightName,
+  required onButtonPressed,
+  required onCardTap,
   required String imagePath,
 }) =>
     Builder(
       builder: (context) {
         var mediaQueryHeight= MediaQuery.of(context).size.height;
         var mediaQueryWidth = MediaQuery.of(context).size.width;
-        return Stack(
-          children: [
-            Container(
-              width: double.infinity,
-              height: mediaQueryHeight*0.524,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: tPrimary(),
-              ),
-            ),
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(9.0),
-                  child: Container(
-                    width: double.infinity,
-                    height: mediaQueryHeight*0.398,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
+        return GestureDetector(
+          onTap: onCardTap,
+          child: Stack(
+            children: [
+              Container(
+
+                width: double.infinity,
+                height: mediaQueryHeight*0.159,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: tSecondary(),
+                  boxShadow: [
+                    BoxShadow(
                       color: tGrey(),
-                      image: DecorationImage(
-                        image: AssetImage(imagePath),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                ),
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsetsDirectional.only(
-                        start: 30,
-                      ),
-                      child: Text(
-                        sightname,
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),
-                    ),
-                    Expanded(child: Container()),
-                    Padding(
-                      padding: const EdgeInsetsDirectional.only(top: 8, end: 15),
-                      child: Container(
-                        child: MaterialButton(
-                          onPressed: onPressed,
-                          minWidth: minWidth,
-                          height: height,
-                          elevation: elevation,
-                          color: const Color(0xFFFFFFFF),
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(30.0))),
-                          child: Text(
-                            'More',
-                            style: TextStyle(
-                              color: const Color(0xFF292D32),
-                              fontSize: 18,
-                            ),
-                          ),
-                        ),
-                      ),
+                      offset: Offset(5, 5),
+                      blurRadius: 3,
+
                     )
                   ],
                 ),
-              ],
-            ),
-          ],
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(9.0),
+                    child: Container(
+                      width: mediaQueryWidth*0.277,
+                      height: mediaQueryHeight*0.132,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: tGrey(),
+                        image: DecorationImage(
+                          image: AssetImage(imagePath),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        height: mediaQueryHeight*0.159,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10.0),
+                          child: Column(
+                            children: [
+                              Container(
+                                width: 200,
+                                height: 50,
+                                child: Text(
+                                  sightName,
+                                  maxLines: 2,
+                                  style: TextStyle(fontSize: 20, color: tPrimary(),),
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  SizedBox(width: 88,),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.only(top: 8, end: 15),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(30)
+                                      ),
+                                      width: 80,
+                                      height: 40,
+                                      child: MaterialButton(
+                                        onPressed:  onButtonPressed,
+                                        //minWidth: minWidth,
+                                        //height: height,
+                                        elevation: elevation,
+                                        color: tPrimary(),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.all(Radius.circular(30.0))),
+                                        child: Text(
+                                          'Done',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         );
       }
     );

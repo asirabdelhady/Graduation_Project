@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../navigation.dart';
 
@@ -171,6 +172,15 @@ class _signUpPageState extends State<signUpPage> {
                                 }
                             },
                             onFieldSubmitted: (value){
+                              RegExp regex =
+                              RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
+
+                              if(value != regex.hasMatch(value)) {
+                                Fluttertoast.showToast(
+                                  msg: 'Validate password must contain upper and lower letters , number and at least 8 characters ',
+                                  toastLength: Toast.LENGTH_LONG,
+                              );
+                              }
 
                             },
                             suffixPressed: () {
