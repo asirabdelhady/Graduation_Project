@@ -82,7 +82,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     children: [
                       defaultTitle(title: 'The Great Pyramids Of Giza'),
                        SizedBox(height: mediaQueryHeight*0.019,),
-                      aboutDetails(details: 'Pyramids of Giza, Arabic Ahrāmāt Al-Jīzah, Giza also spelled Gizeh, three 4th-dynasty (c. 2575–c. 2465 BCE) pyramids erected on a rocky ...more'),
+                      aboutDetails(details: 'Pyramids of Giza, Arabic Ahrāmāt Al-Jīzah, Giza also spelled Gizeh, three 4th-dynasty (c. 2575–c. 2465 BCE) pyramids erected on a rocky asdasdasdasdf fsdfds afsad kj hdfjdshfdsnhfsdhfgdsfnhdsfjdsfdsgmnfdasfjdsfdasbjfdsfdsfdfdsfdsfydsfdstbf adskyfadsh fdsmfmsadgjf'),
                        SizedBox(
                         height: mediaQueryHeight*0.019,
                       ),
@@ -112,8 +112,13 @@ class _DetailScreenState extends State<DetailScreen> {
                               ),
                             )),
                         Container(
-                            width: mediaQueryWidth*0.625,//mediaQueryWidth*0.70,
-                            height: mediaQueryHeight*0.081,//mediaQueryHeight*0.081,
+
+                            width: mediaQueryWidth*0.29,
+                            height: mediaQueryHeight*0.081,
+
+                          //  width: mediaQueryWidth*0.625,//mediaQueryWidth*0.70,
+                          //  height: mediaQueryHeight*0.081,//mediaQueryHeight*0.081,
+
                             child: ElevatedButton(
                               onPressed: () {},
                               child: Text.rich(TextSpan(
@@ -123,8 +128,10 @@ class _DetailScreenState extends State<DetailScreen> {
                               )),
                               style: ElevatedButton.styleFrom(
                                   shape: StadiumBorder(),
-                                  primary: Color(0xff292D32)),
-                            )),
+                                  primary: Color(0xff292D32)
+                              ),
+                            )
+                        ),
                       ]),
                        SizedBox(height: mediaQueryHeight*0.019,),
                     ],

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/modules/details/details_screen.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
+import 'package:expandable_text/expandable_text.dart';
+
 /////////////////////////////// Shared //////////////////////////////////////////////////
 
 //////////////////////// DetailsScreen///////////////////////////////////////////////////
@@ -20,6 +22,7 @@ Widget aboutDetails({required String details}) => Builder(
   builder: (context) {
     var mediaQueryHeight= MediaQuery.of(context).size.height;
     var mediaQueryWidth = MediaQuery.of(context).size.width;
+    double textHeight=70;
     return     Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -29,13 +32,18 @@ Widget aboutDetails({required String details}) => Builder(
             SizedBox(
               height: mediaQueryHeight*0.019,
             ),
-            Container(
-                height: 70,
-                child: Text(
-                  details,
-                  maxLines: 4,
-                  overflow: TextOverflow.ellipsis,
-                )),
+            ExpandableText(
+
+              details,
+              maxLines: 4,
+              expandText: 'more',
+              collapseText: 'less',
+              animation: true,
+              collapseOnTextTap: true,
+
+
+
+            ),
           ],
         );
   }
