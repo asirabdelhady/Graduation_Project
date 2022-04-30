@@ -9,7 +9,7 @@ import 'package:expandable_text/expandable_text.dart';
 
 //////////////////////// DetailsScreen///////////////////////////////////////////////////
 // Big Title
-Widget detailsTitle({required String title}) => Text.rich(TextSpan(
+Widget defaultTitle({required String title}) => Text.rich(TextSpan(
     text: title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35)));
 
 //Small title

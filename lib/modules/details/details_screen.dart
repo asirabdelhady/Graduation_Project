@@ -19,7 +19,7 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     PageController pageController = PageController();
     var mediaQueryHeight = MediaQuery.of(context).size.height;
-    var mediaQueryWidth = MediaQuery.of(context).size.height;
+    var mediaQueryWidth = MediaQuery.of(context).size.width;
     Widget _buildPageItem(int index) {
       return defualtCard(placeName: 'Pyramids', imagePath: 'assets/images/Pyramids.jpg');
     }
@@ -48,7 +48,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375, vertical: mediaQueryHeight*0.01311),
                       child: CircleAvatar(
                         radius: 22.5,
                         backgroundColor: tPrimary(),
@@ -76,11 +76,11 @@ class _DetailScreenState extends State<DetailScreen> {
                   height: mediaQueryHeight*0.019,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      detailsTitle(title: 'The Great Pyramids Of Giza'),
+                      defaultTitle(title: 'The Great Pyramids Of Giza'),
                        SizedBox(height: mediaQueryHeight*0.019,),
                       aboutDetails(details: 'Pyramids of Giza, Arabic Ahrāmāt Al-Jīzah, Giza also spelled Gizeh, three 4th-dynasty (c. 2575–c. 2465 BCE) pyramids erected on a rocky asdasdasdasdf fsdfds afsad kj hdfjdshfdsnhfsdhfgdsfnhdsfjdsfdsgmnfdasfjdsfdasbjfdsfdsfdfdsfdsfydsfdstbf adskyfadsh fdsmfmsadgjf'),
                        SizedBox(
@@ -112,8 +112,13 @@ class _DetailScreenState extends State<DetailScreen> {
                               ),
                             )),
                         Container(
+
                             width: mediaQueryWidth*0.29,
                             height: mediaQueryHeight*0.081,
+
+                          //  width: mediaQueryWidth*0.625,//mediaQueryWidth*0.70,
+                          //  height: mediaQueryHeight*0.081,//mediaQueryHeight*0.081,
+
                             child: ElevatedButton(
                               onPressed: () {},
                               child: Text.rich(TextSpan(
