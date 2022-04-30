@@ -543,8 +543,8 @@ Widget tourPlanCard({
             children: [
               Container(
 
-                width: double.infinity,
-                height: mediaQueryHeight*0.159,
+                width: 300,
+                height: 130,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
                   color: tSecondary(),
@@ -561,10 +561,10 @@ Widget tourPlanCard({
               Row(
                 children: [
                   Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.025, vertical: mediaQueryWidth*0.0131),
+                    padding:  EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                     child: Container(
-                      width: mediaQueryWidth*0.277,
-                      height: mediaQueryHeight*0.132,
+                      width: 90,
+                      height: 80,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: tGrey(),
@@ -578,14 +578,15 @@ Widget tourPlanCard({
                   Row(
                     children: [
                       Container(
-                        height: mediaQueryHeight*0.159,
+                        height: 150,
+                        width: 200,
                         child: Padding(
                           padding:  EdgeInsets.symmetric(vertical: mediaQueryHeight*0.01311),
                           child: Column(
                             children: [
                               Container(
-                                width: mediaQueryWidth*0.625,
-                                height: mediaQueryHeight*0.0819,
+                                width: 180,
+                                height: 50,
                                 child: Text(
                                   sightName,
                                   maxLines: 2,
@@ -594,7 +595,7 @@ Widget tourPlanCard({
                               ),
                               Row(
                                 children: [
-                                  SizedBox(width: mediaQueryWidth*0.275,),
+                                  SizedBox(width: 20,),
                                   Padding(
                                     padding: EdgeInsetsDirectional.only(top: mediaQueryHeight*0.01311, end: mediaQueryWidth*0.0468),
                                     child: Container(
@@ -602,8 +603,8 @@ Widget tourPlanCard({
                                         color: Colors.white,
                                         borderRadius: BorderRadius.circular(30)
                                       ),
-                                      width: mediaQueryWidth*0.25,
-                                      height: mediaQueryHeight*0.655,
+                                      width: 100,
+                                      height: 50,
                                       child: MaterialButton(
                                         onPressed:  onButtonPressed,
                                         //minWidth: minWidth,
