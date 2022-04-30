@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
-import 'package:expandable_text/expandable_text.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({Key? key}) : super(key: key);
