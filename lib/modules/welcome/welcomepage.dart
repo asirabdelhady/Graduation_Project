@@ -13,52 +13,33 @@ class welcomepage extends StatefulWidget{
 class _welcomepageState extends State<welcomepage> {
   @override
   Widget build(BuildContext context) {
+    var mediaQueryHeight=MediaQuery.of(context).size.height;
+    var mediaQueryWidth=MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
 
         child: Column(
           children:
           [
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              physics: const NeverScrollableScrollPhysics(),
-
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsetsDirectional.only(start: 23,top: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Welcome,',
-                          style: TextStyle(
-                            fontSize: 36,
-                            color: tPrimary(),
-                          ),
-                        ),
-                        Text('Explorer',
-                          style: TextStyle(
-                            fontSize: 36,
-                            color: tPrimary(),
-                          ),
-                        ),
-                      ],
-                    ),
+            Row(
+              children: [
+                Padding(
+                  padding:  EdgeInsetsDirectional.only(start: mediaQueryWidth*0.071,top: mediaQueryHeight*0.0163),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      defaultTitle(title: 'Welcome'),
+                      defaultTitle(title: 'Explorer'),
+                    ],
                   ),
-                  SizedBox(width: 70
-                    ,),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.only(top: 20),
-                    child:circleBack(width: 145,height:145),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-            SizedBox(height: 15,
+            SizedBox(height: mediaQueryHeight*0.0245,
             ),
             Image(
               image: AssetImage('assets/images/Group 67welcomepageimage.png'),
-              height: 242,
+              height: mediaQueryHeight*0.3278,
               width: double.infinity,
             ),
             Expanded(
@@ -78,21 +59,21 @@ class _welcomepageState extends State<welcomepage> {
                   ),
                   Center(
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 28,right: 28,left: 28),
+                      padding:  EdgeInsets.symmetric(vertical: mediaQueryHeight*0.0459,horizontal: mediaQueryWidth*0.0875),
                       child: Column(
                         children:
                         [
                           Text('lets get started',
                             style: TextStyle(
-                                fontSize: 18,
+                                fontSize: mediaQueryWidth*0.0562,
                                 color: Colors.white
                             ),),
-                          SizedBox(height: 16,),
+                          SizedBox(height: mediaQueryHeight*0.02622,),
                           mainButton(
-                              minWidth: 222,
-                              height: 53,
+                              minWidth: mediaQueryWidth*0.693,
+                              height: mediaQueryHeight*0.0819,
                               text: 'Create Account',
-                              fontSize: 18,
+                              fontSize: mediaQueryWidth*0.085,
                               onPressed: (){
                                 Navigator.push(
                                     context,
@@ -105,23 +86,24 @@ class _welcomepageState extends State<welcomepage> {
 
 
                               }, imagePath: 'assets/images/arrow.png'),
-                          SizedBox(height: 16,
+                          SizedBox(height: mediaQueryHeight*0.02622,
                           ),
                           Text('Already have an',
                             style: TextStyle(
-                                fontSize: 18,
+                                fontSize: mediaQueryWidth*0.0562,
                                 color: Colors.white
                             ),),
                           Text('account?',
                             style: TextStyle(
-                                fontSize: 18,
+                                fontSize: mediaQueryWidth*0.0562,
                                 color: Colors.white
                             ),),
-                          SizedBox(height: 16,),
-                          mainButton(minWidth: 222,
-                              height: 53,
+                          SizedBox(height: mediaQueryHeight*0.02622,),
+                          mainButton(
+                              minWidth: mediaQueryWidth*0.693,
+                              height: mediaQueryHeight*0.0819,
                               text: 'Login',
-                              fontSize: 18,
+                              fontSize: mediaQueryWidth*0.056,
                               onPressed: (){
                                 Navigator.push(
                                     context,

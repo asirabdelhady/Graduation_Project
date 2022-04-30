@@ -9,8 +9,10 @@ import 'package:expandable_text/expandable_text.dart';
 
 //////////////////////// DetailsScreen///////////////////////////////////////////////////
 // Big Title
-Widget defaultTitle({required String title}) => Text.rich(TextSpan(
-    text: title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35)));
+Widget defaultTitle({
+  required String title,
+  var fontWeight}) => Text.rich(TextSpan(
+    text: title, style: TextStyle(fontWeight:fontWeight, fontSize: 35)));
 
 //Small title
 Widget subTitle({required String subTitle}) => Text.rich(TextSpan(
@@ -494,22 +496,18 @@ Widget mainFormField({
                 TextFormField(
                   onFieldSubmitted:onFieldSubmitted ,
                   validator: validatorFunction,
-
                   controller: controller,
-
-
                   onChanged: onChanged,
-
                   decoration: InputDecoration(
                     hintText: hintText,
                     border: InputBorder.none,
                     hintStyle: TextStyle(color: Colors.grey),
                     prefixIcon: Padding(
-                      padding: const EdgeInsets.all(14.0),
+                      padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.043, vertical: mediaQueryHeight*0.0229),
                       child: Image.asset(
                         imagepath,
-                        width: 10,
-                        height: 10,
+                        width: mediaQueryWidth*0.0312,
+                        height: mediaQueryHeight*0.016,
                         //    fit: BoxFit.fill,
                       ),
                     ),
@@ -518,9 +516,6 @@ Widget mainFormField({
                       icon: suffixicon,
                     ),
                   ),
-                 /* IconButton(icon: suffixicon, onPressed: suffixPressed,),
-                   border: InputBorder.none,*/
-
                   keyboardType: TextInputType,
                   obscureText: passorno,
                 ),
@@ -566,7 +561,7 @@ Widget tourPlanCard({
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(9.0),
+                    padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.025, vertical: mediaQueryWidth*0.0131),
                     child: Container(
                       width: mediaQueryWidth*0.277,
                       height: mediaQueryHeight*0.132,
@@ -585,30 +580,30 @@ Widget tourPlanCard({
                       Container(
                         height: mediaQueryHeight*0.159,
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10.0),
+                          padding:  EdgeInsets.symmetric(vertical: mediaQueryHeight*0.01311),
                           child: Column(
                             children: [
                               Container(
-                                width: 200,
-                                height: 50,
+                                width: mediaQueryWidth*0.625,
+                                height: mediaQueryHeight*0.0819,
                                 child: Text(
                                   sightName,
                                   maxLines: 2,
-                                  style: TextStyle(fontSize: 20, color: tPrimary(),),
+                                  style: TextStyle(fontSize: mediaQueryWidth*0.0625, color: tPrimary(),),
                                 ),
                               ),
                               Row(
                                 children: [
-                                  SizedBox(width: 88,),
+                                  SizedBox(width: mediaQueryWidth*0.275,),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.only(top: 8, end: 15),
+                                    padding: EdgeInsetsDirectional.only(top: mediaQueryHeight*0.01311, end: mediaQueryWidth*0.0468),
                                     child: Container(
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.circular(30)
                                       ),
-                                      width: 80,
-                                      height: 40,
+                                      width: mediaQueryWidth*0.25,
+                                      height: mediaQueryHeight*0.655,
                                       child: MaterialButton(
                                         onPressed:  onButtonPressed,
                                         //minWidth: minWidth,
@@ -622,7 +617,7 @@ Widget tourPlanCard({
                                           'Done',
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 18,
+                                            fontSize:mediaQueryWidth*0.056 ,
                                           ),
                                         ),
                                       ),
@@ -673,11 +668,6 @@ Widget defualtCard ({
     required String imagePath,
     IconData icon1 = Icons.star,
     IconData icon3 = Icons.location_on_rounded,
-    // mediaQueryHeight*0.200 + mediaQueryHeight*0.120
-    //mediaQueryWidth*0.85+ mediaQueryWidth*0.781
-
-
-
 })=> Builder(
   builder: (context) {
     var mediaQueryHeight= MediaQuery.of(context).size.height;
@@ -704,11 +694,11 @@ Widget defualtCard ({
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(
-                right: 25,
-                left: 15,
-                top: 90,
-                bottom: 8,
+              padding: EdgeInsets.only(
+                right: mediaQueryWidth*0.0781,
+                left: mediaQueryWidth*0.0468,
+                top: mediaQueryHeight*0.1475,
+                bottom: 0.01311,
               ),
               child: Container(
                 height: mediaQueryHeight*0.120,
@@ -730,10 +720,10 @@ Widget defualtCard ({
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(
-                            top: 8.0,
-                            left: 20,
-                            bottom: 8.0,
+                          padding: EdgeInsets.only(
+                            top: mediaQueryHeight*0.01311,
+                            left: mediaQueryWidth*0.0625,
+                            bottom: mediaQueryHeight*0.01311,
 
                           ),
                           child: Container(
@@ -743,7 +733,7 @@ Widget defualtCard ({
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: mediaQueryWidth*0.05,
                                   fontWeight: FontWeight.bold
 
                               ),
@@ -791,7 +781,7 @@ Widget backButton()=> Builder(
     var mediaQueryHeight= MediaQuery.of(context).size.height;
     var mediaQueryWidth = MediaQuery.of(context).size.width;
     return     Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.025, vertical: mediaQueryHeight*0.01311),
       child: Container(
         width: mediaQueryWidth*0.156,
         height: mediaQueryHeight*0.081,
@@ -873,7 +863,7 @@ Widget stepperCard ({
           }));
         },
         child: Container(
-          margin: EdgeInsets.all(10),
+          margin: EdgeInsets.symmetric(vertical:0.0163, horizontal: mediaQueryWidth*0.03125),
           child: Stack(
             children: [
               Container(
@@ -888,15 +878,15 @@ Widget stepperCard ({
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                  right: 25,
-                  left: 15,
-                  top: 90,
-                  bottom: 8,
+                padding: EdgeInsets.only(
+                  right: mediaQueryWidth*0.0781,
+                  left: mediaQueryWidth*0.0468,
+                  top: mediaQueryHeight*0.1475,
+                  bottom: 0.01311,
                 ),
                 child: Container(
-                  height: 100,
-                  width: 230,
+                  height: mediaQueryHeight*0.1639,
+                  width: mediaQueryWidth*0.718,
                   decoration: BoxDecoration(
                     boxShadow: const [
                       BoxShadow(
@@ -914,14 +904,14 @@ Widget stepperCard ({
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(
-                              top: 8.0,
-                              left: 20,
-                              bottom: 8.0,
+                            padding:  EdgeInsets.only(
+                              top: mediaQueryHeight*0.01311,
+                              left: mediaQueryWidth*0.0625,
+                              bottom: mediaQueryHeight*0.01311,
 
                             ),
                             child: Container(
-                              width: 150,
+                              width: mediaQueryWidth*0.468,
                               child: Text(
                                 placeName,
                                 maxLines: 2,

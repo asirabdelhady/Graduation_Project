@@ -155,12 +155,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 SizedBox(height: mediaQueryHeight*0.098,),
 
-
-
-                //AnimatedSmoothIndicator(activeIndex: activeIndex, count: 4)
-
-
-
               ],),
           ),
         ),

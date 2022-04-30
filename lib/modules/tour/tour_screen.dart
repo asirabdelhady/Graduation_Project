@@ -49,16 +49,17 @@ class _TourScreenState extends State<TourScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var mediaQueryHeight=MediaQuery.of(context).size.height;
+    var mediaQueryWidth=MediaQuery.of(context).size.width;
     return  Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading:false,
         backgroundColor: Colors.transparent,
-        title:const Text('Tour Plan',
+        title: Text('Tour Plan',
           style: TextStyle(
               color: Colors.black,
-              fontWeight:
-              FontWeight.bold,
-              fontSize: 30),
+              fontWeight: FontWeight.bold,
+              fontSize: mediaQueryWidth*0.093),
         ) ,
         elevation: 0,
       ),

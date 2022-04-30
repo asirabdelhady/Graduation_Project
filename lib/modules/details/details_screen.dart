@@ -103,7 +103,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                 });
                               },
                               child: Icon((favClicked==false)? Icons.favorite_border_rounded : Icons.favorite ,
-                                size: 20,
+                                size: mediaQueryWidth*0.0625,
                                 color: Colors.white,
                               ),
                               style: ElevatedButton.styleFrom(
@@ -113,7 +113,7 @@ class _DetailScreenState extends State<DetailScreen> {
                             )),
                         Container(
 
-                            width: mediaQueryWidth*0.29,
+                            width: mediaQueryWidth*0.625,
                             height: mediaQueryHeight*0.081,
 
                           //  width: mediaQueryWidth*0.625,//mediaQueryWidth*0.70,
@@ -124,7 +124,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               child: Text.rich(TextSpan(
                                 text: 'Add to Tour',
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
+                                    color: Colors.white, fontSize: mediaQueryWidth*0.0625),
                               )),
                               style: ElevatedButton.styleFrom(
                                   shape: StadiumBorder(),

@@ -12,32 +12,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-
+    var mediaQueryHeight=MediaQuery.of(context).size.height;
+    var mediaQueryWidth=MediaQuery.of(context).size.width;
     return  SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
           body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              padding:  EdgeInsets.symmetric(horizontal:mediaQueryWidth*0.0375 ),
               child: Column(children:[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children:[
-                    const Text('Profile',
-                        style: TextStyle(
-                            fontWeight:
-                            FontWeight.bold,
-                            fontSize: 30)
-                  ),
+                    defaultTitle(title: 'Profile', fontWeight: FontWeight.bold),
                     Container(
-                      width: 50,
-                      height: 40,
+                      width: mediaQueryWidth*0.156,
+                      height: mediaQueryHeight*0.0655,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(35),
                         border: Border.all(),
                       ),
                         child: IconButton(icon: const Icon(Icons.edit_outlined), onPressed: (){})),
                 ]),
-                const SizedBox(height: 12),
+                 SizedBox(height: mediaQueryHeight*0.0196),
                 profileHeader(imagePath: 'assets/images/Pyramids.jpg', name: 'Asir Abdelhady', age: 22, nationality: 'Egypt'),
                 profileBody(),
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
+import 'package:tour_guide_app/shared/styles/colors.dart';
 
 class NotificationScreen extends StatefulWidget{
   const NotificationScreen({Key? key}) : super(key: key);
@@ -13,19 +14,20 @@ class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     var mediaQueryHeight=MediaQuery.of(context).size.height;
+    var mediaQueryWidth=MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         elevation: 0,
-        title: const Text('Notifications',
-          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: 30),),
+        title:  Text('Notifications',
+          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: mediaQueryWidth*0.093),),
         backgroundColor: Colors.white,),
       extendBody: true,
       body: SafeArea(
         bottom: false,
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal:12.0),
+            padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375),
             child: Column(
               children:[
                
@@ -33,21 +35,28 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   height: mediaQueryHeight,
                   child: ListView.separated(itemBuilder:(context, index)=>Container(
 
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0312),
                     width: double.infinity,
-                    height: 75,
+                    height: mediaQueryHeight*0.1229,
                     decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 5,
+                          offset: Offset(7, 5),
+                          color: tGrey(),
+                        ),
+                      ],
                       color: const Color(0xff292D32),
                       borderRadius: BorderRadius.circular(35),
                     ),
                     child: Row(
-                      children: const [
+                      children:  [
                         Icon(
-                          Icons.notifications,
-                          color: Colors.grey,
+                          Icons.notifications_outlined,
+                          color: Colors.white,
                         ),
                         SizedBox(
-                          width: 10,
+                          width: mediaQueryWidth*0.0375,
                         ),
                         Expanded(
                           child: Text.rich(
@@ -60,7 +69,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       ],
                     ),
                   ),
-                    separatorBuilder: (context, index)=> const SizedBox(height: 15,),
+                    separatorBuilder: (context, index)=>  SizedBox(height: mediaQueryHeight*0.0350,),
                     itemCount: 26,
                   ),
                 ),

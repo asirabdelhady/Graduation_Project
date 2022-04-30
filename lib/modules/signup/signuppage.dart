@@ -22,64 +22,32 @@ class _signUpPageState extends State<signUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    var mediaQueryHeight=MediaQuery.of(context).size.height;
+    var mediaQueryWidth=MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                physics: const NeverScrollableScrollPhysics(),
-                child: Row(
+              Padding(
+                padding:
+                     EdgeInsetsDirectional.only(start: mediaQueryWidth*0.0718, top: mediaQueryHeight*0.0400),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.only(start: 23, top: 50),
-                      child: Column(
-                        children: [
-                          Text(
-                            'Create',
-                            style: TextStyle(
-                              fontSize: 36,
-                              color: tPrimary(),
-                            ),
-                          ),
-                          Text(
-                            'Account',
-                            style: TextStyle(
-                              fontSize: 36,
-                              color: tPrimary(),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 50,
-                    ),
-                    Align(
-                        alignment: Alignment.topRight,
-                        child: Transform.scale(
-                          scale: 1,
-                          child: Column(
-                            children: [
-                              circleBack(width: 190, height: 190),
-                            ],
-                          ),
-                        )),
+                    defaultTitle(title: 'Create'),
+                    defaultTitle(title: 'Account'),
                   ],
                 ),
               ),
               SizedBox(
-                height: 17,
+                height: mediaQueryHeight*0.0278,
               ),
               Stack(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 23.0),
+                    padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.030),
                     child: Container(
                       height: MediaQuery.of(context).size.height * 0.63,
                       width: double.infinity,
@@ -95,7 +63,7 @@ class _signUpPageState extends State<signUpPage> {
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.only(top: 28),
+                          padding: EdgeInsetsDirectional.only(top: mediaQueryHeight*0.040),
                           child: Center(
                               child: mainFormField(
                             hintText: 'Full Name',
@@ -116,9 +84,6 @@ class _signUpPageState extends State<signUpPage> {
                             suffixPressed: null,
                             suffixicon: Icon(null), onChanged: null, onFieldSubmitted: null,
                           )),
-                        ),
-                        SizedBox(
-                          height: 10,
                         ),
                         mainFormField(
                             hintText: 'Email',
@@ -142,9 +107,7 @@ class _signUpPageState extends State<signUpPage> {
                               return null;
                             },
                             suffixPressed: null, onFieldSubmitted: null, onChanged: null),
-                        SizedBox(
-                          height: 10,
-                        ),
+
                         mainFormField(
                             hintText: 'Password',
                             imagepath: 'assets/images/lock.png',
@@ -224,13 +187,13 @@ class _signUpPageState extends State<signUpPage> {
 
                             ),
                         SizedBox(
-                          height: 50,
+                          height: mediaQueryHeight*0.055,
                         ),
                         mainButton(
-                            minWidth: 95,
-                            height: 40,
+                            minWidth: mediaQueryWidth*0.2968,
+                            height: mediaQueryHeight*0.055,
                             text: 'Sign up',
-                            fontSize: 13,
+                            fontSize: mediaQueryWidth*0.040,
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
                                 print(nameController.text);
