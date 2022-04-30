@@ -19,7 +19,7 @@ class _WeatherScreen extends State<WeatherScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12.0),
+          padding: EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375),
           child: SingleChildScrollView(
             child: Column(
               children: [
