@@ -3,7 +3,7 @@ import 'package:tour_guide_app/shared/components/components.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 
 class CategoryScreen extends StatelessWidget{
-
+//hii
   @override
   Widget build(BuildContext context) {
     var mediaQueryHeight = MediaQuery.of(context).size.height;
