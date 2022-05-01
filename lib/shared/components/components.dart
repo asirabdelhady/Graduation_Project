@@ -146,38 +146,54 @@ var mediaQueryWidth = MediaQuery.of(context).size.width;
 //////////////////////// Notification screen///////////////////////////////////////////////////
 
 // Notification container
-Widget notificationItem({required String notification}) => Builder(
+Widget notificationItem1({
+  required String notification,
+  var dotColor,
+  var textColor,
+  var boxColor
+}) => Builder(
   builder: (context) {
     var mediaQueryHeight= MediaQuery.of(context).size.height;
     var mediaQueryWidth = MediaQuery.of(context).size.width;
-    return     Container(
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          width: double.infinity,
-          height: mediaQueryHeight*0.1229,
-          decoration: BoxDecoration(
-            color: Color(0xff292D32),
-            borderRadius: BorderRadius.circular(35),
-          ),
-          child: Row(
-            children: [
-              Icon(
-                Icons.notifications,
-                color: Colors.grey,
-              ),
-              SizedBox(
-                width: mediaQueryWidth*0.03125,
-              ),
-              Expanded(
-                child: Text.rich(
-                  TextSpan(text: notification),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(color: Colors.white),
+    return     GestureDetector(
+      onTap: (){
+
+      },
+      child: Container(
+            padding: EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.03125),
+            width: double.infinity,
+            height: mediaQueryHeight*0.1229,
+            decoration: BoxDecoration(
+              color: boxColor,
+              borderRadius: BorderRadius.circular(35),
+            ),
+            child: Row(
+              children: [
+                Stack(children: [
+                  Icon(
+                    Icons.notifications_none_rounded,
+                    color: Colors.white,
+                  ),
+                  CircleAvatar(
+                    backgroundColor:dotColor,
+                    radius: 5,
+                  ),
+                ],),
+                SizedBox(
+                  width: mediaQueryWidth*0.03125,
                 ),
-              )
-            ],
+                Expanded(
+                  child: Text.rich(
+                    TextSpan(text: notification, style: TextStyle(color: textColor)),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                )
+              ],
+            ),
           ),
-        );
+    );
   }
 );
 
@@ -222,7 +238,7 @@ Widget slimCardItem({
       }
     );
 
-Widget buildNotificationItem() => notificationItem(notification: 'Lets go');
+Widget buildNotificationItem() => notificationItem1(notification: 'Lets go');
 
 ////////////////////////  Profile Screen ///////////////////////////////////////////////////
 
