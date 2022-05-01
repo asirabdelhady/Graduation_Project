@@ -8,44 +8,37 @@ class Utils{
     return [
       Notifications(
         notification: "You are 2 Km away from the Pyramids",
-        icon: Icon(Icons.notifications_none_rounded),
       ),
       Notifications(
         notification: "You are 3 Km away from the Pyramids",
-        icon: Icon(Icons.notifications_none_rounded),
       ),
       Notifications(
         notification: "You are 4 Km away from the Pyramids",
-        icon: Icon(Icons.notifications_none_rounded),
       ),
       Notifications(
         notification: "You are 5 Km away from the Pyramids",
-        icon: Icon(Icons.notifications_none_rounded),
       ),
       Notifications(
         notification: "You are 6 Km away from the Pyramids",
-        icon: Icon(Icons.notifications_none_rounded),
       ),
     ];
   }
 
-  List <Notifications> notifications = Utils.getNotifications();
 }
 
 class NotificationScreen extends StatefulWidget{
   const NotificationScreen({Key? key}) : super(key: key);
   @override
   _NotificationScreenState createState() => _NotificationScreenState();
-}   bool notiPtessed=false;
+}   bool notiTapped=false;
 class _NotificationScreenState extends State<NotificationScreen> {
-
+  List <Notifications> notifications = Utils.getNotifications();
 
   int index =3;
   @override
   Widget build(BuildContext context) {
     var mediaQueryHeight=MediaQuery.of(context).size.height;
     var mediaQueryWidth=MediaQuery.of(context).size.width;
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -62,44 +55,63 @@ class _NotificationScreenState extends State<NotificationScreen> {
             child: Column(
               children:[
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.03125),
-                  width: double.infinity,
-                  height: mediaQueryHeight*0.1229,
-                  decoration: BoxDecoration(
-                    color: notiPtessed==true? tSecondary(): tPrimary(),
-                    borderRadius: BorderRadius.circular(35),
-                  ),
-                  child: Row(
-                    children: [
-                      Stack(children: [
-                        Icon(
-                          Icons.notifications_none_rounded,
-                          color: notiPtessed==true? tPrimary(): Colors.white  ,
-                        ),
-                        CircleAvatar(
-                          backgroundColor:notiPtessed==true? Colors.transparent: Colors.red,
-                          radius: 5,
-                        ),
-                      ],),
-                      SizedBox(
-                        width: mediaQueryWidth*0.03125,
-                      ),
-                      Expanded(
-                        child: Text.rich(
-                          TextSpan(text: 'Test notification', ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(color:notiPtessed==true? tPrimary(): Colors.white),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+                  width: mediaQueryWidth,
+                  height: mediaQueryHeight,
+                  child: ListView.separated(
+                    separatorBuilder: (context, index) => SizedBox(height: 12,),
+                      itemCount: notifications.length,
+                      itemBuilder: (context, index) {
+                        return Dismissible(
+                          key: Key(notifications[index].notification),
+                          onDismissed: (direction){
+                            setState(() {
+                              notifications.removeAt(index);
+                            });
+                          },
+                          child: GestureDetector(
+                            key: Key(notifications[index].notification),
+                            onTap: (){
+                              setState(() {
+                                notiTapped=true;
+                              });
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.03125),
+                              width: double.infinity,
+                              height: mediaQueryHeight*0.1229,
+                              decoration: BoxDecoration(
+                                color: notiTapped==true? tGrey(): tPrimary(),
+                                borderRadius: BorderRadius.circular(35),
+                              ),
+                              child: Row(
+                                children: [
+                                  Stack(children: [
+                                    Icon(Icons.notifications_none_rounded,
+                                    color: notiTapped==true? tPrimary(): Colors.white,),
+                                    CircleAvatar(
+                                      backgroundColor:notiTapped==true? Colors.transparent: Colors.red,
+                                      radius: 5,
+                                    ),
+                                  ],),
+                                  SizedBox(
+                                    width: mediaQueryWidth*0.03125,
+                                  ),
+                                  Expanded(
+                                    child: Text.rich(
+                                      TextSpan(text: notifications[index].notification, ),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(color:notiTapped==true? tPrimary(): Colors.white),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
 
-               /* ListView.builder(
-                    itemBuilder: (context, index) {
-
-                })*/
+                  }),
+                )
 
 
                 /*SizedBox(
