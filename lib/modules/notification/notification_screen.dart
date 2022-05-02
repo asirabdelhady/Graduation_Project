@@ -21,6 +21,23 @@ class Utils{
       Notifications(
         notification: "You are 6 Km away from the Pyramids",
       ),
+      Notifications(
+        notification: "You are 2 Km away from the Pyramids",
+      ),
+      Notifications(
+        notification: "You are 3 Km away from the Pyramids",
+      ),
+      Notifications(
+        notification: "You are 4 Km away from the Pyramids",
+      ),
+      Notifications(
+        notification: "You are 5 Km away from the Pyramids",
+      ),
+      Notifications(
+        notification: "You are 6 Km away from the Pyramids",
+      ),
+
+
     ];
   }
 
@@ -43,6 +60,24 @@ class _NotificationScreenState extends State<NotificationScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         elevation: 0,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+                shape: StadiumBorder(),
+                primary: tPrimary(),
+              ),
+              child: Text('Read All'),
+              onPressed :(){
+                setState(() {
+                  notiTapped=true;
+                });
+              },
+            ),
+          ),
+        ],
         title:  Text('Notifications',
           style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: mediaQueryWidth*0.093),),
         backgroundColor: Colors.white,),
@@ -54,11 +89,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
             padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375),
             child: Column(
               children:[
+                SizedBox(height: mediaQueryHeight*0.0196,),
                 Container(
                   width: mediaQueryWidth,
-                  height: mediaQueryHeight,
+                  height: mediaQueryHeight*0.819,
                   child: ListView.separated(
-                    separatorBuilder: (context, index) => SizedBox(height: 12,),
+                    separatorBuilder: (context, index) => SizedBox(height: mediaQueryHeight*0.0196,),
                       itemCount: notifications.length,
                       itemBuilder: (context, index) {
                         return Dismissible(
@@ -68,50 +104,50 @@ class _NotificationScreenState extends State<NotificationScreen> {
                               notifications.removeAt(index);
                             });
                           },
-                          child: GestureDetector(
-                            key: Key(notifications[index].notification),
-                            onTap: (){
-                              setState(() {
-                                notiTapped=true;
-                              });
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.03125),
-                              width: double.infinity,
-                              height: mediaQueryHeight*0.1229,
-                              decoration: BoxDecoration(
-                                color: notiTapped==true? tGrey(): tPrimary(),
-                                borderRadius: BorderRadius.circular(35),
-                              ),
-                              child: Row(
-                                children: [
-                                  Stack(children: [
-                                    Icon(Icons.notifications_none_rounded,
-                                    color: notiTapped==true? tPrimary(): Colors.white,),
-                                    CircleAvatar(
-                                      backgroundColor:notiTapped==true? Colors.transparent: Colors.red,
-                                      radius: 5,
-                                    ),
-                                  ],),
-                                  SizedBox(
-                                    width: mediaQueryWidth*0.03125,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.03125),
+                            width: double.infinity,
+                            height: mediaQueryHeight*0.1229,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: tGrey(),
+                                  offset: Offset(3,6),
+                                  blurRadius: 3,
+
+                                ),
+                              ],
+                              color: notiTapped==true? tGrey(): tPrimary(),
+                              borderRadius: BorderRadius.circular(35),
+                            ),
+                            child: Row(
+                              children: [
+                                Stack(children: [
+                                  Icon(Icons.notifications_none_rounded,
+                                  color: notiTapped==true? tPrimary(): Colors.white,),
+                                  CircleAvatar(
+                                    backgroundColor:notiTapped==true? Colors.transparent: Colors.red,
+                                    radius: 5,
                                   ),
-                                  Expanded(
-                                    child: Text.rich(
-                                      TextSpan(text: notifications[index].notification, ),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(color:notiTapped==true? tPrimary(): Colors.white),
-                                    ),
-                                  )
-                                ],
-                              ),
+                                ],),
+                                SizedBox(
+                                  width: mediaQueryWidth*0.03125,
+                                ),
+                                Expanded(
+                                  child: Text.rich(
+                                    TextSpan(text: notifications[index].notification, ),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(color:notiTapped==true? tPrimary(): Colors.white),
+                                  ),
+                                )
+                              ],
                             ),
                           ),
                         );
 
                   }),
-                )
+                ),
 
 
                 /*SizedBox(
