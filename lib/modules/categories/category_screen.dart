@@ -1,13 +1,248 @@
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:tour_guide_app/models/models.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
-
+class UtilsRecommended{
+  static List <RecommendedPlaces> getRecommendedPlaces(){
+    return [
+      RecommendedPlaces(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      RecommendedPlaces(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      RecommendedPlaces(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      RecommendedPlaces(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      RecommendedPlaces(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      RecommendedPlaces(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+    ];
+  }
+}
+class UtilsTAttractions {
+  static List <TAttractions> getTAttractionPlaces() {
+    return [
+      TAttractions(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      TAttractions(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      TAttractions(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      TAttractions(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      TAttractions(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      TAttractions(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      TAttractions(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+    ];
+  }
+}
+class UtilsHotels{
+  static List <Hotels> getHotels() {
+    return [
+      Hotels(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      Hotels(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      Hotels(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      Hotels(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      Hotels(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      Hotels(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+    ];
+  }
+}
+class UtilsEntertainment{
+  static List <Entertainment> getEntertainment() {
+    return [
+      Entertainment(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      Entertainment(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      Entertainment(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      Entertainment(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      Entertainment(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      Entertainment(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      Entertainment(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      Entertainment(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      Entertainment(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      Entertainment(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      Entertainment(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      Entertainment(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      Entertainment(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+      Entertainment(
+          placeName: 'They Pyramids',
+          imagePath: 'assets/images/Pyramids.jpg',
+          distance: '26 Km',
+          rating: '4.8'
+      ),
+    ];
+  }
+}
 class CategoryScreen extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
     var mediaQueryHeight = MediaQuery.of(context).size.height;
     var mediaQueryWidth = MediaQuery.of(context).size.width;
+
+    List<RecommendedPlaces> recommendedPlaces = UtilsRecommended.getRecommendedPlaces();
+    List<TAttractions> tAttractions = UtilsTAttractions.getTAttractionPlaces();
+    List<Hotels> hotels = UtilsHotels.getHotels();
+    List<Entertainment> entertainment = UtilsEntertainment.getEntertainment();
+
+
+    PageController recommendedPageController =PageController(initialPage: 0);
+    PageController tAttractionsPageController =PageController(initialPage: 0);
+    PageController hotelsPageController =PageController(initialPage: 0);
+    PageController entertainmentPageController =PageController(initialPage: 0);
+
     return Scaffold(
       body: SafeArea(
         bottom: false,
@@ -42,38 +277,145 @@ class CategoryScreen extends StatelessWidget{
                   ),
                 ),
                 SizedBox(height: mediaQueryHeight*0.039,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Column(
                   children: [
-                    subTitle(subTitle: 'Recommended (nearby)'),
-                    Icon(Icons.keyboard_arrow_right)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        subTitle(subTitle: 'Recommended (nearby)'),
+                        Icon(Icons.keyboard_arrow_right)
+                      ],
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Container(
+                          height: mediaQueryHeight*0.322,
+                          width: mediaQueryWidth,
+                          child: PageView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) => defualtCard(
+                                placeName:recommendedPlaces[index].placeName,
+                                imagePath: recommendedPlaces[index].imagePath,
+                                rating: recommendedPlaces[index].rating,
+                                distance: recommendedPlaces[index].distance),
+                            itemCount: recommendedPlaces.length,
+                            controller: recommendedPageController,
+                          )
+                      ),
+                    ),
+                    Center(
+                      child: SmoothPageIndicator(
+                        controller: recommendedPageController,
+                        count: recommendedPlaces.length,
+                        effect: ScrollingDotsEffect(
+                          dotColor: tGrey(),
+                          activeDotColor: tPrimary(),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: mediaQueryHeight*0.049,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        subTitle(subTitle: 'Tourist Attractions'),
+                        Icon(Icons.keyboard_arrow_right),
+                      ],),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Container(
+                          height: mediaQueryHeight*0.322,
+                          width: mediaQueryWidth,
+                          child: PageView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) => defualtCard(
+                                placeName:tAttractions[index].placeName,
+                                imagePath: tAttractions[index].imagePath,
+                                rating: tAttractions[index].rating,
+                                distance: tAttractions[index].distance),
+                            itemCount: tAttractions.length,
+                            controller: tAttractionsPageController,
+                          )
+                      ),
+                    ),
+                    Center(
+                      child: SmoothPageIndicator(
+                        controller: tAttractionsPageController,
+                        count: tAttractions.length,
+                        effect: ScrollingDotsEffect(
+                          dotColor: tGrey(),
+                          activeDotColor: tPrimary(),
+                        ),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        subTitle(subTitle: 'Hotels'),
+                        Icon(Icons.keyboard_arrow_right),
+                      ],),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Container(
+                          height: mediaQueryHeight*0.322,
+                          width: mediaQueryWidth,
+                          child: PageView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) => defualtCard(
+                                placeName:hotels[index].placeName,
+                                imagePath: hotels[index].imagePath,
+                                rating: hotels[index].rating,
+                                distance: hotels[index].distance),
+                            itemCount: hotels.length,
+                            controller: hotelsPageController,
+                          )
+                      ),
+                    ),
+                    Center(
+                      child: SmoothPageIndicator(
+                        controller: hotelsPageController,
+                        count: hotels.length,
+                        effect: ScrollingDotsEffect(
+                          dotColor: tGrey(),
+                          activeDotColor: tPrimary(),
+                        ),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        subTitle(subTitle: 'Entertainment'),
+                        Icon(Icons.keyboard_arrow_right),
+                      ],),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Container(
+                          height: mediaQueryHeight*0.322,
+                          width: mediaQueryWidth,
+                          child: PageView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) => defualtCard(
+                                placeName:entertainment[index].placeName,
+                                imagePath: entertainment[index].imagePath,
+                                rating: entertainment[index].rating,
+                                distance: entertainment[index].distance),
+                            itemCount: entertainment.length,
+                            controller: entertainmentPageController,
+                          )
+                      ),
+                    ),
+                    Center(
+                      child: SmoothPageIndicator(
+                        controller: entertainmentPageController,
+                        count: entertainment.length,
+                        effect: ScrollingDotsEffect(
+                          dotColor: tGrey(),
+                          activeDotColor: tPrimary(),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: mediaQueryHeight*0.049,),
                   ],
-                ),
-                SizedBox(height: mediaQueryHeight*0.039,),
-                cardBuilderWithDotIndicator(),
-                SizedBox(height: mediaQueryHeight*0.049,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    subTitle(subTitle: 'Tourist Attractions'),
-                    Icon(Icons.keyboard_arrow_right),
-                  ],),
-                cardBuilderWithDotIndicator(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    subTitle(subTitle: 'Hotels'),
-                    Icon(Icons.keyboard_arrow_right),
-                  ],),
-                cardBuilderWithDotIndicator(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    subTitle(subTitle: 'Entertainment'),
-                    Icon(Icons.keyboard_arrow_right),
-                  ],),
-                cardBuilderWithDotIndicator(),
-                SizedBox(height: mediaQueryHeight*0.049,)
+                )
 
 
               ],
@@ -84,5 +426,4 @@ class CategoryScreen extends StatelessWidget{
     );
   }
 }
-
 

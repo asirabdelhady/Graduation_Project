@@ -23,12 +23,6 @@ class _WeatherScreen extends State<WeatherScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Row(
-                  children: [
-                    Icon(Icons.cloud_circle_rounded,
-                      size: mediaQueryWidth*0.125,color: tPrimary(),)
-                  ],
-                ),
                 Text('Weather',
                   style:  TextStyle(
                     fontSize: mediaQueryWidth*0.125,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tour_guide_app/profileEdit_screen.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
 class ProfileScreen extends StatefulWidget{
   const ProfileScreen({Key? key}) : super(key: key);
@@ -31,7 +32,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         borderRadius: BorderRadius.circular(35),
                         border: Border.all(),
                       ),
-                        child: IconButton(icon: const Icon(Icons.edit_outlined), onPressed: (){})),
+                        child: IconButton(
+                            icon: const Icon(Icons.edit_outlined),
+                            onPressed: (){
+                              Navigator. push(context, MaterialPageRoute(builder: (context)=> ProfileEditScreen()));
+                            })),
                 ]),
                  SizedBox(height: mediaQueryHeight*0.0196),
                 profileHeader(imagePath: 'assets/images/Pyramids.jpg', name: 'Asir Abdelhady', age: 22, nationality: 'Egypt'),

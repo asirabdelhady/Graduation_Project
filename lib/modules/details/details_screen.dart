@@ -20,9 +20,6 @@ class _DetailScreenState extends State<DetailScreen> {
     PageController pageController = PageController();
     var mediaQueryHeight = MediaQuery.of(context).size.height;
     var mediaQueryWidth = MediaQuery.of(context).size.width;
-    Widget _buildPageItem(int index) {
-      return defualtCard(placeName: 'Pyramids', imagePath: 'assets/images/Pyramids.jpg');
-    }
 
     return Scaffold(
 

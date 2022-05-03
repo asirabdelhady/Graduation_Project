@@ -4,6 +4,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/modules/details/details_screen.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 import 'package:expandable_text/expandable_text.dart';
+import 'package:tour_guide_app/models/models.dart';
+
 
 /////////////////////////////// Shared //////////////////////////////////////////////////
 
@@ -147,52 +149,51 @@ var mediaQueryWidth = MediaQuery.of(context).size.width;
 
 // Notification container
 Widget notificationItem1({
+  bool notiTapped=false,
   required String notification,
-  var dotColor,
-  var textColor,
-  var boxColor
 }) => Builder(
   builder: (context) {
     var mediaQueryHeight= MediaQuery.of(context).size.height;
     var mediaQueryWidth = MediaQuery.of(context).size.width;
-    return     GestureDetector(
-      onTap: (){
+    return     Container(
+      padding: EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.03125),
+      width: double.infinity,
+      height: mediaQueryHeight*0.1229,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: tGrey(),
+            offset: Offset(3,6),
+            blurRadius: 3,
 
-      },
-      child: Container(
-            padding: EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.03125),
-            width: double.infinity,
-            height: mediaQueryHeight*0.1229,
-            decoration: BoxDecoration(
-              color: boxColor,
-              borderRadius: BorderRadius.circular(35),
-            ),
-            child: Row(
-              children: [
-                Stack(children: [
-                  Icon(
-                    Icons.notifications_none_rounded,
-                    color: Colors.white,
-                  ),
-                  CircleAvatar(
-                    backgroundColor:dotColor,
-                    radius: 5,
-                  ),
-                ],),
-                SizedBox(
-                  width: mediaQueryWidth*0.03125,
-                ),
-                Expanded(
-                  child: Text.rich(
-                    TextSpan(text: notification, style: TextStyle(color: textColor)),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                )
-              ],
-            ),
           ),
+        ],
+        color: notiTapped==true? tGrey(): tPrimary(),
+        borderRadius: BorderRadius.circular(35),
+      ),
+      child: Row(
+        children: [
+          Stack(children: [
+            Icon(Icons.notifications_none_rounded,
+              color: notiTapped==true? tPrimary(): Colors.white,),
+            CircleAvatar(
+              backgroundColor:notiTapped==true? Colors.transparent: Colors.red,
+              radius: 5,
+            ),
+          ],),
+          SizedBox(
+            width: mediaQueryWidth*0.03125,
+          ),
+          Expanded(
+            child: Text.rich(
+              TextSpan(text: notification, ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color:notiTapped==true? tPrimary(): Colors.white),
+            ),
+          )
+        ],
+      ),
     );
   }
 );
@@ -678,11 +679,116 @@ Widget homeScreenRecommendedCard({
       ),
     );
 
+Widget categoryCard ({
+  required String categoryName,
+  required String imagePath,
+  required String numberOfPlaces,
+  IconData icon = Icons.location_on_rounded,
+})=> Builder(
+    builder: (context) {
+      var mediaQueryHeight= MediaQuery.of(context).size.height;
+      var mediaQueryWidth = MediaQuery.of(context).size.width;
+      return GestureDetector(
+        onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context){
+            return DetailScreen();
+          }));
+        },
+        child: Container(
+          margin: EdgeInsets.all(10),
+          child: Stack(
+            children: [
+              Container(
+                height: mediaQueryHeight*0.200,
+                width: mediaQueryWidth*0.85,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  image: DecorationImage(
+                    image: AssetImage(imagePath),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  right: mediaQueryWidth*0.0781,
+                  left: mediaQueryWidth*0.0468,
+                  top: mediaQueryHeight*0.1475,
+                  bottom: 0.01311,
+                ),
+                child: Container(
+                  height: mediaQueryHeight*0.120,
+                  width: mediaQueryWidth*0.781,
+                  decoration: BoxDecoration(
+                    boxShadow: const [
+                      BoxShadow(
+                        offset: Offset(5, 5),
+                        blurRadius: 5,
+                        color: Colors.grey,
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(30),
+                    color: Colors.white,
+                  ),
+                  child:Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: mediaQueryHeight*0.01311,
+                              left: mediaQueryWidth*0.0625,
+                              bottom: mediaQueryHeight*0.01311,
 
+                            ),
+                            child: Container(
+                              width: mediaQueryWidth*0.6875,
+                              child: Text(
+                                categoryName,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    fontSize: mediaQueryWidth*0.05,
+                                    fontWeight: FontWeight.bold
+
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],),
+                      Container(
+                        width:mediaQueryWidth*0.75 ,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children:[
+                            SizedBox(width: mediaQueryWidth*0.0400,),
+                            Row(
+                              children: [
+                                Icon(icon, color: Colors.yellow,),
+                                Text(numberOfPlaces),
+
+                              ],
+                            ),
+                            SizedBox(width: mediaQueryWidth*0.0375,),
+
+                          ],),
+                      ),
+                    ],),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+);
 
 Widget defualtCard ({
     required String placeName,
     required String imagePath,
+    required String rating,
+    required String distance,
     IconData icon1 = Icons.star,
     IconData icon3 = Icons.location_on_rounded,
 })=> Builder(
@@ -712,7 +818,7 @@ Widget defualtCard ({
             ),
             Padding(
               padding: EdgeInsets.only(
-                right: mediaQueryWidth*0.0781,
+                right: mediaQueryWidth*0.0650,
                 left: mediaQueryWidth*0.0468,
                 top: mediaQueryHeight*0.1475,
                 bottom: 0.01311,
@@ -821,14 +927,18 @@ Widget backButton()=> Builder(
   }
 );
 
-Widget cardBuilderWithDotIndicator ()=> Builder(
+Widget cardBuilderWithDotIndicator ({
+  required String placeName,
+  required String imagePath,
+  required String rating,
+  required String distance,
+  IconData icon1 = Icons.star,
+  IconData icon3 = Icons.location_on_rounded,
+})=> Builder(
   builder: (context) {
     var mediaQueryHeight= MediaQuery.of(context).size.height;
     var mediaQueryWidth = MediaQuery.of(context).size.width;
     PageController pageController = PageController(initialPage: 0);
-    Widget _buildPageItem(int index) {
-      return defualtCard(placeName: 'Pyramids', imagePath: 'assets/images/Pyramids.jpg');
-    }
     return     Column(
       children: [
         SingleChildScrollView(
@@ -838,7 +948,106 @@ Widget cardBuilderWithDotIndicator ()=> Builder(
               width: mediaQueryWidth,
               child: PageView.builder(
                 scrollDirection: Axis.horizontal,
-                itemBuilder: (context, position) => _buildPageItem(position),
+                itemBuilder: (context, position) => GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context){
+                      return DetailScreen();
+                    }));
+                  },
+                  child: Container(
+                    margin: EdgeInsets.all(10),
+                    child: Stack(
+                      children: [
+                        Container(
+                          height: mediaQueryHeight*0.200,
+                          width: mediaQueryWidth*0.85,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            image: DecorationImage(
+                              image: AssetImage(imagePath),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            right: mediaQueryWidth*0.0781,
+                            left: mediaQueryWidth*0.0468,
+                            top: mediaQueryHeight*0.1475,
+                            bottom: 0.01311,
+                          ),
+                          child: Container(
+                            height: mediaQueryHeight*0.120,
+                            width: mediaQueryWidth*0.781,
+                            decoration: BoxDecoration(
+                              boxShadow: const [
+                                BoxShadow(
+                                  offset: Offset(5, 5),
+                                  blurRadius: 5,
+                                  color: Colors.grey,
+                                ),
+                              ],
+                              borderRadius: BorderRadius.circular(30),
+                              color: Colors.white,
+                            ),
+                            child:Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                        top: mediaQueryHeight*0.01311,
+                                        left: mediaQueryWidth*0.0625,
+                                        bottom: mediaQueryHeight*0.01311,
+
+                                      ),
+                                      child: Container(
+                                        width: mediaQueryWidth*0.6875,
+                                        child: Text(
+                                          placeName,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              fontSize: mediaQueryWidth*0.05,
+                                              fontWeight: FontWeight.bold
+
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],),
+                                Container(
+                                  width:mediaQueryWidth*0.75 ,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children:[
+                                      SizedBox(width: mediaQueryWidth*0.0400,),
+                                      Row(
+                                        children: [
+                                          Icon(icon1, color: Colors.yellow,),
+                                          Text('4.9'),
+
+                                        ],
+                                      ),
+                                      SizedBox(width: mediaQueryWidth*0.0375,),
+                                      Row(
+                                        children: [
+                                          Icon(icon3, color: Colors.lightBlue,),
+                                          Text('26 Km'),
+
+                                        ],),
+                                      SizedBox(width: mediaQueryWidth*0.0375,),
+
+                                    ],),
+                                ),
+                              ],),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 itemCount: 3,
                 controller: pageController,
               )
