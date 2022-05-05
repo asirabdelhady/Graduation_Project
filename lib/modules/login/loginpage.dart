@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../navigation.dart';
 class loginPage extends StatefulWidget {
@@ -14,6 +15,7 @@ class _loginPageState extends State<loginPage> {
   var passwordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
   bool passorno = true;
+  String password = '';
   @override
   Widget build(BuildContext context) {
     var mediaQueryHeight = MediaQuery.of(context).size.height;
@@ -76,7 +78,23 @@ class _loginPageState extends State<loginPage> {
                                 passorno: false,
                                 suffixicon: Icon(null),
                                 controller: emailController,
-                                suffixPressed: null, validatorFunction: null, onFieldSubmitted: null, onChanged: null),
+                                validatorFunction:  (value) {
+                                  // Check if this field is empty
+                                  if (value == null || value.isEmpty) {
+                                    return 'This field is required';
+                                  }
+
+                                  // using regular expression
+                                  if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                                    return "Please enter a valid email address";
+                                  }
+
+                                  // the email is valid
+                                  return null;
+                                },
+                                suffixPressed: null,
+                                onFieldSubmitted: null,
+                                onChanged: null),
                             SizedBox(
                               height: mediaQueryHeight*0.0163,
                             ),
@@ -85,19 +103,50 @@ class _loginPageState extends State<loginPage> {
                                 imagepath: 'assets/images/lock.png',
                                 TextInputType: TextInputType.visiblePassword,
                                 passorno: passorno,
-                                suffixicon: Icon((passorno==false)? Icons.remove_red_eye : Icons.visibility_off,),
+                                suffixicon: Icon(
+                                  (passorno == false)
+                                      ? Icons.remove_red_eye
+                                      : Icons.visibility_off,
+                                ),
                                 controller: passwordController,
-                                suffixPressed: (){
+                                onChanged: (value) => password = value,
+                                validatorFunction: (value) {
+                                  RegExp regex =
+                                  RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
+
+                                  if (!regex.hasMatch(value)) {
+                                    ElevatedButton(
+                                      // color: Colors.orange,
+                                        child: Text('Bottom Sheet'),
+                                        onPressed: () {
+
+                                        });
+                                    return 'Please enter a valid password';
+                                  }
+                                },
+                                onFieldSubmitted: (value){
+                                  RegExp regex =
+                                  RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
+
+                                  if(value != regex.hasMatch(value)) {
+                                    Fluttertoast.showToast(
+                                      msg: 'Validate password must contain upper and lower letters , number and at least 8 characters ',
+                                      toastLength: Toast.LENGTH_LONG,
+                                    );
+                                  }
+
+                                },
+                                suffixPressed: () {
                                   setState(() {
-                                    passorno=!passorno;
+                                    passorno = !passorno;
                                   });
-                                }, validatorFunction: null, onChanged: null, onFieldSubmitted: null),
+                                }),
                             SizedBox(
                               height: mediaQueryHeight*0.0655,
                             ),
                             mainButton(
-                                minWidth: mediaQueryWidth*0.296,
-                                height: mediaQueryHeight*0.0065,
+                                minWidth: mediaQueryWidth*0.2968,
+                                height: mediaQueryHeight*0.066,
                                 text: 'Login',
                                 fontSize: mediaQueryWidth*0.40,
 

@@ -416,49 +416,49 @@ Widget mainButton({
   required String imagePath,
   required double minWidth,
   required double height,
-  double elevation = 25,
+  double elevation = 15,
   required String text,
   required double fontSize,
   required onPressed,
 }) =>
     Builder(
-      builder: (context) {
-        var mediaQueryHeight= MediaQuery.of(context).size.height;
-        var mediaQueryWidth = MediaQuery.of(context).size.width;
-        return MaterialButton(
-          onPressed: onPressed,
-          minWidth: minWidth,
-          height: height,
-          elevation: elevation,
-          color: const Color(0xFFFFFAED),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(30.0))),
-          child: Container(
-            width: mediaQueryWidth*0.484,
-            height: mediaQueryHeight*0.086,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  text,
-                  style: TextStyle(
-                    color: const Color(0xFF292D32),
-                    fontSize: 18,
+        builder: (context) {
+          var mediaQueryHeight= MediaQuery.of(context).size.height;
+          var mediaQueryWidth = MediaQuery.of(context).size.width;
+          return MaterialButton(
+            onPressed: onPressed,
+            minWidth: minWidth,
+            height: height,
+            elevation: elevation,
+            color: const Color(0xFFFFFAED),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(30.0))),
+            child: Container(
+              width: mediaQueryWidth*0.444,
+              height: mediaQueryHeight*0.039,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    text,
+                    style: TextStyle(
+                      color: const Color(0xFF292D32),
+                      fontSize: mediaQueryWidth*0.05,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Image.asset(
-                  imagePath,
-                  width: mediaQueryWidth*0.053,
-                  height: 0.0278,
-                )
-              ],
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Image.asset(
+                    imagePath,
+                    width: mediaQueryWidth*0.052,
+                    height: mediaQueryHeight*0.026,
+                  )
+                ],
+              ),
             ),
-          ),
-        );
-      }
+          );
+        }
     );
 
 Widget circleBack({
@@ -473,188 +473,186 @@ Widget circleBack({
     );
 
 Widget mainFormField({
-  //double width = 276,
-  //double height = 49,
   required String hintText,
-  required String imagepath,
+  String? imagepath,
   required TextInputType,
   required bool passorno,
   var suffixicon = const Icon(Icons.remove_red_eye),
   required var controller,
-
-   var suffixPressed ,
+  var suffixPressed ,
   required var onFieldSubmitted,
   required var validatorFunction,
-  required var onChanged
+  required var onChanged,
+  enable=null
 }) =>
     Builder(
-      builder: (context) {
-        var mediaQueryHeight= MediaQuery.of(context).size.height;
-        var mediaQueryWidth = MediaQuery.of(context).size.width;
-        return Stack(children: [
-          Container(
-            width: mediaQueryWidth*0.862,
-            height: mediaQueryHeight*0.080,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: Colors.white,
+        builder: (context) {
+          var mediaQueryHeight= MediaQuery.of(context).size.height;
+          var mediaQueryWidth = MediaQuery.of(context).size.width;
+          return Stack(children: [
+            Container(
+              width: mediaQueryWidth*0.775,
+              height: mediaQueryHeight*0.066,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: Colors.white,
+              ),
             ),
-          ),
-          Container(
-            width: 276,
-            height: 71,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: Colors.transparent,
-            ),
-            child: Column(
-              children: [
-                //   SizedBox(height: 1,),
-                TextFormField(
-                  onFieldSubmitted:onFieldSubmitted ,
-                  validator: validatorFunction,
-                  controller: controller,
-                  onChanged: onChanged,
-                  decoration: InputDecoration(
-                    hintText: hintText,
-                    border: InputBorder.none,
-                    hintStyle: TextStyle(color: Colors.grey),
-                    prefixIcon: Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.043, vertical: mediaQueryHeight*0.0229),
-                      child: Image.asset(
-                        imagepath,
-                        width: mediaQueryWidth*0.0312,
-                        height: mediaQueryHeight*0.016,
-                        //    fit: BoxFit.fill,
+            Container(
+              width: mediaQueryWidth*0.766,
+              height: mediaQueryHeight*0.094,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: Colors.transparent,
+              ),
+              child: Column(
+                children: [
+                  //   SizedBox(height: 1,),
+                  TextFormField(
+                    enabled: enable,
+                    onFieldSubmitted:onFieldSubmitted ,
+                    validator: validatorFunction,
+                    controller: controller,
+                    onChanged: onChanged,
+                    decoration: InputDecoration(
+                      hintText: hintText,
+                      border: InputBorder.none,
+                      hintStyle: TextStyle(color: Colors.grey),
+                      prefixIcon: Padding(
+                        padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.043, vertical: mediaQueryHeight*0.0229),
+                        child: Image.asset(
+                          imagepath!,
+                          width: mediaQueryWidth*0.0312,
+                          height: mediaQueryHeight*0.016,
+                          //    fit: BoxFit.fill,
+                        ),
+                      ),
+                      suffixIcon: IconButton(
+                        onPressed: suffixPressed,
+                        icon: suffixicon,
+                        iconSize: 19,
                       ),
                     ),
-                    suffixIcon: IconButton(
-                      onPressed: suffixPressed,
-                      icon: suffixicon,
-                    ),
+                    keyboardType: TextInputType,
+                    obscureText: passorno,
                   ),
-                  keyboardType: TextInputType,
-                  obscureText: passorno,
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ]);
-      }
+          ]);
+        }
     );
 
 Widget tourPlanCard({
-  double elevation = 25,
+  double elevation =7,
   required String sightName,
   required onButtonPressed,
   required onCardTap,
   required String imagePath,
 }) =>
     Builder(
-      builder: (context) {
-        var mediaQueryHeight= MediaQuery.of(context).size.height;
-        var mediaQueryWidth = MediaQuery.of(context).size.width;
-        return GestureDetector(
-          onTap: onCardTap,
-          child: Stack(
-            children: [
-              Container(
+        builder: (context) {
+          var mediaQueryHeight= MediaQuery.of(context).size.height;
+          var mediaQueryWidth = MediaQuery.of(context).size.width;
+          return GestureDetector(
+            onTap: onCardTap,
+            child: Stack(
+              children: [
+                Container(
 
-                width: 300,
-                height: 130,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: tSecondary(),
-                  boxShadow: [
-                    BoxShadow(
-                      color: tGrey(),
-                      offset: Offset(5, 5),
-                      blurRadius: 3,
-
-                    )
-                  ],
-                ),
-              ),
-              Row(
-                children: [
-                  Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                    child: Container(
-                      width: 90,
-                      height: 80,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
+                  width: mediaQueryWidth*0.916,
+                  height: mediaQueryHeight*0.159,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(mediaQueryWidth*0.083),
+                    color: tSecondary(),
+                    boxShadow: [
+                      BoxShadow(
                         color: tGrey(),
-                        image: DecorationImage(
-                          image: AssetImage(imagePath),
-                          fit: BoxFit.fill,
+                        offset: Offset(5, 5),
+                        blurRadius: 3,
+
+                      )
+                    ],
+                  ),
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding:  EdgeInsets.only(bottom: mediaQueryHeight*0.037,left: mediaQueryWidth*0.027),
+                      child: Container(
+                        width: mediaQueryWidth*0.277,
+                        height: mediaQueryHeight*0.132,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(mediaQueryWidth*0.083),
+                          color: tGrey(),
+                          image: DecorationImage(
+                            image: AssetImage(imagePath),
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        height: 150,
-                        width: 200,
-                        child: Padding(
-                          padding:  EdgeInsets.symmetric(vertical: mediaQueryHeight*0.01311),
-                          child: Column(
-                            children: [
-                              Container(
-                                width: 180,
-                                height: 50,
-                                child: Text(
-                                  sightName,
-                                  maxLines: 2,
-                                  style: TextStyle(fontSize: mediaQueryWidth*0.0625, color: tPrimary(),),
+                    Row(
+                      children: [
+                        Container(
+                          height: mediaQueryHeight*0.186,
+                          width: mediaQueryWidth*0.555,
+                          child: Padding(
+                            padding:  EdgeInsets.symmetric(vertical: mediaQueryHeight*0.01311),
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: mediaQueryWidth*0.486,
+                                  height: mediaQueryHeight*0.066,
+                                  child: Text(
+                                    sightName,
+                                    maxLines: 2,
+                                    style: TextStyle(fontSize: mediaQueryWidth*0.0625, color: tPrimary(),),
+                                  ),
                                 ),
-                              ),
-                              Row(
-                                children: [
-                                  SizedBox(width: 20,),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.only(top: mediaQueryHeight*0.01311, end: mediaQueryWidth*0.0468),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(30)
-                                      ),
-                                      width: 100,
-                                      height: 50,
-                                      child: MaterialButton(
-                                        onPressed:  onButtonPressed,
-                                        //minWidth: minWidth,
-                                        //height: height,
-                                        elevation: elevation,
-                                        color: tPrimary(),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.all(Radius.circular(30.0))),
-                                        child: Text(
-                                          'Done',
-                                          style: TextStyle(
+                                Row(
+                                  children: [
+                                    SizedBox(width: mediaQueryWidth*0.286,),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.only(top: mediaQueryHeight*0.01311, end: mediaQueryWidth*0.0468),
+                                      child: Container(
+                                        decoration: BoxDecoration(
                                             color: Colors.white,
-                                            fontSize:mediaQueryWidth*0.056 ,
+                                            borderRadius: BorderRadius.circular(mediaQueryWidth*0.083)
+                                        ),
+                                        width: mediaQueryWidth*0.222,
+                                        height: mediaQueryHeight*0.053,
+                                        child: MaterialButton(
+                                          onPressed:  onButtonPressed,
+                                          elevation: elevation,
+                                          color: tPrimary(),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                              BorderRadius.all(Radius.circular(mediaQueryWidth*0.083))),
+                                          child: Text(
+                                            'Done',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize:mediaQueryWidth*0.044 ,
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      }
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        }
     );
 
 Widget homeScreenRecommendedCard({
@@ -900,31 +898,24 @@ Widget defualtCard ({
 
 Widget backButton()=> Builder(
 
-  builder: (context) {
-    var mediaQueryHeight= MediaQuery.of(context).size.height;
-    var mediaQueryWidth = MediaQuery.of(context).size.width;
-    return     Padding(
-      padding: EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.025, vertical: mediaQueryHeight*0.01311),
-      child: Container(
-        width: mediaQueryWidth*0.156,
-        height: mediaQueryHeight*0.081,
-        child: ElevatedButton(
-          onPressed: () {
-          Navigator.pop(context);
-        },
-    style: ElevatedButton.styleFrom(
-    primary: tPrimary(),
-    shape: CircleBorder(),
-
-    ),
-    child: Icon(Icons.arrow_back_rounded,
+    builder: (context) {
+      var mediaQueryHeight= MediaQuery.of(context).size.height;
+      var mediaQueryWidth = MediaQuery.of(context).size.width;
+      return     Padding(
+        padding: EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.025, vertical: mediaQueryHeight*0.01311),
+        child: CircleAvatar(
+          radius: 22.5,
+          backgroundColor: tPrimary(),
+          child: IconButton(onPressed: () {
+            Navigator.pop(context);
+          }, icon: Icon(Icons.arrow_back,
             color: Colors.white,
+          ),
+          ),
         ),
-    ),
-      )
-    );
+      );
 
-  }
+    }
 );
 
 Widget cardBuilderWithDotIndicator ({
@@ -1184,3 +1175,57 @@ Widget stepperCard ({
       );
     }
 );
+
+Widget buildTodayItem() =>
+    Builder(
+        builder: (context) {
+          var mediaQueryHeight= MediaQuery.of(context).size.height;
+          var mediaQueryWidth = MediaQuery.of(context).size.width;
+          return Container(
+            width: mediaQueryWidth*0.166,
+            child:
+            Column(
+              children: [
+                Stack(
+                  alignment: AlignmentDirectional.bottomCenter,
+                  children: [
+                    Container(
+                      child: Column(
+                        children: [
+                          SizedBox(height: mediaQueryHeight*0.026,),
+                          Text('09:00 AM',
+                            style: TextStyle(color: Colors.black,
+                                fontSize: mediaQueryHeight*0.014
+                            ),
+                          ),
+                          SizedBox(height: mediaQueryHeight*0.006,),
+                          Icon(Icons.cloud_outlined, color: Colors.black,
+                          )
+                        ],
+                      ),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(50),
+                        color: tGrey(),
+                      ),
+                      width: mediaQueryWidth*0.25,
+                      height: mediaQueryHeight*0.159,
+                    ),
+                    Padding(
+                      padding:  EdgeInsetsDirectional.only(
+                        bottom: mediaQueryHeight*0.006,
+                      ),
+                      child: CircleAvatar(
+                        child:
+                        Text('15° C',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        radius: 25.0,
+                        backgroundColor: tPrimary(),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        }
+    );

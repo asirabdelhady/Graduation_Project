@@ -81,7 +81,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
         title:  Text('Notifications',
           style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: mediaQueryWidth*0.093),),
         backgroundColor: Colors.white,),
-      extendBody: true,
+      //extendBody: true,
       body: SafeArea(
         bottom: false,
         child: SingleChildScrollView(

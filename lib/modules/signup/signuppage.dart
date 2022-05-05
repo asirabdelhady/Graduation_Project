@@ -82,9 +82,12 @@ class _signUpPageState extends State<signUpPage> {
                               return null;
                             },
                             suffixPressed: null,
-                            suffixicon: Icon(null), onChanged: null, onFieldSubmitted: null,
+                            suffixicon: Icon(null),
+                                onChanged: null,
+                                onFieldSubmitted: null,
                           )),
                         ),
+                        SizedBox(height: 5,),
                         mainFormField(
                             hintText: 'Email',
                             imagepath: 'assets/images/mail.png',
@@ -106,7 +109,11 @@ class _signUpPageState extends State<signUpPage> {
                               // the email is valid
                               return null;
                             },
-                            suffixPressed: null, onFieldSubmitted: null, onChanged: null),
+                            suffixPressed: null,
+                            onFieldSubmitted: null,
+                            onChanged: null),
+                        SizedBox(height: 5,),
+
 
                         mainFormField(
                             hintText: 'Password',
@@ -152,10 +159,12 @@ class _signUpPageState extends State<signUpPage> {
                               });
                             }),
                         SizedBox(
-                          height: 10,
+                          height: 5,
                         ),
                         mainFormField(
-                            hintText: 'Confirm Password',
+                          enable: password!=null&&password.isNotEmpty,
+
+                          hintText: 'Confirm Password',
                             imagepath: 'assets/images/lock.png',
                             TextInputType: TextInputType.visiblePassword,
                             passorno: passorno,
@@ -191,7 +200,7 @@ class _signUpPageState extends State<signUpPage> {
                         ),
                         mainButton(
                             minWidth: mediaQueryWidth*0.2968,
-                            height: mediaQueryHeight*0.055,
+                            height: mediaQueryHeight*0.066,
                             text: 'Sign up',
                             fontSize: mediaQueryWidth*0.040,
                             onPressed: () {

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:im_stepper/stepper.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/models/models.dart';
 import 'package:tour_guide_app/modules/categories/category_screen.dart';
@@ -7,6 +8,8 @@ import 'package:tour_guide_app/modules/details/details_screen.dart';
 import 'package:tour_guide_app/recommended_screen.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
+
+import '../tour/tour_screen.dart';
 class UtilsRecommended{
   static List <RecommendedPlaces> getRecommendedPlaces(){
     return [
@@ -75,7 +78,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<RecommendedPlaces> recommendedPlaces = UtilsRecommended.getRecommendedPlaces();
   List<Categories> categories = UtilsCategories.getCategories();
+//////////////
+  int activeStep = 5; // Initial step set to 5.
 
+  int upperBound = 6; // upperBound MUST BE total number of icons minus 1.
+  ///////////////
   @override
   Widget build(BuildContext context) {
 
@@ -166,6 +173,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                            return TourScreen();
+                          }));
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -180,7 +190,77 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Container(
-                                //////////Active Tour Section/////////
+                                ///////////////////////////////////
+
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.only(start: 10.0,top: 8),
+                                        child: Text('My Tour',
+                                          style: TextStyle(
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.w400
+                                          ),
+                                        ),
+                                      ),
+                                      IconStepper(
+                                        icons: [
+                                          Icon(null),
+                                          Icon(null),
+                                          Icon(null),
+                                          Icon(null),
+                                          Icon(null),
+                                          Icon(null),
+                                          Icon(null),
+                                        ],
+
+                                        // activeStep property set to activeStep variable defined above.
+                                        activeStep: activeStep,
+                                        enableStepTapping: false,
+                                        //enableNextPreviousButtons: false,
+                                        stepColor: tGrey(),
+                                        activeStepBorderColor:tPrimary(),
+                                        activeStepBorderWidth:5,
+                                        activeStepBorderPadding: 0,
+                                        activeStepColor: tSecondary(),
+                                        lineColor: tPrimary(),
+                                        stepRadius: 14,
+
+
+                                        // This ensures step-tapping updates the activeStep.
+                                        onStepReached: (index) {
+                                          setState(() {
+                                            activeStep = index;
+                                          });
+                                        },
+                                      ),
+                                      SizedBox(height: 12,),
+
+                                      Expanded(
+                                        child: Text('Next stop, The Pryamids',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                          ),),
+                                      ),
+
+                                      Padding(
+                                        padding: const EdgeInsets.only(bottom: 8,right: 20),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+
+                                            nextButton(),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  )
+
+                                //////////////////////////////////
+
+
+
                               ),
                             ),
                           ),
@@ -296,6 +376,25 @@ class _HomeScreenState extends State<HomeScreen> {
     );
 
     }
+  // Returns the next button
+  Widget nextButton() {
+    return ElevatedButton(onPressed: (){
+      // Increment activeStep, when the next button is tapped. However, check for upper bound.
+      if (activeStep < upperBound) {
+        setState(() {
+          activeStep++;
+
+        });
+      }
+
+    },
+        style: ElevatedButton.styleFrom(
+          primary: tPrimary(),
+          shape: StadiumBorder(),
+        ),
+        child: Text('Next'));
+  }
+
 
 }
 

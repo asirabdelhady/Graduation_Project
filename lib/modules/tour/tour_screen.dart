@@ -49,8 +49,9 @@ class _TourScreenState extends State<TourScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var mediaQueryHeight=MediaQuery.of(context).size.height;
+    //var mediaQueryHeight=MediaQuery.of(context).size.height;
     var mediaQueryWidth=MediaQuery.of(context).size.width;
+
     return  Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading:false,

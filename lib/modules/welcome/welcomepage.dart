@@ -70,8 +70,8 @@ class _welcomepageState extends State<welcomepage> {
                             ),),
                           SizedBox(height: mediaQueryHeight*0.02622,),
                           mainButton(
-                              minWidth: mediaQueryWidth*0.693,
-                              height: mediaQueryHeight*0.0819,
+                              minWidth: mediaQueryWidth*0.611,
+                              height: mediaQueryHeight*0.066,
                               text: 'Create Account',
                               fontSize: mediaQueryWidth*0.085,
                               onPressed: (){
@@ -100,8 +100,8 @@ class _welcomepageState extends State<welcomepage> {
                             ),),
                           SizedBox(height: mediaQueryHeight*0.02622,),
                           mainButton(
-                              minWidth: mediaQueryWidth*0.693,
-                              height: mediaQueryHeight*0.0819,
+                              minWidth: mediaQueryWidth*0.5,
+                              height: mediaQueryHeight*0.066,
                               text: 'Login',
                               fontSize: mediaQueryWidth*0.056,
                               onPressed: (){
