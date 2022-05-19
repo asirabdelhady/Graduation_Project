@@ -23,20 +23,7 @@ class RecommendedPlaces{
 });
 }
 
-class TAttractions{
-  String imagePath;
-  String placeName;
-  String rating;
-  String distance;
 
-  TAttractions({
-    required this.placeName,
-    required this.imagePath,
-    required this.distance,
-    required this.rating,
-
-  });
-}
 
 class Hotels{
   String imagePath;

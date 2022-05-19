@@ -119,9 +119,9 @@ class _TourScreenState extends State<TourScreen> {
 
            },
            onCardTap: (){
-             Navigator.push(context, MaterialPageRoute(builder: (context){
+            /* Navigator.push(context, MaterialPageRoute(builder: (context){
                return const DetailScreen();
-             }));
+             }));*/
            },
            imagePath: item.image),
         onTap: () {},

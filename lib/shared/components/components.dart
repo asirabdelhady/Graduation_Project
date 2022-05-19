@@ -2,9 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/modules/details/details_screen.dart';
+import 'package:tour_guide_app/modules/home/homescreen.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:tour_guide_app/models/models.dart';
+import 'package:tour_guide_app/tour_database.dart';
+import 'package:tour_guide_app/tAttraction_model.dart';
 
 
 /////////////////////////////// Shared //////////////////////////////////////////////////
@@ -677,19 +680,16 @@ Widget homeScreenRecommendedCard({
       ),
     );
 
-Widget categoryCard ({
-  required String categoryName,
-  required String imagePath,
-  required String numberOfPlaces,
-  IconData icon = Icons.location_on_rounded,
-})=> Builder(
+Widget categoryCard (Map model)=> Builder(
     builder: (context) {
+      late List<TAttractions> tAttraction;
       var mediaQueryHeight= MediaQuery.of(context).size.height;
       var mediaQueryWidth = MediaQuery.of(context).size.width;
+      IconData? icon;
       return GestureDetector(
         onTap: (){
           Navigator.push(context, MaterialPageRoute(builder: (context){
-            return DetailScreen();
+            return HomeScreen();//DetailScreen();
           }));
         },
         child: Container(
@@ -702,7 +702,7 @@ Widget categoryCard ({
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
                   image: DecorationImage(
-                    image: AssetImage(imagePath),
+                    image: AssetImage('${model['image']}'),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -743,7 +743,7 @@ Widget categoryCard ({
                             child: Container(
                               width: mediaQueryWidth*0.6875,
                               child: Text(
-                                categoryName,
+                                '${model['name']}',
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -764,7 +764,7 @@ Widget categoryCard ({
                             Row(
                               children: [
                                 Icon(icon, color: Colors.yellow,),
-                                Text(numberOfPlaces),
+                                Text('3'),
 
                               ],
                             ),
@@ -782,11 +782,7 @@ Widget categoryCard ({
     }
 );
 
-Widget defualtCard ({
-    required String placeName,
-    required String imagePath,
-    required String rating,
-    required String distance,
+Widget defualtCard (Map model, {
     IconData icon1 = Icons.star,
     IconData icon3 = Icons.location_on_rounded,
 })=> Builder(
@@ -796,7 +792,7 @@ Widget defualtCard ({
     return GestureDetector(
       onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (context){
-          return DetailScreen();
+          return HomeScreen();//DetailScreen();
         }));
       },
       child: Container(
@@ -809,7 +805,7 @@ Widget defualtCard ({
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
                 image: DecorationImage(
-                  image: AssetImage(imagePath),
+                  image: AssetImage('${model['image']}'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -850,7 +846,7 @@ Widget defualtCard ({
                           child: Container(
                             width: mediaQueryWidth*0.6875,
                             child: Text(
-                              placeName,
+                              '${model['name']}',
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -871,7 +867,7 @@ Widget defualtCard ({
                           Row(
                             children: [
                               Icon(icon1, color: Colors.yellow,),
-                              Text('4.9'),
+                              Text('${model['rating']}'),
 
                             ],
                           ),
@@ -879,7 +875,7 @@ Widget defualtCard ({
                           Row(
                             children: [
                               Icon(icon3, color: Colors.lightBlue,),
-                              Text('26 Km'),
+                              Text('${model['distance']}'),
 
                             ],),
                           SizedBox(width: mediaQueryWidth*0.0375,),
@@ -942,7 +938,7 @@ Widget cardBuilderWithDotIndicator ({
                 itemBuilder: (context, position) => GestureDetector(
                   onTap: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context){
-                      return DetailScreen();
+                      return HomeScreen();//DetailScreen();
                     }));
                   },
                   child: Container(
@@ -1076,7 +1072,7 @@ Widget stepperCard ({
       return GestureDetector(
         onTap: (){
           Navigator.push(context, MaterialPageRoute(builder: (context){
-            return DetailScreen();
+            return HomeScreen();//DetailScreen();
           }));
         },
         child: Container(

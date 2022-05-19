@@ -292,7 +292,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 SizedBox(height: mediaQueryHeight*0.039,),
-                SingleChildScrollView(
+                /*SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Container(
                       height: mediaQueryHeight*0.322,
@@ -308,7 +308,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         controller: recommendedPageController,
                       )
                   ),
-                ),
+                ),*/
                 Center(
                   child: SmoothPageIndicator(
                     controller: recommendedPageController,
@@ -341,7 +341,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 SizedBox(height: mediaQueryHeight*0.016,),
-                SingleChildScrollView(
+                /*SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Container(
                       height: mediaQueryHeight*0.322,
@@ -356,7 +356,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         controller: categoriesPageController,
                       )
                   ),
-                ),
+                ),*/
                 Center(
                   child: SmoothPageIndicator(
                     controller: categoriesPageController,

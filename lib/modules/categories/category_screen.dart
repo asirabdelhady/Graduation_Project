@@ -45,54 +45,6 @@ class UtilsRecommended{
     ];
   }
 }
-class UtilsTAttractions {
-  static List <TAttractions> getTAttractionPlaces() {
-    return [
-      TAttractions(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      TAttractions(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      TAttractions(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      TAttractions(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      TAttractions(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      TAttractions(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      TAttractions(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-    ];
-  }
-}
 class UtilsHotels{
   static List <Hotels> getHotels() {
     return [
@@ -233,7 +185,6 @@ class CategoryScreen extends StatelessWidget{
     var mediaQueryWidth = MediaQuery.of(context).size.width;
 
     List<RecommendedPlaces> recommendedPlaces = UtilsRecommended.getRecommendedPlaces();
-    List<TAttractions> tAttractions = UtilsTAttractions.getTAttractionPlaces();
     List<Hotels> hotels = UtilsHotels.getHotels();
     List<Entertainment> entertainment = UtilsEntertainment.getEntertainment();
 
@@ -286,7 +237,7 @@ class CategoryScreen extends StatelessWidget{
                         Icon(Icons.keyboard_arrow_right)
                       ],
                     ),
-                    SingleChildScrollView(
+                    /*SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Container(
                           height: mediaQueryHeight*0.322,
@@ -302,7 +253,7 @@ class CategoryScreen extends StatelessWidget{
                             controller: recommendedPageController,
                           )
                       ),
-                    ),
+                    ),*/
                     Center(
                       child: SmoothPageIndicator(
                         controller: recommendedPageController,
@@ -320,6 +271,7 @@ class CategoryScreen extends StatelessWidget{
                         subTitle(subTitle: 'Tourist Attractions'),
                         Icon(Icons.keyboard_arrow_right),
                       ],),
+/*
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Container(
@@ -337,10 +289,11 @@ class CategoryScreen extends StatelessWidget{
                           )
                       ),
                     ),
+*/
                     Center(
                       child: SmoothPageIndicator(
                         controller: tAttractionsPageController,
-                        count: tAttractions.length,
+                        count: 1,
                         effect: ScrollingDotsEffect(
                           dotColor: tGrey(),
                           activeDotColor: tPrimary(),
@@ -353,7 +306,7 @@ class CategoryScreen extends StatelessWidget{
                         subTitle(subTitle: 'Hotels'),
                         Icon(Icons.keyboard_arrow_right),
                       ],),
-                    SingleChildScrollView(
+                    /*SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Container(
                           height: mediaQueryHeight*0.322,
@@ -369,7 +322,7 @@ class CategoryScreen extends StatelessWidget{
                             controller: hotelsPageController,
                           )
                       ),
-                    ),
+                    ),*/
                     Center(
                       child: SmoothPageIndicator(
                         controller: hotelsPageController,
@@ -386,7 +339,7 @@ class CategoryScreen extends StatelessWidget{
                         subTitle(subTitle: 'Entertainment'),
                         Icon(Icons.keyboard_arrow_right),
                       ],),
-                    SingleChildScrollView(
+                    /*SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Container(
                           height: mediaQueryHeight*0.322,
@@ -402,7 +355,7 @@ class CategoryScreen extends StatelessWidget{
                             controller: entertainmentPageController,
                           )
                       ),
-                    ),
+                    ),*/
                     Center(
                       child: SmoothPageIndicator(
                         controller: entertainmentPageController,

@@ -1,20 +1,40 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
+import 'package:tour_guide_app/tour_database.dart';
+
+import '../../tAttraction_model.dart';
 
 class DetailScreen extends StatefulWidget {
-  const DetailScreen({Key? key}) : super(key: key);
+  final int tAttractionId;
 
+   DetailScreen({
+    Key? key,
+    required this.tAttractionId,
+}): super(key: key);
   @override
   _DetailScreenState createState() => _DetailScreenState();
 }
 
 class _DetailScreenState extends State<DetailScreen> {
   bool favClicked = false;
+  bool isLoading = false;
+  late TAttractions tAttractions;
 
+  void initState() {
+    super.initState();
+
+    refreshTAttractions();
+  }
+  Future refreshTAttractions() async{
+    setState(()=> isLoading=true);
+
+    this.tAttractions = (await TourDatabase.instance.readTAttraction(widget.tAttractionId)) as TAttractions;
+
+    setState(()=> isLoading=false);
+  }
+  
   @override
   Widget build(BuildContext context) {
     PageController pageController = PageController();

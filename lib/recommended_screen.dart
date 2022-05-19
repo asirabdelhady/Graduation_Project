@@ -100,7 +100,7 @@ class RecommendedScreen extends StatelessWidget{
                     Icon(Icons.arrow_drop_down)
                   ],
                 ),
-                SingleChildScrollView(
+                /*SingleChildScrollView(
                   child: Container(
                       height: mediaQueryHeight,
                       width: mediaQueryWidth,
@@ -115,7 +115,7 @@ class RecommendedScreen extends StatelessWidget{
                         controller: recommendedPageController,
                       )
                   ),
-                ),
+                ),*/
                 SizedBox(height: mediaQueryHeight*0.049,)
 
 
