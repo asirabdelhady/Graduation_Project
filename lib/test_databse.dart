@@ -9,6 +9,9 @@ class TestingYoutubeVideo extends StatefulWidget{
 }
 
 class _TestingYoutubeVideoState extends State<TestingYoutubeVideo> {
+
+  TourDatabase tourDatabase = TourDatabase.instance;
+
   late List<TAttractions> tAttractions;
   bool isLoading = false;
   @override
@@ -67,7 +70,14 @@ class _TestingYoutubeVideoState extends State<TestingYoutubeVideo> {
           }, child: Text('add')),
           ElevatedButton(onPressed: (){
             TourDatabase.instance.readAllTAttractions();
-          }, child: Text('print'))
+          }, child: Text('print')),
+          /*FutureBuilder(
+              future: tourDatabase.readAllTAttractions(),
+              builder: (context, snapshot) {
+            if(snapshot.hasError) print('error');
+            var data=snapshot.data;
+            return snapshot.hasData ? TAttractions() : new Center(child: Text('You have no contacts'),);
+          }))*/
         ],),
       ),
 

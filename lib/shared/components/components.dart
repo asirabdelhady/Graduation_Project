@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/modules/details/details_screen.dart';
 import 'package:tour_guide_app/modules/home/homescreen.dart';
+import 'package:tour_guide_app/shared/components/constants.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:tour_guide_app/models/models.dart';
@@ -77,12 +78,14 @@ Widget detailsImage({
         child: Image(image: AssetImage(imagePath)));
 
 //Map GestureButton
-Widget mapButton() => Builder(
+Widget mapButton(Map model) => Builder(
   builder: (context) {
     var mediaQueryHeight= MediaQuery.of(context).size.height;
     var mediaQueryWidth = MediaQuery.of(context).size.width;
     return     GestureDetector(
-          onTap: () {},
+          onTap: () {
+            model['googleMapLocation'];
+          },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: Container(
@@ -789,26 +792,30 @@ Widget defualtCard (Map model, {
   builder: (context) {
     var mediaQueryHeight= MediaQuery.of(context).size.height;
     var mediaQueryWidth = MediaQuery.of(context).size.width;
+    Widget buildImage()=> Container(
+      height: mediaQueryHeight*0.200,
+      width: mediaQueryWidth*0.85,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        image: DecorationImage(
+          image: AssetImage('${model['image']}'),
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
     return GestureDetector(
       onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (context){
-          return HomeScreen();//DetailScreen();
+          return DetailScreen(tAttractions);
         }));
       },
       child: Container(
         margin: EdgeInsets.all(10),
         child: Stack(
           children: [
-            Container(
-              height: mediaQueryHeight*0.200,
-              width: mediaQueryWidth*0.85,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                image: DecorationImage(
-                  image: AssetImage('${model['image']}'),
-                  fit: BoxFit.cover,
-                ),
-              ),
+            Hero(
+              tag: tAttractions,
+                child: buildImage()
             ),
             Padding(
               padding: EdgeInsets.only(
@@ -1225,3 +1232,4 @@ Widget buildTodayItem() =>
           );
         }
     );
+

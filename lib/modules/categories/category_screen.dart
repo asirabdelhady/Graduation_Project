@@ -3,6 +3,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/models/models.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
+
+import '../../shared/components/constants.dart';
 class UtilsRecommended{
   static List <RecommendedPlaces> getRecommendedPlaces(){
     return [
@@ -177,8 +179,22 @@ class UtilsEntertainment{
     ];
   }
 }
-class CategoryScreen extends StatelessWidget{
+class CategoryScreen extends StatefulWidget{
 
+  @override
+  State<CategoryScreen> createState() => _CategoryScreenState();
+}
+
+class _CategoryScreenState extends State<CategoryScreen> {
+  @override
+  void initState() {
+    super.initState();
+    createDatabase().then((value) {
+      setState(() {
+      });
+    });
+
+  }
   @override
   Widget build(BuildContext context) {
     var mediaQueryHeight = MediaQuery.of(context).size.height;
@@ -271,7 +287,6 @@ class CategoryScreen extends StatelessWidget{
                         subTitle(subTitle: 'Tourist Attractions'),
                         Icon(Icons.keyboard_arrow_right),
                       ],),
-/*
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Container(
@@ -279,21 +294,16 @@ class CategoryScreen extends StatelessWidget{
                           width: mediaQueryWidth,
                           child: PageView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) => defualtCard(
-                                placeName:tAttractions[index].placeName,
-                                imagePath: tAttractions[index].imagePath,
-                                rating: tAttractions[index].rating,
-                                distance: tAttractions[index].distance),
+                            itemBuilder: (context, index) => defualtCard(tAttractions[index]),
                             itemCount: tAttractions.length,
                             controller: tAttractionsPageController,
                           )
                       ),
                     ),
-*/
                     Center(
                       child: SmoothPageIndicator(
                         controller: tAttractionsPageController,
-                        count: 1,
+                        count: tAttractions.length,
                         effect: ScrollingDotsEffect(
                           dotColor: tGrey(),
                           activeDotColor: tPrimary(),
@@ -339,27 +349,23 @@ class CategoryScreen extends StatelessWidget{
                         subTitle(subTitle: 'Entertainment'),
                         Icon(Icons.keyboard_arrow_right),
                       ],),
-                    /*SingleChildScrollView(
+                    SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Container(
                           height: mediaQueryHeight*0.322,
                           width: mediaQueryWidth,
                           child: PageView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) => defualtCard(
-                                placeName:entertainment[index].placeName,
-                                imagePath: entertainment[index].imagePath,
-                                rating: entertainment[index].rating,
-                                distance: entertainment[index].distance),
-                            itemCount: entertainment.length,
+                            itemBuilder: (context, index) => defualtCard(tAttractions[index]),
+                            itemCount: tAttractions.length,
                             controller: entertainmentPageController,
                           )
                       ),
-                    ),*/
+                    ),
                     Center(
                       child: SmoothPageIndicator(
                         controller: entertainmentPageController,
-                        count: entertainment.length,
+                        count: tAttractions.length,
                         effect: ScrollingDotsEffect(
                           dotColor: tGrey(),
                           activeDotColor: tPrimary(),

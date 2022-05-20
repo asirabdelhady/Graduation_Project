@@ -14,15 +14,20 @@ class _TestingDatabseState extends State<TestingDatabse> {
 
 
   late Database database;
+
   @override
   void initState() {
     super.initState();
-    createDatabase();
+    createDatabase().then((value) {
+      setState(() {
+      });
+    });
+
   }
 
-  void createDatabase() async{
+  Future createDatabase() async{
      database = await openDatabase(
-      'tourGuideDB3.db',
+      'tourGuideDB4.db',
       version: 1,
       onCreate: (database, version) async{
         print('database created');
@@ -35,10 +40,10 @@ class _TestingDatabseState extends State<TestingDatabse> {
 
       onOpen: (database){
         print('database opened');
-        /*getDataFromDatabase(database).then((value) {
+        getDataFromDatabase(database).then((value) {
           tAttractions=value;
           print(tAttractions);
-        });*/
+        });
       }
     );
   }
@@ -48,24 +53,24 @@ class _TestingDatabseState extends State<TestingDatabse> {
 
       await txn.rawInsert('''
       INSERT INTO tAttractions (
-      name , 
-      latitude , 
-      longitude ,
-      image ,
-      rating , 
-      distance,
-      googleMapLocation ,
-      description ) VALUES(
-      "Museum of Islamic Art", 
-      "30.0447", 
-      "31.2527",
-      "assets/images/Museum of Islamic Art.jpg", 
-      "4.7" ,
-      "20km",
-      "https://www.google.com/maps/place/Museum+of+Islamic+Art,+Cairo/@30.0447243,31.2505325,17z/data=!3m1!4b1!4m5!3m4!1s0x14583f7d6211c891:0xad7d1092373bae8b!8m2!3d30.0447197!4d31.2527212",
-      "Opposite to the Cairo Governorate Office, at the intersection of Port Said and Mohamed Ali streets, is the magnificent building of the Museum of Islamic Art (MIA). The place is a must visit if you are planning to travel to Cairo. The reason behind this is the overwhelming architecture of the building and divine historical artefacts housed by the Museum."
-      )
-      
+name , 
+latitude , 
+longitude ,
+image ,
+rating , 
+distance,
+googleMapLocation ,
+description ) 
+VALUES(
+"Wadi El Rayan", 
+"29.1909", 
+"30.4012",
+"assets/images/Wadi El Rayan.jpg", 
+"4.6" ,
+"37 KM ",
+"https://www.google.com/maps/place/Wadi+El+Rayan/@29.1907185,30.3659211,12z/data=!3m1!4b1!4m5!3m4!1s0x145bef777593e399:0x42b67909acc99ad8!8m2!3d29.1908915!4d30.4011911?hl=en",
+"Wadi El-Rayan is a natural depression in the western desert of Egypt, 42m below the sea level. It consists of two lakes connected by Egypt's only waterfall. It was designated as a Protected Area in 1989 to protect the area's biological, geological and cultural resources. The Protected Area covers 1759 km2 in the southern part of El-Fayoum."
+)     
       ''')
           .then((value) => print('$value inserted successfully'))
           .catchError((e)=> print('error when inserting data: $e'));
@@ -78,7 +83,7 @@ class _TestingDatabseState extends State<TestingDatabse> {
   }
   
   void deleteRow(){
-    database.rawDelete('DELETE FROM tAttractions WHERE id = 1').then((value) =>
+    database.rawDelete('DELETE FROM tAttractions WHERE id = 3').then((value) =>
         print('row deleted')).catchError((error)=> print('error when deleting row: $error'));
   }
   void dropTable(){
@@ -87,6 +92,10 @@ class _TestingDatabseState extends State<TestingDatabse> {
   void updateRow(){
     database.rawQuery('UPDATE tAttractions SET rating = "4.5", WHERE id = 10' );
 
+  }
+
+  void insertElement(){
+    database.rawQuery('sql');
   }
 
 
@@ -101,6 +110,9 @@ class _TestingDatabseState extends State<TestingDatabse> {
           child: Column(children: [
             ElevatedButton(onPressed: (){
               insertToDatabase();
+              setState(() {
+
+              });
             },
                 child: Text('insert to database')),
             ElevatedButton(onPressed: (){
@@ -115,13 +127,19 @@ class _TestingDatabseState extends State<TestingDatabse> {
             },
                 child: Text('delete row')),
             ElevatedButton(onPressed: (){
+              setState(() {
+
+              });
+            },
+                child: Text('set State')),
+            ElevatedButton(onPressed: (){
               updateRow();
             },
                 child: Text('update')),
             ElevatedButton(onPressed: (){
               dropTable();
             },
-                child: Text('delete row')),
+                child: Text('drop table')),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Container(
