@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 
-List<Map> tAttractions= [];
+late List tAttractions=[];
 
 late Database database;
 

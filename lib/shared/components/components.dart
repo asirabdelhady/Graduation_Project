@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/modules/details/details_screen.dart';
 import 'package:tour_guide_app/modules/home/homescreen.dart';
+import 'package:tour_guide_app/second_detail.dart';
 import 'package:tour_guide_app/shared/components/constants.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 import 'package:expandable_text/expandable_text.dart';
@@ -806,7 +807,8 @@ Widget defualtCard (Map model, {
     return GestureDetector(
       onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (context){
-          return DetailScreen(tAttractions);
+          return PageView.builder(
+              itemBuilder:(context, index)=> SecondDetails(tAttractions[index]));
         }));
       },
       child: Container(

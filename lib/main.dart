@@ -21,7 +21,7 @@ void main() async{
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(home: SecondDetails(tAttractions),
+    return  MaterialApp(home: TestingDatabse(),
     debugShowCheckedModeBanner: false,
     );
   }
