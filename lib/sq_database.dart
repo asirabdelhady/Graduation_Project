@@ -21,8 +21,15 @@ class _TestingDatabseState extends State<TestingDatabse> {
       setState(() {
       });
     });
-
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    database.close();
+  }
+
+
 
   Future createDatabase() async{
      database = await openDatabase(

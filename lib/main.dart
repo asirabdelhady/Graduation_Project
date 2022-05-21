@@ -24,7 +24,7 @@ void main() async{
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(home: loginPage(),
+    return  MaterialApp(home: TestingDatabse(),
     debugShowCheckedModeBanner: false,
     );
   }
