@@ -221,7 +221,20 @@ class _signUpPageState extends State<signUpPage> {
                             imagePath: 'assets/images/arrow.png')*/
                         MaterialButton(
                           onPressed: (){
-                            FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailController.text, password: passwordController.text);
+
+                            FirebaseAuth.instance.createUserWithEmailAndPassword(
+                                email: emailController.text,
+                                password: passwordController.text).then((value) {
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (context) {
+                                  return Navigation();
+                                },
+                              ));
+                            } ).catchError((error){
+                              Fluttertoast.showToast(
+                                msg:
+                                'Email already exist',
+                                toastLength: Toast.LENGTH_LONG,);                            });
                           },
                           minWidth: mediaQueryWidth*0.2968,
                           height: mediaQueryHeight*0.066,

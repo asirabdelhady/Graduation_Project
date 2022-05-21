@@ -6,6 +6,7 @@ import 'package:tour_guide_app/shared/components/components.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../navigation.dart';
+
 class loginPage extends StatefulWidget {
   @override
   State<loginPage> createState() => _loginPageState();
@@ -29,8 +30,9 @@ class _loginPageState extends State<loginPage> {
               Row(
                 children: [
                   Padding(
-                    padding:
-                         EdgeInsetsDirectional.only(start: mediaQueryWidth*0.0718, top: mediaQueryHeight*0.163),
+                    padding: EdgeInsetsDirectional.only(
+                        start: mediaQueryWidth * 0.0718,
+                        top: mediaQueryHeight * 0.163),
                     child: Column(
                       children: [
                         defaultTitle(title: 'Login'),
@@ -40,22 +42,23 @@ class _loginPageState extends State<loginPage> {
                 ],
               ),
               SizedBox(
-                height: mediaQueryHeight*0.027,
+                height: mediaQueryHeight * 0.027,
               ),
               Text(
                 'Please sign in to continue',
                 style: TextStyle(
                   color: tGrey(),
-                  fontSize: mediaQueryWidth*0.056,
+                  fontSize: mediaQueryWidth * 0.056,
                 ),
               ),
               SizedBox(
-                height: mediaQueryHeight*0.027,
+                height: mediaQueryHeight * 0.027,
               ),
               Stack(
                 children: [
                   Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.035),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: mediaQueryWidth * 0.035),
                     child: Container(
                       height: MediaQuery.of(context).size.height * 0.43,
                       width: double.infinity,
@@ -68,7 +71,8 @@ class _loginPageState extends State<loginPage> {
                   Form(
                     key: formKey,
                     child: Padding(
-                      padding:  EdgeInsetsDirectional.only(top: mediaQueryHeight*0.057),
+                      padding: EdgeInsetsDirectional.only(
+                          top: mediaQueryHeight * 0.057),
                       child: Center(
                         child: Column(
                           children: [
@@ -79,14 +83,15 @@ class _loginPageState extends State<loginPage> {
                                 passorno: false,
                                 suffixicon: Icon(null),
                                 controller: emailController,
-                                validatorFunction:  (value) {
+                                validatorFunction: (value) {
                                   // Check if this field is empty
                                   if (value == null || value.isEmpty) {
                                     return 'This field is required';
                                   }
 
                                   // using regular expression
-                                  if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                                  if (!RegExp(r'\S+@\S+\.\S+')
+                                      .hasMatch(value)) {
                                     return "Please enter a valid email address";
                                   }
 
@@ -97,7 +102,7 @@ class _loginPageState extends State<loginPage> {
                                 onFieldSubmitted: null,
                                 onChanged: null),
                             SizedBox(
-                              height: mediaQueryHeight*0.0163,
+                              height: mediaQueryHeight * 0.0163,
                             ),
                             mainFormField(
                                 hintText: 'Password',
@@ -112,30 +117,28 @@ class _loginPageState extends State<loginPage> {
                                 controller: passwordController,
                                 onChanged: (value) => password = value,
                                 validatorFunction: (value) {
-                                  RegExp regex =
-                                  RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
+                                  RegExp regex = RegExp(
+                                      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
 
                                   if (!regex.hasMatch(value)) {
                                     ElevatedButton(
-                                      // color: Colors.orange,
+                                        // color: Colors.orange,
                                         child: Text('Bottom Sheet'),
-                                        onPressed: () {
-
-                                        });
+                                        onPressed: () {});
                                     return 'Please enter a valid password';
                                   }
                                 },
-                                onFieldSubmitted: (value){
-                                  RegExp regex =
-                                  RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
+                                onFieldSubmitted: (value) {
+                                  RegExp regex = RegExp(
+                                      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
 
-                                  if(value != regex.hasMatch(value)) {
+                                  if (value != regex.hasMatch(value)) {
                                     Fluttertoast.showToast(
-                                      msg: 'Validate password must contain upper and lower letters , number and at least 8 characters ',
+                                      msg:
+                                          'Validate password must contain upper and lower letters , number and at least 8 characters ',
                                       toastLength: Toast.LENGTH_LONG,
                                     );
                                   }
-
                                 },
                                 suffixPressed: () {
                                   setState(() {
@@ -143,7 +146,7 @@ class _loginPageState extends State<loginPage> {
                                   });
                                 }),
                             SizedBox(
-                              height: mediaQueryHeight*0.0655,
+                              height: mediaQueryHeight * 0.0655,
                             ),
                             /*mainButton(
                                 minWidth: mediaQueryWidth*0.2968,
@@ -165,19 +168,33 @@ class _loginPageState extends State<loginPage> {
                                 },
                                 imagePath: 'assets/images/arrow.png')*/
                             MaterialButton(
-                              onPressed: (){
-                                FirebaseAuth.instance.signInWithEmailAndPassword(
-                                    email: emailController.text,
-                                    password: passwordController.text);
+                              onPressed: () {
+                                FirebaseAuth.instance
+                                    .signInWithEmailAndPassword(
+                                        email: emailController.text,
+                                        password: passwordController.text)
+                                    .then((value) {
+                                  Navigator.push(context, MaterialPageRoute(
+                                    builder: (context) {
+                                      return Navigation();
+                                    },
+                                  ));
+                                }).catchError((error) {
+                                  Fluttertoast.showToast(
+                                      msg:
+                                      'Check your email or password',
+                                      toastLength: Toast.LENGTH_LONG,);
+                                });
                               },
-                              minWidth: mediaQueryWidth*0.2968,
-                              height: mediaQueryHeight*0.066,
+                              minWidth: mediaQueryWidth * 0.2968,
+                              height: mediaQueryHeight * 0.066,
                               color: const Color(0xFFFFFAED),
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(30.0))),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30.0))),
                               child: Container(
-                                width: mediaQueryWidth*0.444,
-                                height: mediaQueryHeight*0.039,
+                                width: mediaQueryWidth * 0.444,
+                                height: mediaQueryHeight * 0.039,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -185,7 +202,7 @@ class _loginPageState extends State<loginPage> {
                                       'Login',
                                       style: TextStyle(
                                         color: const Color(0xFF292D32),
-                                        fontSize: mediaQueryWidth*0.05,
+                                        fontSize: mediaQueryWidth * 0.05,
                                       ),
                                     ),
                                     SizedBox(
@@ -193,14 +210,13 @@ class _loginPageState extends State<loginPage> {
                                     ),
                                     Image.asset(
                                       'assets/images/arrow.png',
-                                      width: mediaQueryWidth*0.052,
-                                      height: mediaQueryHeight*0.026,
+                                      width: mediaQueryWidth * 0.052,
+                                      height: mediaQueryHeight * 0.026,
                                     )
                                   ],
                                 ),
                               ),
                             )
-
                           ],
                         ),
                       ),
