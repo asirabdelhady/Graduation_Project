@@ -41,7 +41,7 @@ class _HeroTestingState extends State<HeroTesting> {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) => GestureDetector(
                     onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> detailsPage(attractions[index])));
+                      //Navigator.push(context, MaterialPageRoute(builder: (context)=> detailsPage(attractions[index])));
                     },
                       child: defualtCard(attractions[index])),
                   itemCount: attractions.length,

@@ -127,7 +127,7 @@ VALUES(
                   child: Text('insert to database')),
               ElevatedButton(onPressed: (){
                 getDataFromDatabase(database).then((value) {
-                  attractions=value;
+                  attractions=value ;
                   print(attractions.length);
                 });
               },
@@ -168,15 +168,16 @@ VALUES(
                     )
                 ),
               ),
-              /*Container(
+Container(
                 width: double.infinity,
                 height: 300,
                 child: PageView.builder(
                   itemCount: 3,
-                    itemBuilder: (context, index) => defualtCard(attractions1[index]),
+                    itemBuilder: (context, index) => defualtCard(attractions[index]),
 
                 )
-              ),*/
+              ),
+
             ],),
           ),
         ),

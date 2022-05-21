@@ -20,7 +20,7 @@ Future createDatabase() async{
       onOpen: (database){
         print('database opened');
         getDataFromDatabase(database).then((value) {
-          attractions=value;
+          attractions=value ;
           print(attractions);
         });
       }

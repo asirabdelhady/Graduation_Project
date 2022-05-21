@@ -1,16 +1,16 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/modules/details/details_screen.dart';
 import 'package:tour_guide_app/modules/home/homescreen.dart';
-import 'package:tour_guide_app/second_detail.dart';
 import 'package:tour_guide_app/shared/components/constants.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:tour_guide_app/models/models.dart';
 import 'package:tour_guide_app/tour_database.dart';
 import 'package:tour_guide_app/tAttraction_model.dart';
+
+import '../../second_detail.dart';
 
 
 /////////////////////////////// Shared //////////////////////////////////////////////////
@@ -787,7 +787,143 @@ Widget categoryCard (Map model)=> Builder(
     }
 );
 
+Widget detailsPage(context, Map model)=> SafeArea(
+  child:SingleChildScrollView(
+    child:
+    Builder(
+        builder: (context) {
+          PageController pageController = PageController();
+          var mediaQueryHeight = MediaQuery.of(context).size.height;
+          var mediaQueryWidth = MediaQuery.of(context).size.width;
+          return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Stack(
+              children: [
+                Container(
+                  width: mediaQueryWidth,
+                  height: mediaQueryHeight*0.327,
+                  child: PageView.builder(
+                    itemBuilder: (context, position)=>ClipRRect(
+                        borderRadius: BorderRadius.only(bottomRight: Radius.circular(30),bottomLeft: Radius.circular(30)
+                        ),
+
+                        child: Image(image: AssetImage('${model['image']}'),
+                          fit: BoxFit.fill,)),
+                    itemCount: 4,
+                    controller: pageController,
+
+                  ),
+                ),
+                Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375, vertical: mediaQueryHeight*0.01311),
+                  child: CircleAvatar(
+                    radius: 22.5,
+                    backgroundColor: tPrimary(),
+                    child: IconButton(onPressed: () {
+                      Navigator.pop(context);
+                    }, icon: Icon(Icons.arrow_back,
+                      color: Colors.white,
+                    ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: mediaQueryHeight*0.019,),
+            Center(
+              child: SmoothPageIndicator(controller: pageController,
+                count: 4,
+                effect: WormEffect(
+                  activeDotColor: tPrimary(),
+                ),
+
+              ),
+            ),
+            SizedBox(
+              height: mediaQueryHeight*0.019,
+            ),
+            Padding(
+              padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  defaultTitle(title: '${model['name']}'),
+                  SizedBox(height: mediaQueryHeight*0.019,),
+                  aboutDetails(details: '${model['description']}'),
+                  SizedBox(
+                    height: mediaQueryHeight*0.019,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      model['location'];
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: Container(
+                        width: mediaQueryWidth*1.25,
+                        height: mediaQueryHeight*0.163,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          image: DecorationImage(
+                            fit: BoxFit.fitWidth,
+                            image: AssetImage('assets/images/Map.jpeg'),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: mediaQueryHeight*0.019,
+                  ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                            width: mediaQueryWidth*0.156,
+                            height: mediaQueryHeight*0.081,
+                            child: ElevatedButton(
+                              onPressed: () {
+
+                              },
+                              child: Icon(Icons.favorite  ,
+                                size: mediaQueryWidth*0.0625,
+                                color: Colors.white,
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                primary: Color(0xff292D32),
+                                shape: CircleBorder(),
+                              ),
+                            )),
+                        Container(
+                            width: mediaQueryWidth*0.625,
+                            height: mediaQueryHeight*0.081,
+
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              child: Text.rich(TextSpan(
+                                text: 'Add to Tour',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: mediaQueryWidth*0.0625),
+                              )),
+                              style: ElevatedButton.styleFrom(
+                                  shape: StadiumBorder(),
+                                  primary: Color(0xff292D32)
+                              ),
+                            )
+                        ),
+                      ]),
+                  SizedBox(height: mediaQueryHeight*0.019,),
+                ],
+              ),
+            ),
+          ]);
+        }
+    ),
+  ),
+);
+
+
 Widget defualtCard (Map model, {
+
     IconData icon1 = Icons.star,
     IconData icon3 = Icons.location_on_rounded,
 })=> Builder(
@@ -800,7 +936,7 @@ Widget defualtCard (Map model, {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
         image: DecorationImage(
-          image: NetworkImage('${model['image']}'),
+          image: AssetImage('${model['image']}'),
           fit: BoxFit.cover,
         ),
       ),
@@ -809,7 +945,7 @@ Widget defualtCard (Map model, {
       onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (context){
           return PageView.builder(
-              itemBuilder:(context, index)=> detailsPage(attractions[index]));
+              itemBuilder:(context, index)=> detailsPage(context, attractions[index]));
         }));
       },
       child: Container(
