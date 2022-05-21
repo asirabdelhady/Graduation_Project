@@ -38,7 +38,7 @@ class _TestingDatabseState extends State<TestingDatabse> {
       onCreate: (database, version) async{
         print('database created');
        await database.execute(
-            'CREATE TABLE tAttractions (id INTEGER PRIMARY KEY, name TEXT, latitude INTEGER, longitude INTEGER ,image TEXT ,rating INTEGER ,distance TEXT ,googleMapLocation TEXT ,description TEXT)')
+            'CREATE TABLE attractions (id INTEGER PRIMARY KEY, name TEXT, latitude INTEGER, longitude INTEGER ,image TEXT ,rating INTEGER ,distance TEXT ,googleMapLocation TEXT ,description TEXT)')
           .then((value) => print('table created'))
           .catchError((error)=> print('error when creating database: $error'));
         },
@@ -47,8 +47,8 @@ class _TestingDatabseState extends State<TestingDatabse> {
       onOpen: (database){
         print('database opened');
         getDataFromDatabase(database).then((value) {
-          tAttractions=value;
-          print(tAttractions);
+          attractions=value;
+          print(attractions);
         });
       }
     );
@@ -58,7 +58,7 @@ class _TestingDatabseState extends State<TestingDatabse> {
     database.transaction((txn) async {
 
       await txn.rawInsert('''
-      INSERT INTO tAttractions (
+      INSERT INTO attractions (
 name , 
 latitude , 
 longitude ,
@@ -85,7 +85,7 @@ VALUES(
   }
 
   Future<List<Map>> getDataFromDatabase(database)async{
-    return await database.rawQuery('SELECT * FROM tAttractions');
+    return await database.rawQuery('SELECT * FROM attractions');
   }
   
   void deleteRow(String sql){
@@ -93,10 +93,10 @@ VALUES(
         print('row deleted')).catchError((error)=> print('error when deleting row: $error'));
   }
   void dropTable(){
-    database.rawQuery('DROP TABLE tAttractions');
+    database.rawQuery('DROP TABLE attractions');
   }
   void updateRow(){
-    database.rawQuery('UPDATE tAttractions SET rating = "4.5", WHERE id = 10' );
+    database.rawQuery('UPDATE attractions SET rating = "4.5", WHERE id = 10' );
 
   }
 
@@ -127,13 +127,13 @@ VALUES(
                   child: Text('insert to database')),
               ElevatedButton(onPressed: (){
                 getDataFromDatabase(database).then((value) {
-                  tAttractions=value;
-                  print(tAttractions.length);
+                  attractions=value;
+                  print(attractions.length);
                 });
               },
                   child: Text('print')),
               ElevatedButton(onPressed: (){
-                deleteRow('DELETE FROM tAttractions WHERE id = 1');
+                deleteRow('DELETE FROM attractions WHERE id = 1');
               },
                   child: Text('delete row')),
               ElevatedButton(onPressed: (){
@@ -163,8 +163,8 @@ VALUES(
                     width: mediaQueryWidth,
                     child: PageView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => defualtCard(tAttractions[index]),
-                      itemCount: tAttractions.length,
+                      itemBuilder: (context, index) => defualtCard(attractions[index]),
+                      itemCount: attractions.length,
                     )
                 ),
               ),
@@ -173,7 +173,7 @@ VALUES(
                 height: 300,
                 child: PageView.builder(
                   itemCount: 3,
-                    itemBuilder: (context, index) => defualtCard(tAttractions1[index]),
+                    itemBuilder: (context, index) => defualtCard(attractions1[index]),
 
                 )
               ),*/

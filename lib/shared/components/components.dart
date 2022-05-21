@@ -800,7 +800,7 @@ Widget defualtCard (Map model, {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
         image: DecorationImage(
-          image: AssetImage('${model['image']}'),
+          image: NetworkImage('${model['image']}'),
           fit: BoxFit.cover,
         ),
       ),
@@ -809,7 +809,7 @@ Widget defualtCard (Map model, {
       onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (context){
           return PageView.builder(
-              itemBuilder:(context, index)=> SecondDetails(tAttractions[index]));
+              itemBuilder:(context, index)=> detailsPage(attractions[index]));
         }));
       },
       child: Container(
@@ -817,7 +817,7 @@ Widget defualtCard (Map model, {
         child: Stack(
           children: [
             Hero(
-              tag: tAttractions,
+              tag: attractions,
                 child: buildImage()
             ),
             Padding(

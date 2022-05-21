@@ -206,7 +206,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
 
     PageController recommendedPageController =PageController(initialPage: 0);
-    PageController tAttractionsPageController =PageController(initialPage: 0);
+    PageController attractionsPageController =PageController(initialPage: 0);
     PageController hotelsPageController =PageController(initialPage: 0);
     PageController entertainmentPageController =PageController(initialPage: 0);
 
@@ -294,16 +294,16 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           width: mediaQueryWidth,
                           child: PageView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) => defualtCard(tAttractions[index]),
-                            itemCount: tAttractions.length,
-                            controller: tAttractionsPageController,
+                            itemBuilder: (context, index) => defualtCard(attractions[index]),
+                            itemCount: attractions.length,
+                            controller: attractionsPageController,
                           )
                       ),
                     ),
                     Center(
                       child: SmoothPageIndicator(
-                        controller: tAttractionsPageController,
-                        count: tAttractions.length,
+                        controller: attractionsPageController,
+                        count: attractions.length,
                         effect: ScrollingDotsEffect(
                           dotColor: tGrey(),
                           activeDotColor: tPrimary(),
@@ -356,8 +356,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           width: mediaQueryWidth,
                           child: PageView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) => defualtCard(tAttractions[index]),
-                            itemCount: tAttractions.length,
+                            itemBuilder: (context, index) => defualtCard(attractions[index]),
+                            itemCount: attractions.length,
                             controller: entertainmentPageController,
                           )
                       ),
@@ -365,7 +365,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     Center(
                       child: SmoothPageIndicator(
                         controller: entertainmentPageController,
-                        count: tAttractions.length,
+                        count: attractions.length,
                         effect: ScrollingDotsEffect(
                           dotColor: tGrey(),
                           activeDotColor: tPrimary(),

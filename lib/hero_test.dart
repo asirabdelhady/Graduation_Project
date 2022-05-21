@@ -27,7 +27,7 @@ class _HeroTestingState extends State<HeroTesting> {
     var mediaQueryWidth = MediaQuery.of(context).size.width;
     PageController entertainmentPageController =PageController(initialPage: 0);
 
-    final items = tAttractions;
+    final items = attractions;
     return Scaffold(
       appBar: AppBar(),
       body: Center(
@@ -41,10 +41,10 @@ class _HeroTestingState extends State<HeroTesting> {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) => GestureDetector(
                     onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> detailsPage(tAttractions[index])));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> detailsPage(attractions[index])));
                     },
-                      child: defualtCard(tAttractions[index])),
-                  itemCount: tAttractions.length,
+                      child: defualtCard(attractions[index])),
+                  itemCount: attractions.length,
                   controller: entertainmentPageController,
                 )
             ),

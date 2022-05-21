@@ -29,7 +29,7 @@ class _DetailScreenState extends State<DetailScreen> {
   Future refreshTAttractions() async{
     setState(()=> isLoading=true);
 
-   // this.tAttractions = (await TourDatabase.instance.readTAttraction(widget.tAttractionId)) as TAttractions;
+   // this.attractions = (await TourDatabase.instance.readTAttraction(widget.tAttractionId)) as TAttractions;
 
     setState(()=> isLoading=false);
   }
@@ -45,7 +45,7 @@ class _DetailScreenState extends State<DetailScreen> {
     return Scaffold(
 
       body: Hero(
-        tag: tAttractions ,
+        tag: attractions ,
         child: SafeArea(
           child:SingleChildScrollView(
                 child:
@@ -60,7 +60,7 @@ class _DetailScreenState extends State<DetailScreen> {
                             borderRadius: BorderRadius.only(bottomRight: Radius.circular(30),bottomLeft: Radius.circular(30)
                             ),
 
-                            child: Image(image: AssetImage('${tAttractions[index]['image']}'),
+                            child: Image(image: AssetImage('${attractions[index]['image']}'),
                               fit: BoxFit.fill,)),
                           itemCount: 4,
                           controller: pageController,

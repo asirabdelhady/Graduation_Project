@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 
-late List tAttractions=[];
+List attractions=[];
 
 late Database database;
 
@@ -20,8 +20,8 @@ Future createDatabase() async{
       onOpen: (database){
         print('database opened');
         getDataFromDatabase(database).then((value) {
-          tAttractions=value;
-          print(tAttractions);
+          attractions=value;
+          print(attractions);
         });
       }
   );

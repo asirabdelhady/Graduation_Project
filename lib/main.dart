@@ -9,6 +9,7 @@ import 'package:tour_guide_app/shared/components/constants.dart';
 import 'package:tour_guide_app/sq_database.dart';
 import 'package:tour_guide_app/test_databse.dart';
 
+import 'modules/database.dart';
 import 'modules/login/loginpage.dart';
 import 'modules/signup/signuppage.dart';
 import 'navigation.dart';
@@ -24,7 +25,7 @@ void main() async{
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(home: TestingDatabse(),
+    return  MaterialApp(home: MyFirebase(),
     debugShowCheckedModeBanner: false,
     );
   }

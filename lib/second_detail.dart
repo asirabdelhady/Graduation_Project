@@ -23,7 +23,7 @@ class _SecondDetailsState extends State<SecondDetails> {
 
     return Scaffold(
       body: PageView.builder(itemBuilder: (context, index) {
-        return detailsPage(tAttractions[index]);
+        return detailsPage(attractions[index]);
       })
     );
 
@@ -52,7 +52,7 @@ Widget detailsPage(Map model)=> Builder(
                           borderRadius: BorderRadius.only(bottomRight: Radius.circular(30),bottomLeft: Radius.circular(30)
                           ),
 
-                          child: Image(image: AssetImage('${model['image']}'),
+                          child: Image(image: NetworkImage('${model['image']}'),
                             fit: BoxFit.fill,)
                       ),
                     ),
