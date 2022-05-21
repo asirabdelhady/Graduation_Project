@@ -4,7 +4,6 @@ late List tAttractions=[];
 
 late Database database;
 
-
 Future createDatabase() async{
   database = await openDatabase(
       'tourGuideDB4.db',

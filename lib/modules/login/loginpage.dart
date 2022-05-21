@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
@@ -144,7 +145,7 @@ class _loginPageState extends State<loginPage> {
                             SizedBox(
                               height: mediaQueryHeight*0.0655,
                             ),
-                            mainButton(
+                            /*mainButton(
                                 minWidth: mediaQueryWidth*0.2968,
                                 height: mediaQueryHeight*0.066,
                                 text: 'Login',
@@ -162,7 +163,44 @@ class _loginPageState extends State<loginPage> {
                                     ));
                                   }
                                 },
-                                imagePath: 'assets/images/arrow.png')
+                                imagePath: 'assets/images/arrow.png')*/
+                            MaterialButton(
+                              onPressed: (){
+                                FirebaseAuth.instance.signInWithEmailAndPassword(
+                                    email: emailController.text,
+                                    password: passwordController.text);
+                              },
+                              minWidth: mediaQueryWidth*0.2968,
+                              height: mediaQueryHeight*0.066,
+                              color: const Color(0xFFFFFAED),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(30.0))),
+                              child: Container(
+                                width: mediaQueryWidth*0.444,
+                                height: mediaQueryHeight*0.039,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Login',
+                                      style: TextStyle(
+                                        color: const Color(0xFF292D32),
+                                        fontSize: mediaQueryWidth*0.05,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Image.asset(
+                                      'assets/images/arrow.png',
+                                      width: mediaQueryWidth*0.052,
+                                      height: mediaQueryHeight*0.026,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )
+
                           ],
                         ),
                       ),

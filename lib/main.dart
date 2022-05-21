@@ -1,7 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:tour_guide_app/hero_test.dart';
 import 'package:tour_guide_app/modules/categories/category_screen.dart';
 import 'package:tour_guide_app/modules/home/homescreen.dart';
@@ -11,9 +9,14 @@ import 'package:tour_guide_app/shared/components/constants.dart';
 import 'package:tour_guide_app/sq_database.dart';
 import 'package:tour_guide_app/test_databse.dart';
 
+import 'modules/login/loginpage.dart';
+import 'modules/signup/signuppage.dart';
+import 'navigation.dart';
+
 
 void main() async{
   runApp(const MyApp());
+  await Firebase.initializeApp();
 }
 
   class MyApp extends StatelessWidget{
@@ -21,7 +24,7 @@ void main() async{
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(home: TestingDatabse(),
+    return  MaterialApp(home: loginPage(),
     debugShowCheckedModeBanner: false,
     );
   }
