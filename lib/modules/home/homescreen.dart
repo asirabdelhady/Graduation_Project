@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:im_stepper/stepper.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/models/models.dart';
 import 'package:tour_guide_app/modules/categories/category_screen.dart';
@@ -50,6 +52,53 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int upperBound = 6; // upperBound MUST BE total number of icons minus 1.
   ///////////////
+
+
+
+  // location
+  String location = 'Null, Press Button';
+  String Address = 'search';
+  String manteka='press the location icon';
+  String bakyelenwan='to get your location';
+
+  Future<Position> _getGeoLocationPosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      await Geolocator.openLocationSettings();
+      return Future.error('Location services are disabled.');
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+  }
+
+  Future<void> GetAddressFromLatLong(Position position) async {
+    List<Placemark> placemarks =
+    await placemarkFromCoordinates(position.latitude, position.longitude);
+    print(placemarks);
+    Placemark place = placemarks[0];
+    Address =
+    '${place.street}, ${place.subLocality}, ${place.locality},${place.country}';
+    manteka='${place.subAdministrativeArea}';
+    bakyelenwan='${place.street},${place.locality},${place.administrativeArea},${place.country}';
+
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -70,44 +119,52 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(mediaQueryWidth*0.025),
+                      padding: EdgeInsets.all(360*0.025),
                       child: Container(
-                        width: mediaQueryWidth*0.125,
-                        height: mediaQueryHeight*0.0655,
+                        width: 360*0.125,
+                        height: 752*0.0655,
                         decoration: BoxDecoration(
-                          color: tPrimary(),
-                          borderRadius: BorderRadius.circular(10)
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(10)
                         ),
-                        child: Icon(Icons.my_location_outlined, color: Colors.white,),
+                        child: IconButton( color: Colors.white,
+                        icon: Icon(Icons.my_location_outlined),
+                        onPressed: () async {
+                          Position position = await _getGeoLocationPosition();
+                        //  location = 'Lat: ${position.latitude} , Long: ${position.longitude}';
+                          GetAddressFromLatLong(position);
+                          print('location gotten');
+                          },
+                      ),
                       ),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                      Container(
-                        width: mediaQueryWidth*0.25,
-                        child: Text(
-                          'El-Haram jjjjjjjjjjjjjjjjj',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: tPrimary(),
-                            fontWeight: FontWeight.bold
+                        Container(
+                          width: 360*0.25,
+                          child: Text(
+                            '${manteka}',
+                            // maxLines: 1,
+                            // overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold
+                            ),
                           ),
                         ),
-                      ),
-                      Container(
-                        width: mediaQueryWidth*0.5,
-                        child: Text(
-                          '12, Khater street',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: tPrimary(),
+                        Container(
+                          width: 360*0.5,
+                          child: Text(
+                            '${bakyelenwan}',
+                              maxLines: 2,
+                             overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
                           ),
-                        ),
-                      )
-                    ],)
+                        )
+                      ],)
                   ],
                 ),
                 Row(

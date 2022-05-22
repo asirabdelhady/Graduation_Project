@@ -4,6 +4,7 @@ import 'package:tour_guide_app/details.dart';
 import 'package:tour_guide_app/modules/categories/category_screen.dart';
 import 'package:tour_guide_app/modules/home/homescreen.dart';
 import 'package:tour_guide_app/modules/welcome/welcomepage.dart';
+import 'package:tour_guide_app/search/search.dart';
 import 'package:tour_guide_app/shared/components/constants.dart';
 import 'modules/database.dart';
 import 'modules/login/loginpage.dart';
