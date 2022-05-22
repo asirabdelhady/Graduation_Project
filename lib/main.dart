@@ -26,7 +26,7 @@ void main() async{
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(home: MyFirebase(),
+    return  MaterialApp(home: Navigation(),
     debugShowCheckedModeBanner: false,
     );
   }

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:tour_guide_app/details.dart';
 import 'package:tour_guide_app/modules/details/details_screen.dart';
@@ -17,6 +18,10 @@ class _MyFirebaseState extends State<MyFirebase> {
   @override
   initState(){
     super.initState();
+    Firebase.initializeApp().whenComplete(() {
+      print("completed");
+      setState(() {});
+    });
     getAll().then((value) {
       return setState((){}) ;
     });
@@ -25,13 +30,13 @@ class _MyFirebaseState extends State<MyFirebase> {
   Future add() async {
     FirebaseFirestore.instance.collection('tAttraction').doc().set(
         {
-          "number": 2,
-          "name": "Al-Azhar Mosque\n",
-          "latitude": 30.0457,
-          "longitude": 31.2627,
-          "image": "https://lh5.googleusercontent.com/p/AF1QipORAQCR-5J8fh-vwsNEFUKOHHE1DyQd83Rf9gr9=w408-h306-k-no",
-          "description": "Al-Azhar Mosque is right in the centre of the downtown area and in addition to being a mosque, it is one of the oldest universities in the world. The spectacular landmark has a huge primary gateway allowing visitors to enter inside and explore the stunning architecture of this marvel. The five minarets of the mosque can be clearly seen and felt. Visitors often sit inside and pray in the central hall to get some respite from the outer busy world.",
-          "googlemaplocation": "https://www.google.com/maps/place/Al-Azhar+Mosque/@30.0456926,31.2604964,17z/data=!3m1!4b1!4m5!3m4!1s0x145840a2f3fd21f5:0x676752c74b1e52e8!8m2!3d30.045688!4d31.2626851"
+          "number": 24,
+          "name": "Al-Muizz Street",
+          "latitude": 30.051,
+          "longitude": 31.2615,
+          "image": "https://drive.google.com/file/d/1oHoFnBp_FzdlB7I7CoLtv-SdDjsQ-rBD/view?usp=sharing",
+          "description": "The northern section of Al-Muizz li-Din Allah Street is rimmed by fine Mamluk buildings, which have been painstakingly restored to their former glory.\nThe Madrassa of as-Salih Ayyub, built in 1247, is a showcase of the tranquil simplicity of Islamic architecture.\nDirectly across the road from the madrassa is the drop-dead gorgeous Madrassa of Qalaun, rightly considered one of the Mamluk period's greatest architectural triumphs.",
+          "googlemaplocation": "https://www.google.com/maps/place/Al+Moez+Ldin+Allah+Al+Fatmi,+El-Gamaleya,+El+Gamaliya,+Cairo+Governorate/@30.0509352,31.2593861,17z/data=!3m1!4b1!4m5!3m4!1s0x1458409e3b8bb121:0x9373489d8a5bf150!8m2!3d30.0509306!4d31.2615748"
         }
     );
   }

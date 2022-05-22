@@ -186,6 +186,8 @@ class CategoryScreen extends StatefulWidget{
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
+  get tAttractions => null;
+
   @override
   void initState() {
     super.initState();

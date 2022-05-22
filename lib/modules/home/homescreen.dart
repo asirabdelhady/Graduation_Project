@@ -204,38 +204,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                         ),
                                       ),
-                                      IconStepper(
-                                        icons: [
-                                          Icon(null),
-                                          Icon(null),
-                                          Icon(null),
-                                          Icon(null),
-                                          Icon(null),
-                                          Icon(null),
-                                          Icon(null),
-                                        ],
-
-                                        // activeStep property set to activeStep variable defined above.
-                                        activeStep: activeStep,
-                                        enableStepTapping: false,
-                                        //enableNextPreviousButtons: false,
-                                        stepColor: tGrey(),
-                                        activeStepBorderColor:tPrimary(),
-                                        activeStepBorderWidth:5,
-                                        activeStepBorderPadding: 0,
-                                        activeStepColor: tSecondary(),
-                                        lineColor: tPrimary(),
-                                        stepRadius: 14,
-
-
-                                        // This ensures step-tapping updates the activeStep.
-                                        onStepReached: (index) {
-                                          setState(() {
-                                            activeStep = index;
-                                          });
-                                        },
-                                      ),
-                                      SizedBox(height: 12,),
 
                                       Expanded(
                                         child: Text('Next stop, The Pryamids',
@@ -244,16 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),),
                                       ),
 
-                                      Padding(
-                                        padding: const EdgeInsets.only(bottom: 8,right: 20),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.end,
-                                          children: [
 
-                                            nextButton(),
-                                          ],
-                                        ),
-                                      ),
                                     ],
                                   )
 
@@ -377,23 +336,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     }
   // Returns the next button
-  Widget nextButton() {
-    return ElevatedButton(onPressed: (){
-      // Increment activeStep, when the next button is tapped. However, check for upper bound.
-      if (activeStep < upperBound) {
-        setState(() {
-          activeStep++;
 
-        });
-      }
-
-    },
-        style: ElevatedButton.styleFrom(
-          primary: tPrimary(),
-          shape: StadiumBorder(),
-        ),
-        child: Text('Next'));
-  }
 
 
 }

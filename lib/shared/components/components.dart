@@ -1325,6 +1325,8 @@ Widget buildTodayItem() =>
           var mediaQueryWidth = MediaQuery.of(context).size.width;
           return Container(
             width: mediaQueryWidth*0.166,
+            //height: mediaQueryHeight*0.2,
+
             child:
             Column(
               children: [
@@ -1342,16 +1344,32 @@ Widget buildTodayItem() =>
                           ),
                           SizedBox(height: mediaQueryHeight*0.006,),
                           Icon(Icons.cloud_outlined, color: Colors.black,
-                          )
+
+                          ),
+                          SizedBox(height: mediaQueryHeight*0.006,),
+                          Padding(
+                            padding:  EdgeInsetsDirectional.only(
+                              bottom: mediaQueryHeight*0.006,
+                            ),
+                            child: CircleAvatar(
+                              child:
+                              Text('15° C',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              radius: 25.0,
+                              backgroundColor: tPrimary(),
+                            ),
+                          ),
+
                         ],
                       ),
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(50),
                         color: tGrey(),
                       ),
                       width: mediaQueryWidth*0.25,
-                      height: mediaQueryHeight*0.159,
+                      height: mediaQueryHeight*0.182,
                     ),
-                    Padding(
+                   /* Padding(
                       padding:  EdgeInsetsDirectional.only(
                         bottom: mediaQueryHeight*0.006,
                       ),
@@ -1363,7 +1381,7 @@ Widget buildTodayItem() =>
                         radius: 25.0,
                         backgroundColor: tPrimary(),
                       ),
-                    ),
+                    ),*/
                   ],
                 ),
               ],

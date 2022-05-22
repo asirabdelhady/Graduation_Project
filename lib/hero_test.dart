@@ -10,6 +10,8 @@ class HeroTesting extends StatefulWidget{
 }
 
 class _HeroTestingState extends State<HeroTesting> {
+  get tAttractions => null;
+
 
   @override
   void initState() {

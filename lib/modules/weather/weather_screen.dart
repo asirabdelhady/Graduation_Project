@@ -1,7 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:tour_guide_app/modules/weather/weather_page.dart';
 import '../../shared/components/components.dart';
 import '../../shared/styles/colors.dart';
+
 
 class WeatherScreen extends StatefulWidget
 {
@@ -15,7 +17,19 @@ class _WeatherScreen extends State<WeatherScreen> {
   {
     var mediaQueryHeight=MediaQuery.of(context).size.height;
     var mediaQueryWidth=MediaQuery.of(context).size.width;
-    return Scaffold(
+    return const WeatherPage();
+  }
+
+
+}
+
+
+
+
+
+
+
+/*Scaffold(
       body: SafeArea(
         bottom: false,
         child: Padding(
@@ -127,11 +141,9 @@ class _WeatherScreen extends State<WeatherScreen> {
         ),
       ),
 
-    );
-  }
-
-  // 1. build item
-  Widget buildPerDayItem() =>
+    );*/
+// 1. build item
+/* Widget buildPerDayItem() =>
       Builder(
         builder: (context) {
          // var mediaQueryHeight=MediaQuery.of(context).size.height;
@@ -165,5 +177,4 @@ class _WeatherScreen extends State<WeatherScreen> {
           );
         }
       );
-
-}
+*/
