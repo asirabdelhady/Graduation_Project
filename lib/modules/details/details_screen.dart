@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
-import 'package:tour_guide_app/tour_database.dart';
 
 import '../../shared/components/constants.dart';
 import '../../tAttraction_model.dart';

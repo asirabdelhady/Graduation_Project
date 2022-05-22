@@ -7,10 +7,7 @@ import 'package:tour_guide_app/shared/components/constants.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:tour_guide_app/models/models.dart';
-import 'package:tour_guide_app/tour_database.dart';
 import 'package:tour_guide_app/tAttraction_model.dart';
-
-import '../../second_detail.dart';
 
 
 /////////////////////////////// Shared //////////////////////////////////////////////////
@@ -685,12 +682,14 @@ Widget homeScreenRecommendedCard({
       ),
     );
 
-Widget categoryCard (Map model)=> Builder(
+Widget categoryCard ({
+  required String name,
+  required String image,
+  required String places
+})=> Builder(
     builder: (context) {
-      late List<TAttractions> tAttraction;
       var mediaQueryHeight= MediaQuery.of(context).size.height;
       var mediaQueryWidth = MediaQuery.of(context).size.width;
-      IconData? icon;
       return GestureDetector(
         onTap: (){
           Navigator.push(context, MaterialPageRoute(builder: (context){
@@ -707,7 +706,7 @@ Widget categoryCard (Map model)=> Builder(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
                   image: DecorationImage(
-                    image: AssetImage('${model['image']}'),
+                    image: AssetImage(image),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -747,8 +746,7 @@ Widget categoryCard (Map model)=> Builder(
                             ),
                             child: Container(
                               width: mediaQueryWidth*0.6875,
-                              child: Text(
-                                '${model['name']}',
+                              child: Text(name,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -768,8 +766,8 @@ Widget categoryCard (Map model)=> Builder(
                             SizedBox(width: mediaQueryWidth*0.0400,),
                             Row(
                               children: [
-                                Icon(icon, color: Colors.yellow,),
-                                Text('3'),
+                                Icon(Icons.location_on_rounded, color: Colors.yellow,),
+                                Text(' $places'),
 
                               ],
                             ),

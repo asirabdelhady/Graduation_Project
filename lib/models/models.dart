@@ -58,12 +58,12 @@ class Entertainment{
 class Categories{
   String imagePath;
   String categoryName;
-  String numberOfPlaces;
+  String places;
 
   Categories({
     required this.categoryName,
     required this.imagePath,
-    required this.numberOfPlaces,
+    required this.places,
 
   });
 }

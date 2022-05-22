@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/models/models.dart';
@@ -5,180 +6,7 @@ import 'package:tour_guide_app/shared/components/components.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 
 import '../../shared/components/constants.dart';
-class UtilsRecommended{
-  static List <RecommendedPlaces> getRecommendedPlaces(){
-    return [
-      RecommendedPlaces(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      RecommendedPlaces(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      RecommendedPlaces(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      RecommendedPlaces(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      RecommendedPlaces(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      RecommendedPlaces(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-    ];
-  }
-}
-class UtilsHotels{
-  static List <Hotels> getHotels() {
-    return [
-      Hotels(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      Hotels(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      Hotels(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      Hotels(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      Hotels(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      Hotels(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-    ];
-  }
-}
-class UtilsEntertainment{
-  static List <Entertainment> getEntertainment() {
-    return [
-      Entertainment(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      Entertainment(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      Entertainment(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      Entertainment(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      Entertainment(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      Entertainment(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      Entertainment(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      Entertainment(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      Entertainment(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      Entertainment(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      Entertainment(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      Entertainment(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      Entertainment(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      Entertainment(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-    ];
-  }
-}
+
 class CategoryScreen extends StatefulWidget{
 
   @override
@@ -190,21 +18,23 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
   @override
   void initState() {
-    super.initState();
-    createDatabase().then((value) {
-      setState(() {
-      });
-    });
+   super.initState();
+   Firebase.initializeApp().whenComplete(() {
+     print("completed");
+     setState(() {});
+     getAllAttractions();
+     getAllHotels();
+     getAllEntertainment();
+   });
 
-  }
+    }
+
   @override
   Widget build(BuildContext context) {
     var mediaQueryHeight = MediaQuery.of(context).size.height;
     var mediaQueryWidth = MediaQuery.of(context).size.width;
 
-    List<RecommendedPlaces> recommendedPlaces = UtilsRecommended.getRecommendedPlaces();
-    List<Hotels> hotels = UtilsHotels.getHotels();
-    List<Entertainment> entertainment = UtilsEntertainment.getEntertainment();
+
 
 
     PageController recommendedPageController =PageController(initialPage: 0);
@@ -272,7 +102,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           )
                       ),
                     ),*/
-                    Center(
+                    /*Center(
                       child: SmoothPageIndicator(
                         controller: recommendedPageController,
                         count: recommendedPlaces.length,
@@ -281,7 +111,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           activeDotColor: tPrimary(),
                         ),
                       ),
-                    ),
+                    ),*/
                     SizedBox(height: mediaQueryHeight*0.049,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -318,23 +148,22 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         subTitle(subTitle: 'Hotels'),
                         Icon(Icons.keyboard_arrow_right),
                       ],),
-                    /*SingleChildScrollView(
+                    SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Container(
                           height: mediaQueryHeight*0.322,
                           width: mediaQueryWidth,
                           child: PageView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) => defualtCard(
-                                placeName:hotels[index].placeName,
-                                imagePath: hotels[index].imagePath,
-                                rating: hotels[index].rating,
-                                distance: hotels[index].distance),
+                            itemBuilder: (context, index) => categoryCard(
+                                name:hotels[index].placeName,
+                                image: hotels[index].imagePath,
+                                places: hotels[index].rating,),
                             itemCount: hotels.length,
                             controller: hotelsPageController,
                           )
                       ),
-                    ),*/
+                    ),
                     Center(
                       child: SmoothPageIndicator(
                         controller: hotelsPageController,

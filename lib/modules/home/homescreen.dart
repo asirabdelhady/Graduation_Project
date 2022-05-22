@@ -50,21 +50,23 @@ class UtilsCategories{
   static List <Categories> getCategories(){
     return [
       Categories(
-        categoryName: 'Tourist Attractoins',
-        imagePath:'assets/images/Pic3.png',
-        numberOfPlaces: '10 active places',
+        categoryName: 'Tourist Attractions',
+        imagePath: 'assets/images/Cairo Tower.jpg',
+        places: '50 active places' ,
       ),
       Categories(
         categoryName: 'Hotels',
-        imagePath:'assets/images/Pic3.png',
-        numberOfPlaces: '10 active places',
+        imagePath: 'assets/images/hotels.jpg',
+        places: '50 active places' ,
       ),
       Categories(
         categoryName: 'Entertainment',
-        imagePath:'assets/images/Pic3.png',
-        numberOfPlaces: '10 active places',
+        imagePath: 'assets/images/KhanElKhalili.jpg',
+        places: '50 active places' ,
       ),
+
     ];
+
   }
 }
 class HomeScreen extends StatefulWidget {
@@ -300,7 +302,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 SizedBox(height: mediaQueryHeight*0.016,),
-                /*SingleChildScrollView(
+                SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Container(
                       height: mediaQueryHeight*0.322,
@@ -308,14 +310,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: PageView.builder(
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) => categoryCard(
-                            categoryName: categories[index].categoryName,
-                            imagePath: categories[index].imagePath,
-                            numberOfPlaces: categories[index].numberOfPlaces),
+                            name: categories[index].categoryName,
+                            image: categories[index].imagePath,
+                          places: categories[index].places,
+                        ),
                         itemCount: categories.length,
                         controller: categoriesPageController,
                       )
                   ),
-                ),*/
+                ),
                 Center(
                   child: SmoothPageIndicator(
                     controller: categoriesPageController,
