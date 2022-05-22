@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tour_guide_app/modules/details/details_screen.dart';
 
 import '../../shared/components/components.dart';
+import '../../shared/components/constants.dart';
 
 class Place {
   String name;
@@ -17,65 +18,41 @@ class TourScreen extends StatefulWidget{
 
 }
 class _TourScreenState extends State<TourScreen> {
-  int index =1;
+  int index = 1;
 
-  final List<Place> _items = [
-    Place(
-
-      name: "The Great Pyramids Of Giza", image: 'assets/images/egypt-cairo-pyramids-of-giza-and camels-2.jpg',
-    ),
-    Place(
-
-      name: "The asdGreat Pyramids Of Giza", image: 'assets/images/Pyramids.jpg',
-    ),
-    Place(
-
-      name: "name 2", image: 'assets/images/Pyramids1.jpg',
-    ),
-    Place(
-
-      name: "name 3", image: 'assets/images/Pyramids2.jpg',
-    ),
-    Place(
-
-      name: "name 4", image: 'assets/images/Pyramids3.jpg',
-    ),
-    Place(
-
-      name: "name 5", image: 'assets/images/Pyramids1.jpg',
-    ),
-  ];
-
+  @override
+  void initState() {
+    getAllTour(context).then((value) => setState(() {}));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    //var mediaQueryHeight=MediaQuery.of(context).size.height;
-    var mediaQueryWidth=MediaQuery.of(context).size.width;
+    var mediaQueryHeight = MediaQuery.of(context).size.height;
+    var mediaQueryWidth = MediaQuery.of(context).size.width;
 
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading:false,
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         title: Text('Tour Plan',
           style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
-              fontSize: mediaQueryWidth*0.093),
-        ) ,
+              fontSize: mediaQueryWidth * 0.093),
+        ),
         elevation: 0,
       ),
-      body: SafeArea(
-        bottom: false,
-        child: ReorderableListView(
-          onReorder: onReorder,
-          children: _getListItems(),
-        ),
+      body: ListView.builder(
+        itemBuilder: (context, index) => tourPlanCard(tour[index]),
+        itemCount: tour.length,
       ),
 
     );
   }
+}
 
-
+/*
   void onReorder(int oldIndex, int newIndex) {
     if (newIndex > oldIndex) {
       newIndex -= 1;
@@ -88,42 +65,25 @@ class _TourScreenState extends State<TourScreen> {
       _items.insert(newIndex, song);
     });
   }
-  List<Widget> _getListItems() => _items
+  List<Widget> _getListItems() => tour
       .asMap()
       .map((i, item) => MapEntry(i, _buildTenableListTile(item, i)))
       .values
       .toList();
 
-  Widget _buildTenableListTile(Place item, int index) {
+  Widget _buildTenableListTile(tour, int index) {
     return Dismissible(
-      key: Key(item.name),
+      key: Key(tour[index]),
       onDismissed: (direction) {
         setState(() {
-          _items.removeAt(index);
+          tour.removeAt(index);
         });
       },
       background: Container(color: Colors.transparent,child: const Center(child: Text('Swipe left or right to delete')),),
       child: ListTile(
-        key: ValueKey(item.name),
-       subtitle: tourPlanCard(
-           sightName: item.name,
-           onButtonPressed: (){
-             setState(() {
-               _items.removeAt(index);
-               Fluttertoast.showToast(
-                   msg: 'This is toast notification',
-                   toastLength: Toast.LENGTH_SHORT,
-
-               );
-             });
-
-           },
-           onCardTap: (){
-            /* Navigator.push(context, MaterialPageRoute(builder: (context){
-               return const DetailScreen();
-             }));*/
-           },
-           imagePath: item.image),
+        key: ValueKey(tour[index]),
+       subtitle: ListView.builder(
+           itemBuilder: (context, index) => tourPlanCard(tour[index])),
         onTap: () {},
         minLeadingWidth: double.infinity,
       ),
@@ -131,3 +91,4 @@ class _TourScreenState extends State<TourScreen> {
   }
 
 }
+*/

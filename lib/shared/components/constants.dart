@@ -1,13 +1,119 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
+
+
 
 List attractions=[];
 
-List cAttractions=[];
+List favorites=[];
+
+List tour=[];
+
+List history=[];
 
 List hotels=[];
 
 List entertainment=[];
+
+Future getAllFavorites(context) async {
+  FirebaseFirestore.instance.collection('favorites').get().then((value) {
+    value.docs.forEach((element) {
+      favorites.add(element.data());
+    });
+  }).then((value) => print('$favorites'));
+}
+
+Future getAllTour(context) async {
+  FirebaseFirestore.instance.collection('tour').get().then((value) {
+    value.docs.forEach((element) {
+      tour.add(element.data());
+    });
+  }).then((value) => print('$tour'));
+}
+
+
+Future addToFavorites({
+  required String name,
+  required String image,
+  required String location,
+  required String distance,
+  required String description,
+  required String latitude,
+  required String longitude,
+
+
+})async {
+  FirebaseFirestore.instance.collection('favorites').doc().set(
+    {
+      "name": name,
+      "latitude": latitude,
+      "longitude": longitude,
+      "image": image,
+      "description": description,
+      "googlemaplocation": location
+
+    }
+  );
+}
+
+Future getAllHistory(context) async {
+  FirebaseFirestore.instance.collection('history').get().then((value) {
+    value.docs.forEach((element) {
+      history.add(element.data());
+    });
+  }).then((value) => print('$history'));
+}
+
+
+Future addToHistory({
+  required String name,
+  required String image,
+  required String location,
+  required String distance,
+  required String description,
+  required String latitude,
+  required String longitude,
+
+
+})async {
+  FirebaseFirestore.instance.collection('history').doc().set(
+      {
+        "name": name,
+        "latitude": latitude,
+        "longitude": longitude,
+        "image": image,
+        "description": description,
+        "googlemaplocation": location
+
+      }
+  );
+}
+
+
+Future addToTour({
+  required String name,
+  required String image,
+  required String location,
+  required String distance,
+  required String description,
+  required String latitude,
+  required String longitude,
+
+
+})async {
+  FirebaseFirestore.instance.collection('tour').doc().set(
+      {
+        "name": name,
+        "latitude": latitude,
+        "longitude": longitude,
+        "image": image,
+        "description": description,
+        "googlemaplocation": location
+
+      }
+  );
+}
 
 Future addToAttractions() async {
   FirebaseFirestore.instance.collection('tAttraction').doc().set(
@@ -74,6 +180,8 @@ Future getAllEntertainment(context) async {
     });
   }).then((value) => print('$entertainment'));
 }
+
+
 /*
 
 late Database database;

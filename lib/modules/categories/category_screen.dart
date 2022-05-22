@@ -20,16 +20,17 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
   @override
   void initState() {
-   super.initState();
    Firebase.initializeApp().whenComplete(() {
      print("completed");
      setState(() {});
    });
-   WidgetsBinding.instance!.addPostFrameCallback((_) => getAllEntertainment(context).then((value) => setState((){})));
-   WidgetsBinding.instance!.addPostFrameCallback((_) => getAllHotels(context).then((value) => setState((){})));
-   WidgetsBinding.instance!.addPostFrameCallback((_) => getAllAttractions(context).then((value) => setState((){})));
+   getAllEntertainment(context).then((value) => setState((){}));
+   getAllHotels(context).then((value) => setState((){}));
+   getAllAttractions(context).then((value) => setState((){}));
+   super.initState();
 
-    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
