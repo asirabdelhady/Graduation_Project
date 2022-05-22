@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:tour_guide_app/modules/categories/category_screen.dart';
 import 'package:tour_guide_app/modules/details/details_screen.dart';
 import 'package:tour_guide_app/modules/home/homescreen.dart';
 import 'package:tour_guide_app/shared/components/constants.dart';
@@ -693,7 +694,7 @@ Widget categoryCard ({
       return GestureDetector(
         onTap: (){
           Navigator.push(context, MaterialPageRoute(builder: (context){
-            return HomeScreen();//DetailScreen();
+            return CategoryScreen();
           }));
         },
         child: Container(
@@ -934,17 +935,125 @@ Widget defualtCard (Map model, {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
         image: DecorationImage(
-          image: AssetImage('${model['image']}'),
+          image: NetworkImage('${model['image']}'),
           fit: BoxFit.cover,
         ),
       ),
     );
     return GestureDetector(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context){
-          return PageView.builder(
-              itemBuilder:(context, index)=> detailsPage(context, attractions[index]));
-        }));
+        showDialog(context: context,
+            builder: (_)=> Dialog(
+                child: SingleChildScrollView(
+                  child:
+                  Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Stack(
+                      children: [
+                        Container(
+                          width: mediaQueryWidth,
+                          height: mediaQueryHeight*0.227,
+                          child:ClipRRect(
+                                borderRadius: BorderRadius.only(bottomRight: Radius.circular(30),bottomLeft: Radius.circular(30)
+                                ),
+                                child: Image(image: AssetImage('assets/images/Pyramids3.jpg'),
+                                  fit: BoxFit.fill,)),
+                        ),
+                        Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375, vertical: mediaQueryHeight*0.01311),
+                          child: CircleAvatar(
+                            radius: 22.5,
+                            backgroundColor: tPrimary(),
+                            child: IconButton(onPressed: () {
+                              Navigator.pop(context);
+                            }, icon: Icon(Icons.arrow_back,
+                              color: Colors.white,
+                            ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                        Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('${model['name']}',
+                                  style: TextStyle(fontSize: 33),),
+                              SizedBox(height: mediaQueryHeight*0.019,),
+                              aboutDetails(details: '${model['description']}'),
+                              SizedBox(
+                                height: mediaQueryHeight*0.019,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                                  child: Container(
+                                    width: mediaQueryWidth*1.25,
+                                    height: mediaQueryHeight*0.163,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      image: DecorationImage(
+                                        fit: BoxFit.fitWidth,
+                                        image: AssetImage('assets/images/Map.jpeg'),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: mediaQueryHeight*0.019,
+                              ),
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Container(
+                                        width: mediaQueryWidth*0.156,
+                                        height: mediaQueryHeight*0.081,
+                                        child: ElevatedButton(
+                                          onPressed: () {
+
+                                          },
+                                          child: Icon(Icons.favorite ,
+                                            size: mediaQueryWidth*0.0625,
+                                            color: Colors.white,
+                                          ),
+                                          style: ElevatedButton.styleFrom(
+                                            primary: Color(0xff292D32),
+                                            shape: CircleBorder(),
+                                          ),
+                                        )),
+                                    Container(
+
+                                        width: mediaQueryWidth*0.500,
+                                        height: mediaQueryHeight*0.081,
+
+                                        child: ElevatedButton(
+                                          onPressed: () {},
+                                          child: Text.rich(TextSpan(
+                                            text: 'Add to Tour',
+                                            style: TextStyle(
+                                                color: Colors.white, fontSize: mediaQueryWidth*0.0625),
+                                          )),
+                                          style: ElevatedButton.styleFrom(
+                                              shape: StadiumBorder(),
+                                              primary: Color(0xff292D32)
+                                          ),
+                                        )
+                                    ),
+                                  ]),
+                              SizedBox(height: mediaQueryHeight*0.019,),
+                            ],
+                          ),
+                        )
+
+                      ],),
+                )
+            ),
+        );
       },
       child: Container(
         margin: EdgeInsets.all(10),

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -22,10 +24,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
    Firebase.initializeApp().whenComplete(() {
      print("completed");
      setState(() {});
-     getAllAttractions();
-     getAllHotels();
-     getAllEntertainment();
    });
+   WidgetsBinding.instance!.addPostFrameCallback((_) => getAllEntertainment(context).then((value) => setState((){})));
+   WidgetsBinding.instance!.addPostFrameCallback((_) => getAllHotels(context).then((value) => setState((){})));
+   WidgetsBinding.instance!.addPostFrameCallback((_) => getAllAttractions(context).then((value) => setState((){})));
 
     }
 
@@ -34,13 +36,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
     var mediaQueryHeight = MediaQuery.of(context).size.height;
     var mediaQueryWidth = MediaQuery.of(context).size.width;
 
-
-
-
     PageController recommendedPageController =PageController(initialPage: 0);
     PageController attractionsPageController =PageController(initialPage: 0);
     PageController hotelsPageController =PageController(initialPage: 0);
     PageController entertainmentPageController =PageController(initialPage: 0);
+    PageController scrollController = PageController();
 
     return Scaffold(
       body: SafeArea(
@@ -48,6 +48,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375),
           child: SingleChildScrollView(
+            controller: scrollController,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -155,10 +156,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           width: mediaQueryWidth,
                           child: PageView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) => categoryCard(
-                                name:hotels[index].placeName,
-                                image: hotels[index].imagePath,
-                                places: hotels[index].rating,),
+                            itemBuilder: (context, index) => defualtCard(hotels[index]),
                             itemCount: hotels.length,
                             controller: hotelsPageController,
                           )
@@ -187,8 +185,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           width: mediaQueryWidth,
                           child: PageView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) => defualtCard(attractions[index]),
-                            itemCount: attractions.length,
+                            itemBuilder: (context, index) => defualtCard(entertainment[index]),
+                            itemCount: entertainment.length,
                             controller: entertainmentPageController,
                           )
                       ),

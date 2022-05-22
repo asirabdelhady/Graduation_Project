@@ -7,45 +7,11 @@ import 'package:tour_guide_app/modules/categories/category_screen.dart';
 import 'package:tour_guide_app/modules/details/details_screen.dart';
 import 'package:tour_guide_app/recommended_screen.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
+import 'package:tour_guide_app/shared/components/constants.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 
 import '../tour/tour_screen.dart';
-class UtilsRecommended{
-  static List <RecommendedPlaces> getRecommendedPlaces(){
-    return [
-      RecommendedPlaces(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      RecommendedPlaces(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      RecommendedPlaces(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      RecommendedPlaces(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      RecommendedPlaces(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-    ];
-  }
-}
+
 class UtilsCategories{
   static List <Categories> getCategories(){
     return [
@@ -78,7 +44,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  List<RecommendedPlaces> recommendedPlaces = UtilsRecommended.getRecommendedPlaces();
   List<Categories> categories = UtilsCategories.getCategories();
 //////////////
   int activeStep = 5; // Initial step set to 5.
@@ -270,7 +235,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       )
                   ),
                 ),*/
-                Center(
+                /*Center(
                   child: SmoothPageIndicator(
                     controller: recommendedPageController,
                     count: recommendedPlaces.length,
@@ -279,7 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       activeDotColor: tPrimary(),
                     ),
                   ),
-                ),
+                ),*/
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -289,7 +254,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: mediaQueryWidth*0.1875,
                       child: ElevatedButton(onPressed: (){
                         Navigator.push(context, MaterialPageRoute(builder: (context){
-                          return CategoryScreen();
+                           return CategoryScreen();
+
                         }));
                       },
                           style: ElevatedButton.styleFrom(

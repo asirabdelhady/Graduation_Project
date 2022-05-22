@@ -3,6 +3,8 @@ import 'package:sqflite/sqflite.dart';
 
 List attractions=[];
 
+List cAttractions=[];
+
 List hotels=[];
 
 List entertainment=[];
@@ -21,7 +23,7 @@ Future addToAttractions() async {
   );
 }
 
-Future getAllAttractions() async {
+Future getAllAttractions(context) async {
   FirebaseFirestore.instance.collection('tAttraction').get().then((value) {
     value.docs.forEach((element) {
       attractions.add(element.data());
@@ -43,7 +45,7 @@ Future addToHotels() async {
   );
 }
 
-Future getAllHotels() async {
+Future getAllHotels(context) async {
   FirebaseFirestore.instance.collection('hotels').get().then((value) {
     value.docs.forEach((element) {
       hotels.add(element.data());
@@ -65,8 +67,8 @@ Future addToEntertainment() async {
   );
 }
 
-Future getAllEntertainment() async {
-  FirebaseFirestore.instance.collection('tAttraction').get().then((value) {
+Future getAllEntertainment(context) async {
+  FirebaseFirestore.instance.collection('entertainment').get().then((value) {
     value.docs.forEach((element) {
       entertainment.add(element.data());
     });
