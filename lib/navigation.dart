@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:tour_guide_app/modules/home/homescreen.dart';
 import 'package:tour_guide_app/modules/tour/tour_screen.dart';
 import 'package:tour_guide_app/modules/weather/weather_screen.dart';
+import 'package:tour_guide_app/shared/components/constants.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 import 'package:tour_guide_app/modules/notification/notification_screen.dart';
 import 'package:tour_guide_app/modules/profile/profile_screen.dart';
@@ -16,6 +17,17 @@ class Navigation extends StatefulWidget{
 }
 
 class _NavigationState extends State<Navigation> {
+
+  @override
+  initState(){
+
+    setState(() {
+
+    });
+    super.initState();
+
+  }
+
   int index=2;
   final screens = [
       WeatherScreen(),

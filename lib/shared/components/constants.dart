@@ -16,20 +16,23 @@ List hotels=[];
 
 List entertainment=[];
 
-Future getAllFavorites(context) async {
-  FirebaseFirestore.instance.collection('favorites').get().then((value) {
-    value.docs.forEach((element) {
-      favorites.add(element.data());
-    });
-  }).then((value) => print('$favorites'));
+Future getAllFavorites() async {
+  if (favorites.isEmpty){
+    FirebaseFirestore.instance.collection('favorites').get().then((value) {
+      value.docs.forEach((element) {
+        favorites.add(element.data());
+      });
+    }).then((value) => print('$favorites'));
+  }
 }
 
-Future getAllTour(context) async {
-  FirebaseFirestore.instance.collection('tour').get().then((value) {
-    value.docs.forEach((element) {
-      tour.add(element.data());
-    });
-  }).then((value) => print('$tour'));
+Future getAllTour() async {
+    FirebaseFirestore.instance.collection('tour').get().then((value) {
+      value.docs.forEach((element) {
+        tour.add(element.data());
+      });
+    }).then((value) => print('$tour'));
+
 }
 
 
@@ -57,12 +60,14 @@ Future addToFavorites({
   );
 }
 
-Future getAllHistory(context) async {
-  FirebaseFirestore.instance.collection('history').get().then((value) {
-    value.docs.forEach((element) {
-      history.add(element.data());
-    });
-  }).then((value) => print('$history'));
+Future getAllHistory() async {
+
+    FirebaseFirestore.instance.collection('history').get().then((value) {
+      value.docs.forEach((element) {
+        history.add(element.data());
+      });
+    }).then((value) => print('$history'));
+
 }
 
 
@@ -129,12 +134,14 @@ Future addToAttractions() async {
   );
 }
 
-Future getAllAttractions(context) async {
-  FirebaseFirestore.instance.collection('tAttraction').get().then((value) {
-    value.docs.forEach((element) {
-      attractions.add(element.data());
+Future getAllAttractions() async {
+  if(tour.isEmpty){
+    FirebaseFirestore.instance.collection('tAttraction').get().then((value) {
+      value.docs.forEach((element) {
+        attractions.add(element.data());
+      });
     });
-  }).then((value) => print('$attractions'));
+  }
 }
 
 Future addToHotels() async {
@@ -151,7 +158,7 @@ Future addToHotels() async {
   );
 }
 
-Future getAllHotels(context) async {
+Future getAllHotels() async {
   FirebaseFirestore.instance.collection('hotels').get().then((value) {
     value.docs.forEach((element) {
       hotels.add(element.data());
@@ -173,7 +180,7 @@ Future addToEntertainment() async {
   );
 }
 
-Future getAllEntertainment(context) async {
+Future getAllEntertainment() async {
   FirebaseFirestore.instance.collection('entertainment').get().then((value) {
     value.docs.forEach((element) {
       entertainment.add(element.data());

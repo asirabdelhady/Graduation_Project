@@ -23,8 +23,13 @@ class _TourScreenState extends State<TourScreen> {
 
   @override
   void initState() {
-    getAllTour(context).then((value) => setState(() {}));
+    getAllTour();
     super.initState();
+  }
+  @override
+  void dispose() {
+
+    super.dispose();
   }
 
   @override

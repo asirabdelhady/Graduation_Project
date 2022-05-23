@@ -1,16 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:im_stepper/stepper.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/models/models.dart';
 import 'package:tour_guide_app/modules/categories/category_screen.dart';
+import 'package:tour_guide_app/modules/details/details_screen.dart';
 import 'package:tour_guide_app/recommended_screen.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
+import 'package:tour_guide_app/shared/components/constants.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 
 import '../tour/tour_screen.dart';
-import 'location_controller.dart';
 
 class UtilsCategories{
   static List <Categories> getCategories(){
@@ -53,8 +55,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
 
+  // location
+  String location = 'Null, Press Button';
+  String Address = 'search';
+  String manteka='press the location icon';
+  String bakyelenwan='to get your location';
 
- /* Future<Position> _getGeoLocationPosition() async {
+  Future<Position> _getGeoLocationPosition() async {
     bool serviceEnabled;
     LocationPermission permission;
     // Test if location services are enabled.
@@ -90,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
     bakyelenwan='${place.street},${place.locality},${place.administrativeArea},${place.country}';
 
     setState(() {});
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(360*0.025),
+                      padding: const EdgeInsets.all(360*0.025),
                       child: Container(
                         width: 360*0.125,
                         height: 752*0.0655,
@@ -121,15 +128,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             borderRadius: BorderRadius.circular(10)
                         ),
                         child: IconButton( color: Colors.white,
-                        icon: Icon(Icons.my_location_outlined),
+                        icon: const Icon(Icons.my_location_outlined),
                         onPressed: () async {
-                          Position position = await getGeoLocationPosition();
+                          Position position = await _getGeoLocationPosition();
                         //  location = 'Lat: ${position.latitude} , Long: ${position.longitude}';
                           GetAddressFromLatLong(position);
                           print('location gotten');
-                          setState(() {
-
-                          });
                           },
                       ),
                       ),
@@ -143,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             '${manteka}',
                             // maxLines: 1,
                             // overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold
                             ),
@@ -155,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             '${bakyelenwan}',
                               maxLines: 2,
                              overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.black,
                             ),
                           ),
@@ -180,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             decoration: InputDecoration(
                               hintText: 'Search',
                               hintStyle: TextStyle(color: tGrey()),
-                              prefixIcon: Icon(Icons.search),
+                              prefixIcon: const Icon(Icons.search),
                               border: InputBorder.none,
                             ),
                           )),
@@ -194,7 +198,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: GestureDetector(
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(builder: (context){
-                            return TourScreen();
+                            return const TourScreen();
                           }));
                         },
                         child: Container(
@@ -214,22 +218,40 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
+                                    children:  [
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.only(start: 10.0,top: 8),
+                                        padding: EdgeInsetsDirectional.only(start: 20.0,top: 8),
                                         child: Text('My Tour',
                                           style: TextStyle(
                                               fontSize: 22,
-                                              fontWeight: FontWeight.w400
+                                              fontWeight: FontWeight.bold
                                           ),
                                         ),
                                       ),
 
-                                      Expanded(
-                                        child: Text('Next stop, The Pryamids',
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                          ),),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.only(start:20.0, top: 8),
+                                        child: Expanded(
+                                          child: Text('Next stop,',
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                            ),),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.only(start:20.0, top: 8),
+                                        child: Expanded(
+                                          child:(tour.isEmpty)?Text('Go Home...',
+                                            maxLines: 1,
+                                            style: TextStyle(
+                                              fontSize: 27,
+                                            ),
+                                          ):Text('${tour[0]['name']}',
+                                            maxLines: 1,
+                                            style: TextStyle(
+                                              fontSize: 27,
+                                            ),),
+                                        ),
                                       ),
 
 
@@ -258,14 +280,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: mediaQueryWidth*0.1875,
                       child: ElevatedButton(onPressed: (){
                         Navigator.push(context, MaterialPageRoute(builder: (context){
-                          return RecommendedScreen();
+                          return const RecommendedScreen();
                         }));
                       },
                           style: ElevatedButton.styleFrom(
                             primary: tPrimary(),
-                            shape: StadiumBorder(),
+                            shape: const StadiumBorder(),
                           ),
-                          child: Text('All')),
+                          child: const Text('All')),
                     ),
 
                   ],
@@ -313,9 +335,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                           style: ElevatedButton.styleFrom(
                             primary: tPrimary(),
-                            shape: StadiumBorder(),
+                            shape: const StadiumBorder(),
                           ),
-                          child: Text('All')),
+                          child: const Text('All')),
                     ),
 
                   ],

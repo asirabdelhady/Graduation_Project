@@ -23,7 +23,7 @@ void main() async{
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(home: signUpPage(),
+    return  MaterialApp(home: Navigation(),
     debugShowCheckedModeBanner: false,
     );
   }

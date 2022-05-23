@@ -14,8 +14,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
-    getAllFavorites(context).then((value) => setState((){}));
-    getAllHistory(context).then((value) => setState((){}));
+    getAllHistory();
+    getAllFavorites();
     super.initState();
   }
   @override

@@ -24,9 +24,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
      print("completed");
      setState(() {});
    });
-   getAllEntertainment(context).then((value) => setState((){}));
-   getAllHotels(context).then((value) => setState((){}));
-   getAllAttractions(context).then((value) => setState((){}));
+   getAllAttractions();
+   getAllHotels();
+   getAllEntertainment();
+
+
    super.initState();
 
 

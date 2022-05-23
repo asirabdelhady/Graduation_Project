@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tour_guide_app/modules/login/loginpage.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
+import 'package:tour_guide_app/shared/components/constants.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 
 import '../signup/signuppage.dart';
@@ -11,6 +12,22 @@ class welcomepage extends StatefulWidget{
 }
 
 class _welcomepageState extends State<welcomepage> {
+
+  @override
+  void initState() {
+    getAllTour();
+    getAllAttractions();
+    getAllHotels();
+    getAllHistory();
+    getAllFavorites();
+    getAllEntertainment();
+    setState(() {
+
+    });
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     var mediaQueryHeight=MediaQuery.of(context).size.height;
