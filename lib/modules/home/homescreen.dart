@@ -1,18 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:im_stepper/stepper.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/models/models.dart';
 import 'package:tour_guide_app/modules/categories/category_screen.dart';
-import 'package:tour_guide_app/modules/details/details_screen.dart';
 import 'package:tour_guide_app/recommended_screen.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
-import 'package:tour_guide_app/shared/components/constants.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 
 import '../tour/tour_screen.dart';
+import 'location_controller.dart';
 
 class UtilsCategories{
   static List <Categories> getCategories(){
@@ -55,13 +53,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
 
-  // location
-  String location = 'Null, Press Button';
-  String Address = 'search';
-  String manteka='press the location icon';
-  String bakyelenwan='to get your location';
 
-  Future<Position> _getGeoLocationPosition() async {
+ /* Future<Position> _getGeoLocationPosition() async {
     bool serviceEnabled;
     LocationPermission permission;
     // Test if location services are enabled.
@@ -97,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
     bakyelenwan='${place.street},${place.locality},${place.administrativeArea},${place.country}';
 
     setState(() {});
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -130,10 +123,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: IconButton( color: Colors.white,
                         icon: Icon(Icons.my_location_outlined),
                         onPressed: () async {
-                          Position position = await _getGeoLocationPosition();
+                          Position position = await getGeoLocationPosition();
                         //  location = 'Lat: ${position.latitude} , Long: ${position.longitude}';
                           GetAddressFromLatLong(position);
                           print('location gotten');
+                          setState(() {
+
+                          });
                           },
                       ),
                       ),
