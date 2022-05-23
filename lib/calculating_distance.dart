@@ -77,6 +77,7 @@ class _CalculateDistanceState extends State<CalculateDistance> {
 
   }
 
+
   int index=0;
 
   @override
@@ -105,20 +106,29 @@ class _CalculateDistanceState extends State<CalculateDistance> {
 
           },
               child: Text('get all')),
-          ElevatedButton(onPressed: (){
+          ElevatedButton(onPressed: () async {
+            Position position = await getGeoLocationPosition();
             for(var i = 0; i < entertainment.length; i++){
-              print(calculateDistance(lat, long, entertainment[i]["latitude"], entertainment[i]["longitude"]));
+              print(calculateDistance(position.latitude, position.longitude, entertainment[i]["latitude"], entertainment[i]["longitude"]));
             }
 
           },
               child: Text('calculate')),
-          IconButton( color: Colors.white,
+          IconButton( color: Colors.black,
             icon: const Icon(Icons.my_location_outlined),
             onPressed: () async {
               Position position = await getGeoLocationPosition();
-              //  location = 'Lat: ${position.latitude} , Long: ${position.longitude}';
+               location = 'Lat: ${position.latitude} , Long: ${position.longitude}';
               GetAddressFromLatLong(position);
               print('location gotten');
+
+             // print(location);
+              lat='${position.latitude}' ;
+              long='${position.longitude}';
+
+              print(lat);
+              print(long);
+
             },
           ),
 
