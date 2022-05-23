@@ -7,6 +7,7 @@ String Address = 'search';
 String manteka='press the location icon';
 String bakyelenwan='to get your location';
 String forweather='';
+String weather='';
 double lat=0.0;
 double long=0.0;
 
@@ -46,7 +47,12 @@ Future<void> GetAddressFromLatLong(Position position) async {
   manteka='${place.subAdministrativeArea}';
   bakyelenwan='${place.street},${place.locality},${place.administrativeArea},${place.country}';
   forweather='${place.administrativeArea}';
+  weather='${place.administrativeArea}';
   lat=double.parse('${position.latitude}');
   long=double.parse('${position.longitude}');
+  print('lat=$lat');
+  print('long=$long');
+
+
 
 }

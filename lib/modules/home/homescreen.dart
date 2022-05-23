@@ -13,6 +13,7 @@ import 'package:tour_guide_app/shared/components/constants.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 
 import '../tour/tour_screen.dart';
+import 'location_controller.dart';
 
 class UtilsCategories{
   static List <Categories> getCategories(){
@@ -56,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
   // location
+/*
   String location = 'Null, Press Button';
   String Address = 'search';
   String manteka='press the location icon';
@@ -85,8 +87,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
   }
+*/
 
-  Future<void> GetAddressFromLatLong(Position position) async {
+ /* Future<void> GetAddressFromLatLong(Position position) async {
     List<Placemark> placemarks =
     await placemarkFromCoordinates(position.latitude, position.longitude);
     print(placemarks);
@@ -97,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
     bakyelenwan='${place.street},${place.locality},${place.administrativeArea},${place.country}';
 
     setState(() {});
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -130,10 +133,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: IconButton( color: Colors.white,
                         icon: const Icon(Icons.my_location_outlined),
                         onPressed: () async {
-                          Position position = await _getGeoLocationPosition();
-                        //  location = 'Lat: ${position.latitude} , Long: ${position.longitude}';
+                          Position position = await getGeoLocationPosition();
+                         //location = 'Lat: ${position.latitude} , Long: ${position.longitude}';
                           GetAddressFromLatLong(position);
                           print('location gotten');
+                          print ('forweather=$forweather');
+                          setState(() {
+
+                          });
                           },
                       ),
                       ),
@@ -231,27 +238,23 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                       Padding(
                                         padding: EdgeInsetsDirectional.only(start:20.0, top: 8),
-                                        child: Expanded(
-                                          child: Text('Next stop,',
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                            ),),
-                                        ),
+                                        child: Text('Next stop,',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                          ),),
                                       ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.only(start:20.0, top: 8),
-                                        child: Expanded(
-                                          child:(tour.isEmpty)?Text('Go Home...',
-                                            maxLines: 1,
-                                            style: TextStyle(
-                                              fontSize: 27,
-                                            ),
-                                          ):Text('${tour[0]['name']}',
-                                            maxLines: 1,
-                                            style: TextStyle(
-                                              fontSize: 27,
-                                            ),),
-                                        ),
+                                        child: (tour.isEmpty)?Text('Go Home...',
+                                          maxLines: 1,
+                                          style: TextStyle(
+                                            fontSize: 27,
+                                          ),
+                                        ):Text('${tour[0]['name']}',
+                                          maxLines: 1,
+                                          style: TextStyle(
+                                            fontSize: 27,
+                                          ),),
                                       ),
 
 
