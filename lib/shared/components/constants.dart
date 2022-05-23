@@ -1,8 +1,17 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 
-
+double calculateDistance(lat1, lon1, lat2, lon2){
+  var p = 0.017453292519943295;
+  var c = cos;
+  var a = 0.5 - c((lat2 - lat1) * p)/2 +
+      c(lat1 * p) * c(lat2 * p) *
+          (1 - c((lon2 - lon1) * p))/2;
+  return 12742 * asin(sqrt(a));
+}
 
 List attractions=[];
 
@@ -135,13 +144,13 @@ Future addToAttractions() async {
 }
 
 Future getAllAttractions() async {
-  if(tour.isEmpty){
+
     FirebaseFirestore.instance.collection('tAttraction').get().then((value) {
       value.docs.forEach((element) {
         attractions.add(element.data());
       });
     });
-  }
+
 }
 
 Future addToHotels() async {
@@ -169,13 +178,14 @@ Future getAllHotels() async {
 Future addToEntertainment() async {
   FirebaseFirestore.instance.collection('entertainment').doc().set(
       {
-        "number": 24,
-        "name": "Al-Muizz Street",
-        "latitude": 30.051,
-        "longitude": 31.2615,
-        "image": "https://drive.google.com/file/d/1oHoFnBp_FzdlB7I7CoLtv-SdDjsQ-rBD/view?usp=sharing",
-        "description": "The northern section of Al-Muizz li-Din Allah Street is rimmed by fine Mamluk buildings, which have been painstakingly restored to their former glory.\nThe Madrassa of as-Salih Ayyub, built in 1247, is a showcase of the tranquil simplicity of Islamic architecture.\nDirectly across the road from the madrassa is the drop-dead gorgeous Madrassa of Qalaun, rightly considered one of the Mamluk period's greatest architectural triumphs.",
-        "googlemaplocation": "https://www.google.com/maps/place/Al+Moez+Ldin+Allah+Al+Fatmi,+El-Gamaleya,+El+Gamaliya,+Cairo+Governorate/@30.0509352,31.2593861,17z/data=!3m1!4b1!4m5!3m4!1s0x1458409e3b8bb121:0x9373489d8a5bf150!8m2!3d30.0509306!4d31.2615748"
+        "number": 2,
+        "name": "Giza Zoo",
+        "rating": 3.8,
+        "latitude": 30.0279,
+        "longitude": 31.216,
+        "image": "https://lh5.googleusercontent.com/p/AF1QipN5FFaKg87Mi7IE3QIDYAGMNvkks2FFZnK8v0rh=w408-h544-k-no",
+        "description": "The Giza Zoo is a zoological garden in Giza, Egypt. It is one of the few green areas in the city, and includes Giza's largest park. The zoo covers about 80 acres, and is home to many endangered species, as well as a selection of endemic fauna. The first to be built in the Middle East, rare species have been successfully bred in the zoo—including the first California sea lion to be born in the region.",
+        "location": "https://www.google.com/maps/place/Giza+Zoo/@30.02795,31.2159686,15z/data=!4m5!3m4!1s0x0:0x8e04c3152a2d7f4e!8m2!3d30.0279662!4d31.2159293"
       }
   );
 }
@@ -185,7 +195,7 @@ Future getAllEntertainment() async {
     value.docs.forEach((element) {
       entertainment.add(element.data());
     });
-  }).then((value) => print('$entertainment'));
+  }).then((value) => print(entertainment));
 }
 
 

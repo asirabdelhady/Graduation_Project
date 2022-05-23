@@ -12,7 +12,7 @@ class welcomepage extends StatefulWidget{
 }
 
 class _welcomepageState extends State<welcomepage> {
-
+var index;
   @override
   void initState() {
     getAllTour();

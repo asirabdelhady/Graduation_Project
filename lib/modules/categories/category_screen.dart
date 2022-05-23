@@ -18,6 +18,7 @@ class CategoryScreen extends StatefulWidget{
 class _CategoryScreenState extends State<CategoryScreen> {
   get tAttractions => null;
 
+  var index;
   @override
   void initState() {
    Firebase.initializeApp().whenComplete(() {
@@ -27,10 +28,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
    getAllAttractions();
    getAllHotels();
    getAllEntertainment();
-
-
    super.initState();
-
 
   }
 
@@ -197,7 +195,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     Center(
                       child: SmoothPageIndicator(
                         controller: entertainmentPageController,
-                        count: attractions.length,
+                        count: entertainment.length,
                         effect: ScrollingDotsEffect(
                           dotColor: tGrey(),
                           activeDotColor: tPrimary(),
