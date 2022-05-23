@@ -285,7 +285,7 @@ class _signUpPageState extends State<signUpPage> {
                             } ).catchError((error){
                               Fluttertoast.showToast(
                                 msg:
-                                'Email already exist',
+                                'Email already exist or something went wrong',
                                 toastLength: Toast.LENGTH_LONG,);                            });
                           },
                           minWidth: mediaQueryWidth*0.2968,
