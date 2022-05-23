@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:tour_guide_app/modules/weather/weather_model.dart';
 import 'package:tour_guide_app/modules/weather/weather_service.dart';
+import '../home/location_controller.dart';
+
 
 class WeatherController extends GetxController {
   var weather = WeatherModel(
@@ -21,7 +23,7 @@ class WeatherController extends GetxController {
     'Bekasi',
     'Padang',
   ];
-  var cityValue = 'Cairo'.obs;
+  var cityValue = '${forweather}'.obs;
   final _weatherIconList = [
     'https://assets9.lottiefiles.com/temp/lf20_XkF78Y.json', //thunderstorm
     'https://assets9.lottiefiles.com/temp/lf20_rpC1Rd.json', //rain

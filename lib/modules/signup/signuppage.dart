@@ -15,7 +15,7 @@ class _signUpPageState extends State<signUpPage> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var nameController = TextEditingController();
-  var confPasswordController = TextEditingController();
+  //var confPasswordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
   bool passorno = true;
   String password = '';
@@ -163,7 +163,7 @@ class _signUpPageState extends State<signUpPage> {
                         SizedBox(
                           height: 5,
                         ),
-                        mainFormField(
+                   /*     mainFormField(
                           enable: password!=null&&password.isNotEmpty,
 
                           hintText: 'Confirm Password',
@@ -196,10 +196,10 @@ class _signUpPageState extends State<signUpPage> {
                               });
                             }, onFieldSubmitted: null,
 
-                            ),
-                        SizedBox(
+                            ),*/
+                       /* SizedBox(
                           height: mediaQueryHeight*0.055,
-                        ),
+                        ),*/
                         /*mainButton(
                             minWidth: mediaQueryWidth*0.2968,
                             height: mediaQueryHeight*0.066,

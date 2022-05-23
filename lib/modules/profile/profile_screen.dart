@@ -32,7 +32,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children:[
                     defaultTitle(title: 'Profile', fontWeight: FontWeight.bold),
-                    Container(
+                   /* Container(
                       width: mediaQueryWidth*0.156,
                       height: mediaQueryHeight*0.0655,
                       decoration: BoxDecoration(
@@ -43,7 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             icon: const Icon(Icons.edit_outlined),
                             onPressed: (){
                               Navigator. push(context, MaterialPageRoute(builder: (context)=> ProfileEditScreen()));
-                            })),
+                            })),*/
                 ]),
                  SizedBox(height: mediaQueryHeight*0.0196),
                 profileHeader(imagePath: 'assets/images/Pyramids.jpg', name: 'Asir Abdelhady', age: 22, nationality: 'Egypt'),

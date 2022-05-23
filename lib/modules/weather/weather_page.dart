@@ -166,7 +166,7 @@ class WeatherPage extends StatelessWidget {
                   width: 100,
                   height: 100,
                   child: CircularProgressIndicator(
-                    color: Colors.red,
+                    color: tPrimary(),
                   ),
                 ),
               )

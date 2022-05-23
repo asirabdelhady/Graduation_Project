@@ -6,6 +6,7 @@ String location = 'Null, Press Button';
 String Address = 'search';
 String manteka='press the location icon';
 String bakyelenwan='to get your location';
+String forweather ='';
 
 
 Future<Position> getGeoLocationPosition() async {
@@ -42,5 +43,6 @@ Future<void> GetAddressFromLatLong(Position position) async {
   '${place.street}, ${place.subLocality}, ${place.locality},${place.country}';
   manteka='${place.subAdministrativeArea}';
   bakyelenwan='${place.street},${place.locality},${place.administrativeArea},${place.country}';
+  forweather='${place.administrativeArea}';
 
 }
