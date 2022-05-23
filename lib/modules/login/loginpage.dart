@@ -60,7 +60,7 @@ class _loginPageState extends State<loginPage> {
                     padding: EdgeInsets.symmetric(
                         horizontal: mediaQueryWidth * 0.035),
                     child: Container(
-                      height: MediaQuery.of(context).size.height * 0.43,
+                      height: MediaQuery.of(context).size.height * 0.5,
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: tPrimary(),
@@ -83,15 +83,14 @@ class _loginPageState extends State<loginPage> {
                                 passorno: false,
                                 suffixicon: Icon(null),
                                 controller: emailController,
-                                validatorFunction: (value) {
+                                validatorFunction:  (value) {
                                   // Check if this field is empty
                                   if (value == null || value.isEmpty) {
                                     return 'This field is required';
                                   }
 
                                   // using regular expression
-                                  if (!RegExp(r'\S+@\S+\.\S+')
-                                      .hasMatch(value)) {
+                                  if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
                                     return "Please enter a valid email address";
                                   }
 
@@ -117,28 +116,28 @@ class _loginPageState extends State<loginPage> {
                                 controller: passwordController,
                                 onChanged: (value) => password = value,
                                 validatorFunction: (value) {
-                                  RegExp regex = RegExp(
-                                      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
+                                  RegExp regex =
+                                  RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
 
                                   if (!regex.hasMatch(value)) {
                                     ElevatedButton(
-                                        // color: Colors.orange,
+                                      // color: Colors.orange,
                                         child: Text('Bottom Sheet'),
-                                        onPressed: () {});
+                                        onPressed: () {
+                                        });
                                     return 'Please enter a valid password';
                                   }
                                 },
-                                onFieldSubmitted: (value) {
-                                  RegExp regex = RegExp(
-                                      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
-
-                                  if (value != regex.hasMatch(value)) {
+                                onFieldSubmitted: (value){
+                                  RegExp regex =
+                                  RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
+                                  if(value != regex.hasMatch(value)) {
                                     Fluttertoast.showToast(
-                                      msg:
-                                          'Validate password must contain upper and lower letters , number and at least 8 characters ',
+                                      msg: 'Validate password must contain upper and lower letters , number and at least 8 characters ',
                                       toastLength: Toast.LENGTH_LONG,
                                     );
                                   }
+
                                 },
                                 suffixPressed: () {
                                   setState(() {

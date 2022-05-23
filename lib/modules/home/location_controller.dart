@@ -6,7 +6,7 @@ String location = 'Null, Press Button';
 String Address = 'search';
 String manteka='press the location icon';
 String bakyelenwan='to get your location';
-String forweather ='';
+String forweather='';
 
 
 Future<Position> getGeoLocationPosition() async {
