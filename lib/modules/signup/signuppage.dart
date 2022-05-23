@@ -21,6 +21,20 @@ class _signUpPageState extends State<signUpPage> {
   String password = '';
   String email='';
   String confirmPassword = '';
+  DateTime selectedDate = DateTime(2004,1,1);
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(1950,9),
+        lastDate: DateTime(2004));
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +65,7 @@ class _signUpPageState extends State<signUpPage> {
                   Padding(
                     padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.030),
                     child: Container(
-                      height: MediaQuery.of(context).size.height * 0.63,
+                      height: MediaQuery.of(context).size.height * 0.7,
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: tPrimary(),
@@ -60,7 +74,6 @@ class _signUpPageState extends State<signUpPage> {
                     ),
                   ),
                   Form(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     key: formKey,
                     child: Column(
                       children: [
@@ -89,7 +102,7 @@ class _signUpPageState extends State<signUpPage> {
                                 onFieldSubmitted: null,
                           )),
                         ),
-                        SizedBox(height: 5,),
+                        SizedBox(height: 15,),
                         mainFormField(
                             hintText: 'Email',
                             imagepath: 'assets/images/mail.png',
@@ -114,9 +127,7 @@ class _signUpPageState extends State<signUpPage> {
                             suffixPressed: null,
                             onFieldSubmitted: null,
                             onChanged: null),
-                        SizedBox(height: 5,),
-
-
+                        SizedBox(height: 15,),
                         mainFormField(
                             hintText: 'Password',
                             imagepath: 'assets/images/lock.png',
@@ -161,9 +172,9 @@ class _signUpPageState extends State<signUpPage> {
                               });
                             }),
                         SizedBox(
-                          height: 5,
+                          height: 15,
                         ),
-                        mainFormField(
+                        /*mainFormField(
                           enable: password!=null&&password.isNotEmpty,
 
                           hintText: 'Confirm Password',
@@ -196,9 +207,50 @@ class _signUpPageState extends State<signUpPage> {
                               });
                             }, onFieldSubmitted: null,
 
-                            ),
-                        SizedBox(
+                            ),*/
+                       /* SizedBox(
                           height: mediaQueryHeight*0.055,
+                        ),*/
+                        Stack(
+                          children: [
+                            Center(
+                              child: Container(
+                                width: mediaQueryWidth*0.6,
+                                height: mediaQueryHeight*0.11,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Center(
+                                child: Column(
+                                  children: [
+                                    Text('Enter you birthday date',
+                                    style: TextStyle(
+                                      fontSize: 14
+                                    ),),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: <Widget>[
+                                        Text("${selectedDate.toLocal()}".split(' ')[0],
+                                        style: TextStyle(
+                                          fontSize: 16
+                                        ),),
+                                        //SizedBox(height: 20.0,),
+                                        IconButton(
+                                          onPressed: () => _selectDate(context),
+                                          icon: Icon(Icons.calendar_today_sharp),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         /*mainButton(
                             minWidth: mediaQueryWidth*0.2968,

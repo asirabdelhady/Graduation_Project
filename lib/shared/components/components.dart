@@ -510,14 +510,13 @@ Widget mainFormField({
             ),
             Container(
               width: mediaQueryWidth*0.766,
-              height: mediaQueryHeight*0.094,
+              height: mediaQueryHeight*0.115,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
                 color: Colors.transparent,
               ),
               child: Column(
                 children: [
-                  //   SizedBox(height: 1,),
                   TextFormField(
                     enabled: enable,
                     onFieldSubmitted:onFieldSubmitted ,
