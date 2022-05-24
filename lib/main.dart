@@ -24,7 +24,7 @@ void main() async{
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(home: CalculateDistance(),
+    return  MaterialApp(home: Navigation(),
     debugShowCheckedModeBanner: false,
     );
   }

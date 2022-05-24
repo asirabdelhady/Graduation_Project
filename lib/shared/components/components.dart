@@ -1108,7 +1108,7 @@ Widget defualtCard (Map model, {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  Utils.openLink(url:'${model['location']}');
+                                  Utils.openLink(url:'https://www.google.com/maps/place/The+Great+Pyramid+of+Giza/@29.9792345,31.1342019,17z/data=!3m1!4b1!4m6!3m5!1s0x14584587ac8f291b:0x810c2f3fa2a52424!8m2!3d29.9792345!4d31.1342019!16zL20vMDM2bWs?authuser=0&hl=en');
 
                                 },
                                 child: Padding(
