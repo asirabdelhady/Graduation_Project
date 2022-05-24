@@ -80,40 +80,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 SizedBox(height: mediaQueryHeight*0.039,),
                 Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        subTitle(subTitle: 'Recommended (nearby)'),
-                        Icon(Icons.keyboard_arrow_right)
-                      ],
-                    ),
-                    /*SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Container(
-                          height: mediaQueryHeight*0.322,
-                          width: mediaQueryWidth,
-                          child: PageView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) => defualtCard(
-                                placeName:recommendedPlaces[index].placeName,
-                                imagePath: recommendedPlaces[index].imagePath,
-                                rating: recommendedPlaces[index].rating,
-                                distance: recommendedPlaces[index].distance),
-                            itemCount: recommendedPlaces.length,
-                            controller: recommendedPageController,
-                          )
-                      ),
-                    ),*/
-                    /*Center(
-                      child: SmoothPageIndicator(
-                        controller: recommendedPageController,
-                        count: recommendedPlaces.length,
-                        effect: ScrollingDotsEffect(
-                          dotColor: tGrey(),
-                          activeDotColor: tPrimary(),
-                        ),
-                      ),
-                    ),*/
                     SizedBox(height: mediaQueryHeight*0.049,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

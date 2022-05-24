@@ -2,7 +2,58 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:sqflite/sqflite.dart';
+
+import '../../modules/home/location_controller.dart';
+
+
+Future addDistanceToAttractions()async{
+  Position position = await getGeoLocationPosition();
+  for(var i = 0; i < attractions.length; i++){
+    var distance= calculateDistance(position.latitude, position.longitude, attractions[i]["latitude"], attractions[i]["longitude"]);
+    FirebaseFirestore.instance.collection('tAttraction').doc('$i').update(
+        {
+          "distance": "${distance.round()} Km"
+    }
+    );
+  }
+
+
+
+}
+
+Future addDistanceToHotels()async{
+  Position position = await getGeoLocationPosition();
+  for(var i = 0; i < hotels.length; i++){
+    var distance= calculateDistance(position.latitude, position.longitude, hotels[i]["latitude"], hotels[i]["longitude"]);
+    FirebaseFirestore.instance.collection('hotels').doc('$i').update(
+        {
+          "distance": "${distance.round()} Km"
+        }
+    );
+  }
+
+
+
+}
+
+Future addDistanceToEntertainment()async{
+  Position position = await getGeoLocationPosition();
+  for(var i = 0; i < entertainment.length; i++){
+    var distance= calculateDistance(position.latitude, position.longitude, entertainment[i]["latitude"], entertainment[i]["longitude"]);
+    FirebaseFirestore.instance.collection('entertainment').doc('$i').update(
+        {
+          "distance": "${distance.round()} Km"
+        }
+    );
+  }
+
+
+
+}
+
+
 
 double calculateDistance(lat1, lon1, lat2, lon2){
   var p = 0.017453292519943295;
@@ -11,6 +62,16 @@ double calculateDistance(lat1, lon1, lat2, lon2){
       c(lat1 * p) * c(lat2 * p) *
           (1 - c((lon2 - lon1) * p))/2;
   return 12742 * asin(sqrt(a));
+}
+
+class Distance{
+  String? distance;
+
+  Distance({this.distance});
+
+  List attractionDis =[];
+  List hotelDis=[];
+  List entertainmentDis=[];
 }
 
 List attractions=[];
@@ -38,8 +99,11 @@ Future getAllFavorites() async {
 Future getAllTour() async {
     FirebaseFirestore.instance.collection('tour').get().then((value) {
       value.docs.forEach((element) {
+        if(tour.contains(element))
+        {print('somthing');}else {
         tour.add(element.data());
-      });
+      }
+    });
     }).then((value) => print('$tour'));
 
 }
@@ -129,16 +193,20 @@ Future addToTour({
   );
 }
 
+
+
 Future addToAttractions() async {
-  FirebaseFirestore.instance.collection('tAttraction').doc().set(
+  int number=28;
+  FirebaseFirestore.instance.collection('tAttraction').doc('$number').set(
       {
-        "number": 24,
-        "name": "Al-Muizz Street",
-        "latitude": 30.051,
-        "longitude": 31.2615,
-        "image": "https://drive.google.com/file/d/1oHoFnBp_FzdlB7I7CoLtv-SdDjsQ-rBD/view?usp=sharing",
-        "description": "The northern section of Al-Muizz li-Din Allah Street is rimmed by fine Mamluk buildings, which have been painstakingly restored to their former glory.\nThe Madrassa of as-Salih Ayyub, built in 1247, is a showcase of the tranquil simplicity of Islamic architecture.\nDirectly across the road from the madrassa is the drop-dead gorgeous Madrassa of Qalaun, rightly considered one of the Mamluk period's greatest architectural triumphs.",
-        "googlemaplocation": "https://www.google.com/maps/place/Al+Moez+Ldin+Allah+Al+Fatmi,+El-Gamaleya,+El+Gamaliya,+Cairo+Governorate/@30.0509352,31.2593861,17z/data=!3m1!4b1!4m5!3m4!1s0x1458409e3b8bb121:0x9373489d8a5bf150!8m2!3d30.0509306!4d31.2615748"
+        "number": "$number",
+        "name": "Qasr El Nil Bridge\n",
+        "rating": 4.7,
+        "latitude": 30.0438,
+        "longitude": 31.2296,
+        "image": "https://lh5.googleusercontent.com/p/AF1QipNa-TmkMcnm1cWfjWXXpwt4Pf90Pvx50YrevvUG=w426-h240-k-no",
+        "description": "The Qasr El Nil Bridge, also commonly spelled Kasr El Nil Bridge, is a historic structure dating from 1931 which replaced the first bridge to span the Nile River in central Cairo, Egypt. It connects Tahrir Square in downtown Cairo to the modern Cairo Opera complex toward the southern end of Gezira Island.",
+        "location": "https://www.google.com/maps/place/Qasr+El+Nil+Bridge/@30.0437555,31.2296361,15z/data=!4m2!3m1!1s0x0:0x514b64de9f412c5?sa=X&ved=2ahUKEwjoupSkluX2AhUXHuwKHfXfBT0Q_BJ6BAgcEAU"
       }
   );
 }
@@ -149,20 +217,22 @@ Future getAllAttractions() async {
       value.docs.forEach((element) {
         attractions.add(element.data());
       });
-    });
+    }).then((value) => print(attractions));
 
 }
 
 Future addToHotels() async {
-  FirebaseFirestore.instance.collection('hotels').doc().set(
+  int number=20;
+  FirebaseFirestore.instance.collection('hotels').doc('$number').set(
       {
-        "number": 24,
-        "name": "Al-Muizz Street",
-        "latitude": 30.051,
-        "longitude": 31.2615,
-        "image": "https://drive.google.com/file/d/1oHoFnBp_FzdlB7I7CoLtv-SdDjsQ-rBD/view?usp=sharing",
-        "description": "The northern section of Al-Muizz li-Din Allah Street is rimmed by fine Mamluk buildings, which have been painstakingly restored to their former glory.\nThe Madrassa of as-Salih Ayyub, built in 1247, is a showcase of the tranquil simplicity of Islamic architecture.\nDirectly across the road from the madrassa is the drop-dead gorgeous Madrassa of Qalaun, rightly considered one of the Mamluk period's greatest architectural triumphs.",
-        "googlemaplocation": "https://www.google.com/maps/place/Al+Moez+Ldin+Allah+Al+Fatmi,+El-Gamaleya,+El+Gamaliya,+Cairo+Governorate/@30.0509352,31.2593861,17z/data=!3m1!4b1!4m5!3m4!1s0x1458409e3b8bb121:0x9373489d8a5bf150!8m2!3d30.0509306!4d31.2615748"
+        "number": "$number",
+        "name": "Aracan pyramids hotel",
+        "rating": 3.7,
+        "latitude": 29.9958161096,
+        "longitude": 31.164641174,
+        "image": "https://lh4.googleusercontent.com/proxy/woxTq3s1rIxhdNZpMnmQ90Djcd5eQhUmRG1TzIYDz2cenB-tF_lnGjkVPH_o2daBNdp5lllXKXg_OIbayJtOqhVISrwUQhB2zXN3lPo--0ixf7L1A94r2u-MBEtxdZxlAGsHfdbKO6bY2tk52IvBng8qsNgBSw=w408-h269-k-no",
+        "description": "The Rooms are Located in the heart of the Pyramids Road, very close to the Pyramids of Giza, in a commercial area, where shopping, restaurants, all daily life and business facilities are available. All the rooms include fluffy pillows, thick mattresses & cotton-rich linens. All the rooms include fluffy pillows, thick mattresses & cotton-rich linens. High-speed Internet, spacious desks and feature-rich phones allow you to work productively. Superior Pyramids View Rooms & Suites are the ideal choice for long-term stays & family vacations supported with Top VIP Treatment and luxury hotel facilities. Hair Dryer. Electric Shaver Outlet (220V). Satellite LCD TV. Wireless High Speed Internet. Individually Controlled A/C. Mini Fridge. Wake Up Call Phone Service. Digital Safe Box. Bathroom with Standard Amenities (Soap, Shower Gel, Shampoo and Towels). Newspaper (on request). Laundry service. Room Service 24/7.",
+        "location": "https://goo.gl/maps/GE5rsPkSgSHCyqS4A"
       }
   );
 }
@@ -176,16 +246,17 @@ Future getAllHotels() async {
 }
 
 Future addToEntertainment() async {
-  FirebaseFirestore.instance.collection('entertainment').doc().set(
+  int number=19;
+  FirebaseFirestore.instance.collection('entertainment').doc('$number').set(
       {
-        "number": 2,
-        "name": "Giza Zoo",
-        "rating": 3.8,
-        "latitude": 30.0279,
-        "longitude": 31.216,
-        "image": "https://lh5.googleusercontent.com/p/AF1QipN5FFaKg87Mi7IE3QIDYAGMNvkks2FFZnK8v0rh=w408-h544-k-no",
-        "description": "The Giza Zoo is a zoological garden in Giza, Egypt. It is one of the few green areas in the city, and includes Giza's largest park. The zoo covers about 80 acres, and is home to many endangered species, as well as a selection of endemic fauna. The first to be built in the Middle East, rare species have been successfully bred in the zoo—including the first California sea lion to be born in the region.",
-        "location": "https://www.google.com/maps/place/Giza+Zoo/@30.02795,31.2159686,15z/data=!4m5!3m4!1s0x0:0x8e04c3152a2d7f4e!8m2!3d30.0279662!4d31.2159293"
+        "number": "$number",
+        "name": "National Military Museum Egypt",
+        "rating": 4.3,
+        "latitude": 30.0309273,
+        "longitude": 31.262557,
+        "image": "https://lh5.googleusercontent.com/p/AF1QipM0qz6VAUolKnQKHRi74snkabt3eSsLfFTz0_He=w408-h271-k-no",
+        "description": "The Egyptian National Military Museum is the official museum of the Egyptian Army.",
+        "location": "https://www.google.com/maps/place/National+Military+Museum+Egypt/@30.030853,31.262557,15z/data=!4m2!3m1!1s0x0:0x74ce0ab766ad25ad?sa=X&ved=2ahUKEwj7mY7Gz-z3AhUNyKQKHZLqCKAQ_BJ6BAhnEAU"
       }
   );
 }

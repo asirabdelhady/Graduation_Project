@@ -7,7 +7,6 @@ import 'package:tour_guide_app/modules/home/homescreen.dart';
 import 'package:tour_guide_app/modules/welcome/welcomepage.dart';
 import 'package:tour_guide_app/search/search.dart';
 import 'package:tour_guide_app/shared/components/constants.dart';
-import 'package:tour_guide_app/urlLuncher.dart';
 import 'modules/database.dart';
 import 'modules/login/loginpage.dart';
 import 'modules/signup/signuppage.dart';
@@ -25,7 +24,7 @@ void main() async{
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(home: Test(),
+    return  MaterialApp(home: CalculateDistance(),
     debugShowCheckedModeBanner: false,
     );
   }

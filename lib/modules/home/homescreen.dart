@@ -54,53 +54,12 @@ class _HomeScreenState extends State<HomeScreen> {
   int upperBound = 6; // upperBound MUST BE total number of icons minus 1.
   ///////////////
 
-
-
-  // location
-/*
-  String location = 'Null, Press Button';
-  String Address = 'search';
-  String manteka='press the location icon';
-  String bakyelenwan='to get your location';
-
-  Future<Position> _getGeoLocationPosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-    // Test if location services are enabled.
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      await Geolocator.openLocationSettings();
-      return Future.error('Location services are disabled.');
-    }
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
-      }
-    }
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-
-    return await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+  @override
+  void initState() {
+    getAllAttractions();
+    super.initState();
   }
-*/
 
- /* Future<void> GetAddressFromLatLong(Position position) async {
-    List<Placemark> placemarks =
-    await placemarkFromCoordinates(position.latitude, position.longitude);
-    print(placemarks);
-    Placemark place = placemarks[0];
-    Address =
-    '${place.street}, ${place.subLocality}, ${place.locality},${place.country}';
-    manteka='${place.subAdministrativeArea}';
-    bakyelenwan='${place.street},${place.locality},${place.administrativeArea},${place.country}';
-
-    setState(() {});
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -134,6 +93,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         icon: const Icon(Icons.my_location_outlined),
                         onPressed: () async {
                           Position position = await getGeoLocationPosition();
+                          addDistanceToAttractions().then((value) => setState((){}));
+                          addDistanceToHotels().then((value) => setState((){}));
+                          addDistanceToEntertainment().then((value) => setState((){}));
                          //location = 'Lat: ${position.latitude} , Long: ${position.longitude}';
                           GetAddressFromLatLong(position);
                           print('location gotten');
@@ -278,7 +240,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     subTitle(subTitle: 'Recommended (nearby)'),
-                    Container(
+                    /*Container(
                       height: mediaQueryHeight*0.049,
                       width: mediaQueryWidth*0.1875,
                       child: ElevatedButton(onPressed: (){
@@ -291,38 +253,34 @@ class _HomeScreenState extends State<HomeScreen> {
                             shape: const StadiumBorder(),
                           ),
                           child: const Text('All')),
-                    ),
+                    ),*/
 
                   ],
                 ),
                 SizedBox(height: mediaQueryHeight*0.039,),
-                /*SingleChildScrollView(
+                SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Container(
                       height: mediaQueryHeight*0.322,
                       width: mediaQueryWidth,
                       child: PageView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) => defualtCard(
-                            placeName:recommendedPlaces[index].placeName,
-                            imagePath: recommendedPlaces[index].imagePath,
-                            rating: recommendedPlaces[index].rating,
-                            distance: recommendedPlaces[index].distance),
-                        itemCount: recommendedPlaces.length,
+                        itemBuilder: (context, index) => defualtCard(attractions[index]),
+                        itemCount: attractions.length,
                         controller: recommendedPageController,
                       )
                   ),
-                ),*/
-                /*Center(
+                ),
+                Center(
                   child: SmoothPageIndicator(
                     controller: recommendedPageController,
-                    count: recommendedPlaces.length,
-                    effect: WormEffect(
+                    count: attractions.length,
+                    effect: ScrollingDotsEffect(
                       dotColor: tGrey(),
                       activeDotColor: tPrimary(),
                     ),
                   ),
-                ),*/
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

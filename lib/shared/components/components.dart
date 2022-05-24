@@ -1210,7 +1210,7 @@ Widget defualtCard (Map model, {
                 bottom: 0.01311,
               ),
               child: Container(
-                height: mediaQueryHeight*0.120,
+                height: mediaQueryHeight*0.220,
                 width: mediaQueryWidth*0.781,
                 decoration: BoxDecoration(
                   boxShadow: const [

@@ -15,12 +15,7 @@ class _welcomepageState extends State<welcomepage> {
 var index;
   @override
   void initState() {
-    getAllTour();
-    getAllAttractions();
-    getAllHotels();
-    getAllHistory();
-    getAllFavorites();
-    getAllEntertainment();
+
     setState(() {
 
     });
