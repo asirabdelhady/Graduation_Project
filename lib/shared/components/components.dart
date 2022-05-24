@@ -10,6 +10,8 @@ import 'package:expandable_text/expandable_text.dart';
 import 'package:tour_guide_app/models/models.dart';
 import 'package:tour_guide_app/tAttraction_model.dart';
 
+import '../../utils.dart';
+
 
 /////////////////////////////// Shared //////////////////////////////////////////////////
 
@@ -1106,7 +1108,8 @@ Widget defualtCard (Map model, {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  model['location'];
+                                  Utils.openLink(url:'${model['location']}');
+
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 12.0),

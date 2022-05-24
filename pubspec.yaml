@@ -53,6 +53,7 @@ dependencies:
   intl: ^0.17.0
   lottie: ^1.2.1
   simple_shadow: ^0.3.0
+  url_launcher: ^6.1.2
 
 dev_dependencies:
   flutter_test:
