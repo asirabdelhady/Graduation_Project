@@ -25,7 +25,10 @@ class _MyFirebaseState extends State<MyFirebase> {
       print("completed");
       setState(() {});
     });
-    //getAllHotels().then((value) => setState((){}));
+    getAllAttractions();
+    setState(() {
+
+    });
     super.initState();
   }
 

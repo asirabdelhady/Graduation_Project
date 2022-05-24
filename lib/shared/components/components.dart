@@ -256,7 +256,7 @@ Widget profileHeader({
   required String imagePath,
   required String name,
   required int age,
-  required String nationality,
+
 }) =>
     Builder(
       builder: (context) {
@@ -284,7 +284,7 @@ Widget profileHeader({
                       text: name,
                       style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold))),
                   Text('Age: $age'),
-                  Text('Nationality: $nationality')
+
                 ]),
               ),
             )
@@ -446,7 +446,7 @@ Widget mainButton({
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(30.0))),
             child: Container(
-              width: mediaQueryWidth*0.444,
+              width: mediaQueryWidth*0.5,
               height: mediaQueryHeight*0.039,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -463,7 +463,7 @@ Widget mainButton({
                   ),
                   Image.asset(
                     imagePath,
-                    width: mediaQueryWidth*0.052,
+                    width: mediaQueryWidth*0.05,
                     height: mediaQueryHeight*0.026,
                   )
                 ],
@@ -719,21 +719,21 @@ Widget tourPlanCard(Map model) =>
                                   child: Text(
                                     '${model['name']}',
                                     maxLines: 2,
-                                    style: TextStyle(fontSize: mediaQueryWidth*0.0625, color: tPrimary(),),
+                                    style: TextStyle(fontSize: 16, color: tPrimary(),),
                                   ),
                                 ),
                                 Row(
                                   children: [
                                     SizedBox(width: mediaQueryWidth*0.286,),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.only(top: mediaQueryHeight*0.01311, end: mediaQueryWidth*0.0468),
+                                      padding: EdgeInsetsDirectional.only(top: mediaQueryHeight*0.0300, end: mediaQueryWidth*0.0468),
                                       child: Container(
                                         decoration: BoxDecoration(
                                             color: Colors.white,
                                             borderRadius: BorderRadius.circular(mediaQueryWidth*0.083)
                                         ),
                                         width: mediaQueryWidth*0.222,
-                                        height: mediaQueryHeight*0.053,
+                                        height: mediaQueryHeight*0.020,
                                         child: MaterialButton(
                                           onPressed:  (){
                                             addToHistory(
@@ -754,7 +754,7 @@ Widget tourPlanCard(Map model) =>
                                             'Done',
                                             style: TextStyle(
                                               color: Colors.white,
-                                              fontSize:mediaQueryWidth*0.044 ,
+                                              fontSize:mediaQueryWidth*0.020 ,
                                             ),
                                           ),
                                         ),
@@ -1462,7 +1462,7 @@ Widget favCard (Map model, {
                             ),
                           ),
                         ],),
-                      Container(
+                      /*Container(
                         width:mediaQueryWidth*0.75 ,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -1485,7 +1485,7 @@ Widget favCard (Map model, {
                             SizedBox(width: mediaQueryWidth*0.0375,),
 
                           ],),
-                      ),
+                      ),*/
                     ],),
                 ),
               ),

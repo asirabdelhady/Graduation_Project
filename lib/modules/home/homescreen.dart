@@ -57,6 +57,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     getAllAttractions().then((value) => setState(() {}));
+    getAllTour();
+    setState(() {
+
+    });
     
     super.initState();
   }

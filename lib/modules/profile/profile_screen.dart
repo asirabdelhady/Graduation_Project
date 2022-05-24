@@ -46,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             })),*/
                 ]),
                  SizedBox(height: mediaQueryHeight*0.0196),
-                profileHeader(imagePath: 'assets/images/Pyramids.jpg', name: 'Asir Abdelhady', age: 22, nationality: 'Egypt'),
+                profileHeader(imagePath: 'assets/images/kisspng-computer-icons-user-profile-info-5acde51ebdcc36.0919547315234429747774.png', name: 'Hobv', age: 23),
                 profileBody(),
 
               ]),

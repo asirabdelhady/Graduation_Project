@@ -263,7 +263,7 @@ class WeatherPage extends StatelessWidget {
                             Text(
                               'Wind',
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 16,
                                 color: tPrimary(),
                               ),
                             ),
@@ -271,7 +271,7 @@ class WeatherPage extends StatelessWidget {
                             Text(
                               'Humidity',
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 16,
                                 color: tPrimary(),
                               ),
                             ),
@@ -284,7 +284,7 @@ class WeatherPage extends StatelessWidget {
                             Text(
                               '|',
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 16,
                                 color: tPrimary(),
                               ),
                             ),
@@ -292,7 +292,7 @@ class WeatherPage extends StatelessWidget {
                             Text(
                               '|',
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 16,
                                 color: tPrimary(),
                               ),
                             ),
@@ -306,7 +306,7 @@ class WeatherPage extends StatelessWidget {
                             Text(
                               '${c.weather.value.speed} km/h',
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 16,
                                 color: tPrimary(),
                               ),
                             ),
@@ -314,7 +314,7 @@ class WeatherPage extends StatelessWidget {
                             Text(
                               '${c.weather.value.humidity} %',
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 16,
                                 color: tPrimary(),
                               ),
                             ),
