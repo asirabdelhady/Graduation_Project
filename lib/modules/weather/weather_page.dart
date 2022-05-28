@@ -330,18 +330,29 @@ class WeatherPage extends StatelessWidget {
 
     return Obx(
       () => Scaffold(
-        body: Container(
-          height: height,
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-          ),
-          child: ListView(
-            children: [
-              //searchCity(),
-              weatherIcon(),
-              weatherInformation(),
-            ],
-          ),
+        body: Stack(
+          children: [
+            Container(
+              height: height,
+              width: width,
+              child: Image.asset('assets/images/application background.png',
+                fit: BoxFit.cover,),
+
+            ),
+            Container(
+              height: height,
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+              ),
+              child: ListView(
+                children: [
+                  //searchCity(),
+                  weatherIcon(),
+                  weatherInformation(),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

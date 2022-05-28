@@ -1,6 +1,7 @@
-
+import 'package:flutter/services.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tour_guide_app/modules/home/homescreen.dart';
 import 'package:tour_guide_app/modules/tour/tour_screen.dart';
 import 'package:tour_guide_app/modules/weather/weather_screen.dart';
@@ -40,6 +41,12 @@ class _NavigationState extends State<Navigation> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+            statusBarColor: tPrimary()
+          //color set to purple or set your own color
+        )
+    );
     final items = <Widget>[
       const Icon(Icons.cloud_queue_rounded, size: 25,color: Colors.white,),
       const Icon(Icons.train_outlined, size: 25,color: Colors.white),
@@ -49,6 +56,14 @@ class _NavigationState extends State<Navigation> {
     ];
 
     return Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          toolbarHeight: 0,
+          backgroundColor: tPrimary(),  // status bar color
+          systemOverlayStyle: SystemUiOverlayStyle.dark, // status bar brightness
+        ),
+
+
       extendBody: true,
       body: screens[index],
       bottomNavigationBar: CurvedNavigationBar(

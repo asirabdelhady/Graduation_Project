@@ -22,37 +22,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     var mediaQueryHeight=MediaQuery.of(context).size.height;
     var mediaQueryWidth=MediaQuery.of(context).size.width;
-    return  SafeArea(
-      bottom: false,
-      child: Scaffold(
-          body: Padding(
-              padding:  EdgeInsets.symmetric(horizontal:mediaQueryWidth*0.0375 ),
-              child: Column(children:[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children:[
-                    defaultTitle(title: 'Profile', fontWeight: FontWeight.bold),
-                   /* Container(
-                      width: mediaQueryWidth*0.156,
-                      height: mediaQueryHeight*0.0655,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(35),
-                        border: Border.all(),
-                      ),
-                        child: IconButton(
-                            icon: const Icon(Icons.edit_outlined),
-                            onPressed: (){
-                              Navigator. push(context, MaterialPageRoute(builder: (context)=> ProfileEditScreen()));
-                            })),*/
-                ]),
-                 SizedBox(height: mediaQueryHeight*0.0196),
-                profileHeader(imagePath: 'assets/images/kisspng-computer-icons-user-profile-info-5acde51ebdcc36.0919547315234429747774.png', name: 'Hobv', age: 23),
-                profileBody(),
-
-              ]),
-            ),
+    return  Stack(
+      children: [
+        Container(
+          height: mediaQueryHeight,
+          width: mediaQueryWidth,
+          child: Image.asset('assets/images/application background.png',
+            fit: BoxFit.cover,),
 
         ),
+        SafeArea(
+       //   bottom: false,
+          child:Padding(
+                  padding:  EdgeInsets.symmetric(horizontal:mediaQueryWidth*0.0375 ),
+                  child: Column(children:[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children:[
+                        defaultTitle(title: 'Profile', fontWeight: FontWeight.bold),
+                    ]),
+                     SizedBox(height: mediaQueryHeight*0.0180),
+                    profileHeader(imagePath: 'assets/images/kisspng-computer-icons-user-profile-info-5acde51ebdcc36.0919547315234429747774.png', name: 'Hobv', age: 23),
+                    profileBody(),
+
+                  ]),
+                ),
+
+
+        ),
+      ],
     );
   }
 }

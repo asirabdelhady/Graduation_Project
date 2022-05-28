@@ -79,7 +79,8 @@ class _HomeScreenState extends State<HomeScreen> {
           Container(
             height: mediaQueryHeight,
             width: mediaQueryWidth,
-            color: Colors.red,
+            child: Image.asset('assets/images/application background.png',
+            fit: BoxFit.cover,),
 
           ),
           SafeArea(
@@ -185,7 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                             child: Container(
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: Colors.transparent,
                                 border: Border.all(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(mediaQueryWidth*0.125),
                               ),

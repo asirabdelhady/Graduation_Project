@@ -300,59 +300,61 @@ Widget profileBody() => Builder(
     var mediaQueryWidth = MediaQuery.of(context).size.width;
     return     DefaultTabController(
         length: 2, // length of tabs
-        //initialIndex: 0,
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Container(
-                child: TabBar(
-                  labelColor: Color(0xff292D32),
-                  unselectedLabelColor: Colors.grey,
-                  tabs: [
-                    Tab(text: 'Favorites'),
-                    Tab(text: 'History'),
-                  ],
+        child: SafeArea(
+          bottom: false,
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Container(
+                  child: TabBar(
+                    labelColor: Color(0xff292D32),
+                    unselectedLabelColor: Colors.grey,
+                    tabs: [
+                      Tab(text: 'Favorites'),
+                      Tab(text: 'History'),
+                    ],
+                  ),
                 ),
-              ),
-              Container(
-                  height: mediaQueryHeight*0.536, //height of TabBarView
-                  decoration: BoxDecoration(
-                      border:
-                          Border(top: BorderSide(color: Colors.grey, width: 0.5))),
-                  child: TabBarView(children: <Widget>[
-                    SingleChildScrollView(
-                      child: Column(children: [
-                        SizedBox(
-                          height: mediaQueryHeight*0.019,
-                        ),
-                        Container(
-                          width: mediaQueryWidth,
-                          height: mediaQueryHeight*0.536, //height of TabBarView
-                          child: ListView.builder(
-                              itemBuilder: (context, index) => favCard(favorites[index]),
-                            itemCount: favorites.length,
+                Container(
+                    height: mediaQueryHeight*0.536, //height of TabBarView
+                    decoration: BoxDecoration(
+                        border:
+                            Border(top: BorderSide(color: Colors.grey, width: 0.5))),
+                    child: TabBarView(children: <Widget>[
+                      SingleChildScrollView(
+                        child: Column(children: [
+                          SizedBox(
+                            height: mediaQueryHeight*0.019,
                           ),
-                        ),
-                      ]),
-                    ),
-                    SingleChildScrollView(
-                      child: Column(children: [
-                        SizedBox(
-                          height: mediaQueryHeight*0.019,
+                          Container(
+                            width: mediaQueryWidth,
+                            height: mediaQueryHeight*0.536, //height of TabBarView
+                            child: ListView.builder(
+                                itemBuilder: (context, index) => favCard(favorites[index]),
+                              itemCount: favorites.length,
+                            ),
+                          ),
+                        ]),
+                      ),
+                      SingleChildScrollView(
+                        child: Column(children: [
+                          SizedBox(
+                            height: mediaQueryHeight*0.019,
 
-                        ),
-                        Container(
-                          width: mediaQueryWidth,
-                          height: mediaQueryHeight*0.536, //height of TabBarView
-                          child: ListView.builder(
-                            itemBuilder: (context, index) => tourCard(favorites[index]),
-                            itemCount: history.length,
                           ),
-                        ),
-                      ]),
-                    ),
-                  ])),
-            ]));
+                          Container(
+                            width: mediaQueryWidth,
+                            height: mediaQueryHeight*0.536, //height of TabBarView
+                            child: ListView.builder(
+                              itemBuilder: (context, index) => tourCard(favorites[index]),
+                              itemCount: history.length,
+                            ),
+                          ),
+                        ]),
+                      ),
+                    ])),
+              ]),
+        ));
   }
 );
 
@@ -1108,7 +1110,7 @@ Widget defualtCard (Map model, {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  Utils.openLink(url:'https://www.google.com/maps/place/The+Great+Pyramid+of+Giza/@29.9792345,31.1342019,17z/data=!3m1!4b1!4m6!3m5!1s0x14584587ac8f291b:0x810c2f3fa2a52424!8m2!3d29.9792345!4d31.1342019!16zL20vMDM2bWs?authuser=0&hl=en');
+                                  Utils.openLink(url:'${model['location']}');
 
                                 },
                                 child: Padding(

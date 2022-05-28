@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import 'package:tour_guide_app/calculating_distance.dart';
 import 'package:tour_guide_app/details.dart';
 import 'package:tour_guide_app/modules/categories/category_screen.dart';
@@ -14,6 +16,10 @@ import 'navigation.dart';
 
 
 void main() async{
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Colors.blue, // navigation bar color
+    statusBarColor: Colors.pink, // status bar color
+  ));
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
   await Firebase.initializeApp();
@@ -24,7 +30,9 @@ void main() async{
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(home: Navigation(),
+    return  MaterialApp(
+
+      home: Navigation(),
     debugShowCheckedModeBanner: false,
     );
   }

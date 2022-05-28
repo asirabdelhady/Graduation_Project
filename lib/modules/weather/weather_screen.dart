@@ -17,7 +17,7 @@ class _WeatherScreen extends State<WeatherScreen> {
   {
     var mediaQueryHeight=MediaQuery.of(context).size.height;
     var mediaQueryWidth=MediaQuery.of(context).size.width;
-    return const WeatherPage();
+    return  WeatherPage();
   }
 
 
