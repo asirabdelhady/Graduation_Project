@@ -1286,6 +1286,254 @@ Widget defualtCard (Map model, {
   }
 );
 
+Widget defualtCard1 ({
+  required String name,
+  required String image,
+  required double rating,
+  required String distance,
+  required String location,
+  required String description,
+  required double latitude,
+  required double longitude,
+  IconData icon1 = Icons.star,
+  IconData icon3 = Icons.location_on_rounded,
+})=> Builder(
+    builder: (context) {
+      var mediaQueryHeight= MediaQuery.of(context).size.height;
+      var mediaQueryWidth = MediaQuery.of(context).size.width;
+      Widget buildImage()=> Container(
+        height: mediaQueryHeight*0.200,
+        width: mediaQueryWidth*0.85,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          image: DecorationImage(
+            image: NetworkImage(image),
+            fit: BoxFit.cover,
+          ),
+        ),
+      );
+      return GestureDetector(
+        onTap: (){
+          showDialog(context: context,
+            builder: (_)=> Dialog(
+                child: SingleChildScrollView(
+                  child:
+                  Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Stack(
+                      children: [
+                        Container(
+                          width: mediaQueryWidth,
+                          height: mediaQueryHeight*0.227,
+                          child:ClipRRect(
+                              borderRadius: BorderRadius.only(bottomRight: Radius.circular(30),bottomLeft: Radius.circular(30)
+                              ),
+                              child: Image(image: NetworkImage(image),
+                                fit: BoxFit.fill,)),
+                        ),
+                        Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375, vertical: mediaQueryHeight*0.01311),
+                          child: CircleAvatar(
+                            radius: 22.5,
+                            backgroundColor: tPrimary(),
+                            child: IconButton(onPressed: () {
+                              Navigator.pop(context);
+                            }, icon: Icon(Icons.arrow_back,
+                              color: Colors.white,
+                            ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(name,
+                            style: TextStyle(fontSize: 33),),
+                          SizedBox(height: mediaQueryHeight*0.019,),
+                          aboutDetails(details: description),
+                          SizedBox(
+                            height: mediaQueryHeight*0.019,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Utils.openLink(url:'https://www.google.com/maps/place/The+Great+Pyramid+of+Giza/@29.9792345,31.1342019,17z/data=!3m1!4b1!4m6!3m5!1s0x14584587ac8f291b:0x810c2f3fa2a52424!8m2!3d29.9792345!4d31.1342019!16zL20vMDM2bWs?authuser=0&hl=en');
+
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                              child: Container(
+                                width: mediaQueryWidth*1.25,
+                                height: mediaQueryHeight*0.163,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  image: const DecorationImage(
+                                    fit: BoxFit.fitWidth,
+                                    image: AssetImage('assets/images/Map.jpeg'),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: mediaQueryHeight*0.019,
+                          ),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                    width: mediaQueryWidth*0.156,
+                                    height: mediaQueryHeight*0.081,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        addToFavorites(
+                                            name: name,
+                                            image: image,
+                                            location: location,
+                                            distance: '$distance',
+                                            description: description,
+                                            latitude: '$latitude',
+                                            longitude: '$longitude');
+                                      },
+                                      child: Icon(Icons.favorite ,
+                                        size: mediaQueryWidth*0.0625,
+                                        color: Colors.white,
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Color(0xff292D32),
+                                        shape: CircleBorder(),
+                                      ),
+                                    )),
+                                Container(
+
+                                    width: mediaQueryWidth*0.500,
+                                    height: mediaQueryHeight*0.081,
+
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        addToTour(
+                                            name: name,
+                                            image: image,
+                                            location: location,
+                                            distance: location,
+                                            description: description,
+                                            latitude: '$latitude',
+                                            longitude: '$longitude');
+
+                                      },
+                                      child: Text.rich(TextSpan(
+                                        text: 'Add to Tour',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: mediaQueryWidth*0.0625),
+                                      )),
+                                      style: ElevatedButton.styleFrom(
+                                          shape: StadiumBorder(),
+                                          primary: Color(0xff292D32)
+                                      ),
+                                    )
+                                ),
+                              ]),
+                          SizedBox(height: mediaQueryHeight*0.019,),
+                        ],
+                      ),
+                    )
+
+                  ],),
+                )
+            ),
+          );
+        },
+        child: Container(
+          margin: EdgeInsets.all(10),
+          child: Stack(
+            children: [
+              Hero(
+                  tag: attractions,
+                  child: buildImage()
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  right: mediaQueryWidth*0.0650,
+                  left: mediaQueryWidth*0.0468,
+                  top: mediaQueryHeight*0.1475,
+                  bottom: 0.01311,
+                ),
+                child: Container(
+                  height: mediaQueryHeight*0.150,
+                  width: mediaQueryWidth*0.781,
+                  decoration: BoxDecoration(
+                    boxShadow: const [
+                      BoxShadow(
+                        offset: Offset(5, 5),
+                        blurRadius: 5,
+                        color: Colors.grey,
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(30),
+                    color: Colors.white,
+                  ),
+                  child:Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: mediaQueryHeight*0.01311,
+                              left: mediaQueryWidth*0.0625,
+                              bottom: mediaQueryHeight*0.01311,
+
+                            ),
+                            child: Container(
+                              width: mediaQueryWidth*0.6875,
+                              child: Text(name,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    fontSize: mediaQueryWidth*0.05,
+                                    fontWeight: FontWeight.bold
+
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],),
+                      Container(
+                        width:mediaQueryWidth*0.75 ,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children:[
+                            SizedBox(width: mediaQueryWidth*0.0400,),
+                            Row(
+                              children: [
+                                Icon(icon1, color: Colors.yellow,),
+                                Text('$rating'),
+
+                              ],
+                            ),
+                            SizedBox(width: mediaQueryWidth*0.0375,),
+                            Row(
+                              children: [
+                                Icon(icon3, color: Colors.lightBlue,),
+                                Text('$distance'),
+
+                              ],),
+                            SizedBox(width: mediaQueryWidth*0.0375,),
+
+                          ],),
+                      ),
+                    ],),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+);
+
 Widget favCard (Map model, {
 
   IconData icon1 = Icons.star,

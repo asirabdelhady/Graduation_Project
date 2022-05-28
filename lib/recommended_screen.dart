@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/models/models.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
+import 'package:tour_guide_app/shared/components/constants.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 class UtilsRecommended{
   static List <RecommendedPlaces> getRecommendedPlaces(){
@@ -59,6 +62,7 @@ class RecommendedScreen extends StatelessWidget{
     PageController recommendedPageController =PageController(initialPage: 0);
 
 
+    final Stream<QuerySnapshot> attractions = FirebaseFirestore.instance.collection('tAttraction').snapshots();
     return Scaffold(
       body: SafeArea(
         bottom: false,
@@ -68,57 +72,36 @@ class RecommendedScreen extends StatelessWidget{
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment:MainAxisAlignment.start ,
-                  children: [
-                    backButton(),
-                    defaultTitle(title: 'Nearby Places'),
-                  ],
-                ),
-                Container(
-                  height: mediaQueryHeight*0.06,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(mediaQueryWidth*0.0625),
-                    border: Border.all(
-                      color: tGrey(),
-                    ),
-                  ),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Search',
-                      prefixIcon: Icon(Icons.search_rounded),
-                    ),
-                  ),
-                ),
-                SizedBox(height: mediaQueryHeight*0.039,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    subTitle(subTitle: 'Recommended (nearby)'),
-                    Icon(Icons.arrow_drop_down)
-                  ],
-                ),
-                /*SingleChildScrollView(
-                  child: Container(
-                      height: mediaQueryHeight,
+                StreamBuilder(
+                  stream: attractions ,
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot){
+                    if (snapshot.hasError){
+                      return Text('somthing went wrong');
+                    }
+                    if(snapshot.connectionState==ConnectionState.waiting){
+                      return Text('lodaing');
+                    }
+                    final data = snapshot.requireData;
+                    return Container(
                       width: mediaQueryWidth,
-                      child: ListView.separated(
-                        separatorBuilder:(context, index) => SizedBox(height: 0.0196,),
-                        itemBuilder: (context, index) => defualtCard(
-                            placeName:recommendedPlaces[index].placeName,
-                            imagePath: recommendedPlaces[index].imagePath,
-                            rating: recommendedPlaces[index].rating,
-                            distance: recommendedPlaces[index].distance),
-                        itemCount: recommendedPlaces.length,
-                        controller: recommendedPageController,
-                      )
-                  ),
-                ),*/
-                SizedBox(height: mediaQueryHeight*0.049,)
-
-
+                      height: mediaQueryHeight,
+                      child: ListView.builder(
+                        itemCount: data.size,
+                          itemBuilder:(context, index) {
+                            return defualtCard1(
+                                name: data.docs[index]["name"],
+                                image: data.docs[index]["image"],
+                                rating: data.docs[index]["rating"],
+                                distance: data.docs[index]["distance"],
+                                location: data.docs[index]["location"],
+                                description: data.docs[index]["description"],
+                                latitude: data.docs[index]["latitude"],
+                                longitude: data.docs[index]["longitude"]) ;
+                          }),
+                    );
+                  },
+                )
               ],
             ),
           ),

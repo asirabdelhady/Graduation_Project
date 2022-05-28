@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:tour_guide_app/calculating_distance.dart';
 import 'package:tour_guide_app/details.dart';
 import 'package:tour_guide_app/modules/categories/category_screen.dart';
@@ -30,9 +29,7 @@ void main() async{
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-
-      home: Navigation(),
+    return  MaterialApp(home: Navigation(),
     debugShowCheckedModeBanner: false,
     );
   }
