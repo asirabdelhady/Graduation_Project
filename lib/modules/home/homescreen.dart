@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:im_stepper/stepper.dart';
@@ -54,9 +56,14 @@ class _HomeScreenState extends State<HomeScreen> {
   int upperBound = 6; // upperBound MUST BE total number of icons minus 1.
   ///////////////
 
+  final Stream<QuerySnapshot> attractions = FirebaseFirestore.instance.collection('tAttraction').snapshots();
+
   @override
   void initState() {
-    getAllAttractions().then((value) => setState(() {}));
+    Firebase.initializeApp().whenComplete(() {
+      print("completed");
+      setState(() {});
+    });
     getAllTour();
     setState(() {
 
@@ -79,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Container(
             height: mediaQueryHeight,
             width: mediaQueryWidth,
-            color: Colors.red,
+            color: Colors.white,
 
           ),
           SafeArea(
@@ -253,45 +260,56 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         subTitle(subTitle: 'Recommended (nearby)'),
-                        /*Container(
-                          height: mediaQueryHeight*0.049,
-                          width: mediaQueryWidth*0.1875,
-                          child: ElevatedButton(onPressed: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context){
-                              return const RecommendedScreen();
-                            }));
-                          },
-                              style: ElevatedButton.styleFrom(
-                                primary: tPrimary(),
-                                shape: const StadiumBorder(),
-                              ),
-                              child: const Text('All')),
-                        ),*/
 
                       ],
                     ),
                     SizedBox(height: mediaQueryHeight*0.039,),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Container(
-                          height: mediaQueryHeight*0.322,
-                          width: mediaQueryWidth,
-                          child: PageView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) => defualtCard(attractions[index]),
-                            itemCount: attractions.length,
-                            controller: recommendedPageController,
-                          )
+                    Container(
+                      height: mediaQueryHeight*0.322,
+                      width: mediaQueryWidth,
+                      child: SingleChildScrollView(
+                        child: StreamBuilder(
+                          stream: attractions ,
+                          builder: (BuildContext context,
+                              AsyncSnapshot<QuerySnapshot> snapshot){
+                            if (snapshot.hasError){
+                              return Text('somthing went wrong');
+                            }
+                            if(snapshot.connectionState==ConnectionState.waiting){
+                              return Center(child: CircularProgressIndicator());
+                            }
+                            final data = snapshot.requireData;
+                            return Container(
+                              width: mediaQueryWidth,
+                              height: mediaQueryHeight*0.320,
+                              child: ListView.builder(
+                                controller: recommendedPageController,
+                                scrollDirection: Axis.horizontal,
+                                  itemCount: data.size,
+                                  itemBuilder:(context, index) {
+                                    return defualtCard1(
+                                        number: data.docs[index]["number"],
+                                        name: data.docs[index]["name"],
+                                        image: data.docs[index]["image"],
+                                        rating: data.docs[index]["rating"],
+                                        distance: data.docs[index]["distance"],
+                                        location: data.docs[index]["location"],
+                                        description: data.docs[index]["description"],
+                                        latitude: data.docs[index]["latitude"],
+                                        longitude: data.docs[index]["longitude"]) ;
+                                  }),
+                            );
+                          },
+                        ),
                       ),
                     ),
                     Center(
                       child: SmoothPageIndicator(
                         controller: recommendedPageController,
-                        count: attractions.length,
                         effect: ScrollingDotsEffect(
                           dotColor: tGrey(),
                           activeDotColor: tPrimary(),
-                        ),
+                        ), count: 30,
                       ),
                     ),
                     Row(

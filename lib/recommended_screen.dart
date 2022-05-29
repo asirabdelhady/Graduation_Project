@@ -80,7 +80,7 @@ class RecommendedScreen extends StatelessWidget{
                       return Text('somthing went wrong');
                     }
                     if(snapshot.connectionState==ConnectionState.waiting){
-                      return Text('lodaing');
+                      return Center(child: CircularProgressIndicator());
                     }
                     final data = snapshot.requireData;
                     return Container(
@@ -90,6 +90,7 @@ class RecommendedScreen extends StatelessWidget{
                         itemCount: data.size,
                           itemBuilder:(context, index) {
                             return defualtCard1(
+                              number: data.docs[index]["number"],
                                 name: data.docs[index]["name"],
                                 image: data.docs[index]["image"],
                                 rating: data.docs[index]["rating"],

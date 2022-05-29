@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -296,6 +297,8 @@ Widget profileHeader({
 // profile tabs: favs, History, Review
 Widget profileBody() => Builder(
   builder: (context) {
+    final Stream<QuerySnapshot> favorites = FirebaseFirestore.instance.collection('favorites').snapshots();
+    final Stream<QuerySnapshot> history = FirebaseFirestore.instance.collection('history').snapshots();
     var mediaQueryHeight= MediaQuery.of(context).size.height;
     var mediaQueryWidth = MediaQuery.of(context).size.width;
     return     DefaultTabController(
@@ -329,9 +332,32 @@ Widget profileBody() => Builder(
                           Container(
                             width: mediaQueryWidth,
                             height: mediaQueryHeight*0.536, //height of TabBarView
-                            child: ListView.builder(
-                                itemBuilder: (context, index) => favCard(favorites[index]),
-                              itemCount: favorites.length,
+                            child: StreamBuilder(
+                              stream: favorites ,
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<QuerySnapshot> snapshot){
+                                if (snapshot.hasError){
+                                  return Text('somthing went wrong');
+                                }
+                                if(snapshot.connectionState==ConnectionState.waiting){
+                                  return Center(child: CircularProgressIndicator());
+                                }
+                                final data = snapshot.requireData;
+                                return Container(
+                                  width: mediaQueryWidth,
+                                  height: mediaQueryHeight*0.320,
+                                  child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: data.size,
+                                      itemBuilder:(context, index) {
+                                        return tourPlanCard2(
+                                          name: data.docs[index]["name"],
+                                          image: data.docs[index]["image"],
+                                          description: data.docs[index]["description"],
+                                        ) ;
+                                      }),
+                                );
+                              },
                             ),
                           ),
                         ]),
@@ -345,9 +371,32 @@ Widget profileBody() => Builder(
                           Container(
                             width: mediaQueryWidth,
                             height: mediaQueryHeight*0.536, //height of TabBarView
-                            child: ListView.builder(
-                              itemBuilder: (context, index) => tourCard(favorites[index]),
-                              itemCount: history.length,
+                            child:StreamBuilder(
+                              stream: history ,
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<QuerySnapshot> snapshot){
+                                if (snapshot.hasError){
+                                  return Text('somthing went wrong');
+                                }
+                                if(snapshot.connectionState==ConnectionState.waiting){
+                                  return Center(child: CircularProgressIndicator());
+                                }
+                                final data = snapshot.requireData;
+                                return Container(
+                                  width: mediaQueryWidth,
+                                  height: mediaQueryHeight*0.320,
+                                  child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: data.size,
+                                      itemBuilder:(context, index) {
+                                        return tourPlanCard2(
+                                          name: data.docs[index]["name"],
+                                          image: data.docs[index]["image"],
+                                          description: data.docs[index]["description"],
+                                        ) ;
+                                      }),
+                                );
+                              },
                             ),
                           ),
                         ]),
@@ -638,14 +687,14 @@ Widget tourPlanCard(Map model) =>
 
                                         child: ElevatedButton(
                                           onPressed: () {
-                                            addToFavorites(
+                                            /*addToFavorites(
                                                 name: '${model['name']}',
                                                 image: '${model['image']}',
                                                 location: '${model['googlemaplocation']}',
                                                 distance: '${model['description']}',
                                                 description: '${model['description']}',
                                                 latitude: '${model['latitude']}',
-                                                longitude: '${model['longitude']}');
+                                                longitude: '${model['longitude']}')*/;
 
                                           },
                                           child: Text.rich(TextSpan(
@@ -764,6 +813,436 @@ Widget tourPlanCard(Map model) =>
                                     ),
                                   ],
                                 ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        }
+    );
+
+Widget tourPlanCard1({
+  required String name,
+  required String image,
+   double? rating,
+   String? distance,
+   String? location,
+   String? description,
+   double? latitude,
+   double? longitude,
+
+}) =>
+    Builder(
+        builder: (context) {
+          var mediaQueryHeight= MediaQuery.of(context).size.height;
+          var mediaQueryWidth = MediaQuery.of(context).size.width;
+          return GestureDetector(
+            onTap:(){
+              showDialog(context: context,
+                builder: (_)=> Dialog(
+                    child: SingleChildScrollView(
+                      child:
+                      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                        Stack(
+                          children: [
+                            Container(
+                              width: mediaQueryWidth,
+                              height: mediaQueryHeight*0.227,
+                              child:ClipRRect(
+                                  borderRadius: BorderRadius.only(bottomRight: Radius.circular(30),bottomLeft: Radius.circular(30)
+                                  ),
+                                  child: Image(image: NetworkImage('$image'),
+                                    fit: BoxFit.fill,)),
+                            ),
+                            Padding(
+                              padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375, vertical: mediaQueryHeight*0.01311),
+                              child: CircleAvatar(
+                                radius: 22.5,
+                                backgroundColor: tPrimary(),
+                                child: IconButton(onPressed: () {
+                                  Navigator.pop(context);
+                                }, icon: Icon(Icons.arrow_back,
+                                  color: Colors.white,
+                                ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('$name',
+                                style: TextStyle(fontSize: 33),),
+                              SizedBox(height: mediaQueryHeight*0.019,),
+                              aboutDetails(details: '$description'),
+                              SizedBox(
+                                height: mediaQueryHeight*0.019,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  location;
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                                  child: Container(
+                                    width: mediaQueryWidth*1.25,
+                                    height: mediaQueryHeight*0.163,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      image: const DecorationImage(
+                                        fit: BoxFit.fitWidth,
+                                        image: AssetImage('assets/images/Map.jpeg'),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: mediaQueryHeight*0.019,
+                              ),
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Container(
+
+                                        width: mediaQueryWidth*0.550,
+                                        height: mediaQueryHeight*0.081,
+
+                                        child: ElevatedButton(
+                                          onPressed: () {
+                                            /*addToFavorites(
+                                                name: '$name',
+                                                image: '$image',
+                                                location: '$location',
+                                                distance: '$distance',
+                                                description: '$description',
+                                                latitude: '$latitude',
+                                                longitude: '$longitude'
+                                            )*/;
+
+                                          },
+                                          child: Text.rich(TextSpan(
+                                            text: 'Add to Favorites',
+                                            style: TextStyle(
+                                                color: Colors.white, fontSize: mediaQueryWidth*0.0525),
+                                          )),
+                                          style: ElevatedButton.styleFrom(
+                                              shape: StadiumBorder(),
+                                              primary: Color(0xff292D32)
+                                          ),
+                                        )
+                                    ),
+                                  ]),
+                              SizedBox(height: mediaQueryHeight*0.019,),
+                            ],
+                          ),
+                        )
+
+                      ],),
+                    )
+                ),
+              );
+            } ,
+            child: Stack(
+              children: [
+                Container(
+
+                  width: mediaQueryWidth*0.916,
+                  height: mediaQueryHeight*0.159,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(mediaQueryWidth*0.083),
+                    color: tSecondary(),
+                    boxShadow: [
+                      BoxShadow(
+                        color: tGrey(),
+                        offset: Offset(5, 5),
+                        blurRadius: 3,
+
+                      )
+                    ],
+                  ),
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding:  EdgeInsets.only(bottom: mediaQueryHeight*0.037,left: mediaQueryWidth*0.027),
+                      child: Container(
+                        width: mediaQueryWidth*0.277,
+                        height: mediaQueryHeight*0.132,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(mediaQueryWidth*0.083),
+                          color: tGrey(),
+                          image: DecorationImage(
+                            image: NetworkImage('$image'),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          height: mediaQueryHeight*0.186,
+                          width: mediaQueryWidth*0.555,
+                          child: Padding(
+                            padding:  EdgeInsets.symmetric(vertical: mediaQueryHeight*0.01311),
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: mediaQueryWidth*0.486,
+                                  height: mediaQueryHeight*0.066,
+                                  child: Text(
+                                    '$name',
+                                    maxLines: 2,
+                                    style: TextStyle(fontSize: 16, color: tPrimary(),),
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    SizedBox(width: mediaQueryWidth*0.286,),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.only(top: mediaQueryHeight*0.0100, end: mediaQueryWidth*0.0468),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.circular(mediaQueryWidth*0.083)
+                                        ),
+                                        width: mediaQueryWidth*0.222,
+                                        height: mediaQueryHeight*0.060,
+                                        child: MaterialButton(
+                                          onPressed:  (){
+                                            addToHistory(
+                                                name: '$name',
+                                                image: '$image',
+                                                location: '$location',
+                                                distance: '$distance',
+                                                description: '$description',
+                                                latitude: '$latitude',
+                                                longitude: '$longitude'
+                                            );
+                                            var doc =FirebaseFirestore.instance.collection('tour').where('name'==name).get();
+
+                                          },
+                                          elevation: 10,
+                                          color: tPrimary(),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                              BorderRadius.all(Radius.circular(mediaQueryWidth*0.083))),
+                                          child: Text(
+                                            'Done',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize:mediaQueryWidth*0.040 ,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        }
+    );
+
+Widget tourPlanCard2({
+  required String name,
+  required String image,
+  double? rating,
+  String? distance,
+  String? location,
+  String? description,
+  double? latitude,
+  double? longitude,
+
+}) =>
+    Builder(
+        builder: (context) {
+          var mediaQueryHeight= MediaQuery.of(context).size.height;
+          var mediaQueryWidth = MediaQuery.of(context).size.width;
+          return GestureDetector(
+            onTap:(){
+              showDialog(context: context,
+                builder: (_)=> Dialog(
+                    child: SingleChildScrollView(
+                      child:
+                      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                        Stack(
+                          children: [
+                            Container(
+                              width: mediaQueryWidth,
+                              height: mediaQueryHeight*0.227,
+                              child:ClipRRect(
+                                  borderRadius: BorderRadius.only(bottomRight: Radius.circular(30),bottomLeft: Radius.circular(30)
+                                  ),
+                                  child: Image(image: NetworkImage('$image'),
+                                    fit: BoxFit.fill,)),
+                            ),
+                            Padding(
+                              padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375, vertical: mediaQueryHeight*0.01311),
+                              child: CircleAvatar(
+                                radius: 22.5,
+                                backgroundColor: tPrimary(),
+                                child: IconButton(onPressed: () {
+                                  Navigator.pop(context);
+                                }, icon: Icon(Icons.arrow_back,
+                                  color: Colors.white,
+                                ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('$name',
+                                style: TextStyle(fontSize: 33),),
+                              SizedBox(height: mediaQueryHeight*0.019,),
+                              aboutDetails(details: '$description'),
+                              SizedBox(
+                                height: mediaQueryHeight*0.019,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  location;
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                                  child: Container(
+                                    width: mediaQueryWidth*1.25,
+                                    height: mediaQueryHeight*0.163,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      image: const DecorationImage(
+                                        fit: BoxFit.fitWidth,
+                                        image: AssetImage('assets/images/Map.jpeg'),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: mediaQueryHeight*0.019,
+                              ),
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Container(
+
+                                        width: mediaQueryWidth*0.550,
+                                        height: mediaQueryHeight*0.081,
+
+                                        child: ElevatedButton(
+                                          onPressed: () {
+                                            /*addToFavorites(
+                                                name: '$name',
+                                                image: '$image',
+                                                location: '$location',
+                                                distance: '$distance',
+                                                description: '$description',
+                                                latitude: '$latitude',
+                                                longitude: '$longitude'
+                                            )*/;
+
+                                          },
+                                          child: Text.rich(TextSpan(
+                                            text: 'Add to Favorites',
+                                            style: TextStyle(
+                                                color: Colors.white, fontSize: mediaQueryWidth*0.0525),
+                                          )),
+                                          style: ElevatedButton.styleFrom(
+                                              shape: StadiumBorder(),
+                                              primary: Color(0xff292D32)
+                                          ),
+                                        )
+                                    ),
+                                  ]),
+                              SizedBox(height: mediaQueryHeight*0.019,),
+                            ],
+                          ),
+                        )
+
+                      ],),
+                    )
+                ),
+              );
+            } ,
+            child: Stack(
+              children: [
+                Container(
+
+                  width: mediaQueryWidth*0.916,
+                  height: mediaQueryHeight*0.159,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(mediaQueryWidth*0.083),
+                    color: tSecondary(),
+                    boxShadow: [
+                      BoxShadow(
+                        color: tGrey(),
+                        offset: Offset(5, 5),
+                        blurRadius: 3,
+
+                      )
+                    ],
+                  ),
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding:  EdgeInsets.only(bottom: mediaQueryHeight*0.037,left: mediaQueryWidth*0.027),
+                      child: Container(
+                        width: mediaQueryWidth*0.277,
+                        height: mediaQueryHeight*0.132,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(mediaQueryWidth*0.083),
+                          color: tGrey(),
+                          image: DecorationImage(
+                            image: NetworkImage('$image'),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          height: mediaQueryHeight*0.186,
+                          width: mediaQueryWidth*0.555,
+                          child: Padding(
+                            padding:  EdgeInsets.symmetric(vertical: mediaQueryHeight*0.01311),
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: mediaQueryWidth*0.486,
+                                  height: mediaQueryHeight*0.066,
+                                  child: Text(
+                                    '$name',
+                                    maxLines: 2,
+                                    style: TextStyle(fontSize: 16, color: tPrimary(),),
+                                  ),
+                                ),
+
                               ],
                             ),
                           ),
@@ -1139,14 +1618,14 @@ Widget defualtCard (Map model, {
                                         height: mediaQueryHeight*0.081,
                                         child: ElevatedButton(
                                           onPressed: () {
-                                            addToFavorites(
+                                            /*addToFavorites(
                                                 name: '${model['name']}',
                                                 image: '${model['image']}',
                                                 location: '${model['googlemaplocation']}',
                                                 distance: '${model['description']}',
                                                 description: '${model['description']}',
                                                 latitude: '${model['latitude']}',
-                                                longitude: '${model['longitude']}');
+                                                longitude: '${model['longitude']}');*/
                                           },
                                           child: Icon(Icons.favorite ,
                                             size: mediaQueryWidth*0.0625,
@@ -1287,6 +1766,7 @@ Widget defualtCard (Map model, {
 );
 
 Widget defualtCard1 ({
+  required String number,
   required String name,
   required String image,
   required double rating,
@@ -1389,6 +1869,7 @@ Widget defualtCard1 ({
                                     child: ElevatedButton(
                                       onPressed: () {
                                         addToFavorites(
+                                          number: number,
                                             name: name,
                                             image: image,
                                             location: location,
@@ -1745,6 +2226,8 @@ Widget favCard (Map model, {
       );
     }
 );
+
+
 
 Widget tourCard (Map model, {
 

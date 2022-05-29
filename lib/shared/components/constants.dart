@@ -117,11 +117,14 @@ Future addToFavorites({
   required String description,
   required String latitude,
   required String longitude,
+  required String number,
+
 
 
 })async {
-  FirebaseFirestore.instance.collection('favorites').doc().set(
+  FirebaseFirestore.instance.collection('favorites').doc(number).set(
     {
+      "number":number,
       "name": name,
       "latitude": latitude,
       "longitude": longitude,

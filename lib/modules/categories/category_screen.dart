@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -25,12 +26,15 @@ class _CategoryScreenState extends State<CategoryScreen> {
      print("completed");
      setState(() {});
    });
-   getAllAttractions();
-   getAllHotels();
-   getAllEntertainment();
+   //getAllAttractions();
+   //getAllHotels();
+   //getAllEntertainment();
    super.initState();
 
   }
+  final Stream<QuerySnapshot> attractions = FirebaseFirestore.instance.collection('tAttraction').snapshots();
+  final Stream<QuerySnapshot> entertainment = FirebaseFirestore.instance.collection('entertainment').snapshots();
+  final Stream<QuerySnapshot> hotels = FirebaseFirestore.instance.collection('hotels').snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -92,18 +96,45 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       child: Container(
                           height: mediaQueryHeight*0.322,
                           width: mediaQueryWidth,
-                          child: PageView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) => defualtCard(attractions[index]),
-                            itemCount: attractions.length,
-                            controller: attractionsPageController,
+                          child: StreamBuilder(
+                            stream: attractions ,
+                            builder: (BuildContext context,
+                                AsyncSnapshot<QuerySnapshot> snapshot){
+                              if (snapshot.hasError){
+                                return Text('somthing went wrong');
+                              }
+                              if(snapshot.connectionState==ConnectionState.waiting){
+                                return Center(child: CircularProgressIndicator());
+                              }
+                              final data = snapshot.requireData;
+                              return Container(
+                                width: mediaQueryWidth,
+                                height: mediaQueryHeight*0.320,
+                                child: ListView.builder(
+                                    controller: attractionsPageController,
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: data.size,
+                                    itemBuilder:(context, index) {
+                                      return defualtCard1(
+                                          number: data.docs[index]["number"],
+                                          name: data.docs[index]["name"],
+                                          image: data.docs[index]["image"],
+                                          rating: data.docs[index]["rating"],
+                                          distance: data.docs[index]["distance"],
+                                          location: data.docs[index]["location"],
+                                          description: data.docs[index]["description"],
+                                          latitude: data.docs[index]["latitude"],
+                                          longitude: data.docs[index]["longitude"]) ;
+                                    }),
+                              );
+                            },
                           )
                       ),
                     ),
                     Center(
                       child: SmoothPageIndicator(
                         controller: attractionsPageController,
-                        count: attractions.length,
+                        count: 30,
                         effect: ScrollingDotsEffect(
                           dotColor: tGrey(),
                           activeDotColor: tPrimary(),
@@ -121,18 +152,45 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       child: Container(
                           height: mediaQueryHeight*0.322,
                           width: mediaQueryWidth,
-                          child: PageView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) => defualtCard(hotels[index]),
-                            itemCount: hotels.length,
-                            controller: hotelsPageController,
+                          child: StreamBuilder(
+                            stream: hotels ,
+                            builder: (BuildContext context,
+                                AsyncSnapshot<QuerySnapshot> snapshot){
+                              if (snapshot.hasError){
+                                return Text('somthing went wrong');
+                              }
+                              if(snapshot.connectionState==ConnectionState.waiting){
+                                return Center(child: CircularProgressIndicator());
+                              }
+                              final data = snapshot.requireData;
+                              return Container(
+                                width: mediaQueryWidth,
+                                height: mediaQueryHeight*0.320,
+                                child: ListView.builder(
+                                    controller: hotelsPageController,
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: data.size,
+                                    itemBuilder:(context, index) {
+                                      return defualtCard1(
+                                          number: data.docs[index]["number"],
+                                          name: data.docs[index]["name"],
+                                          image: data.docs[index]["image"],
+                                          rating: data.docs[index]["rating"],
+                                          distance: data.docs[index]["distance"],
+                                          location: data.docs[index]["location"],
+                                          description: data.docs[index]["description"],
+                                          latitude: data.docs[index]["latitude"],
+                                          longitude: data.docs[index]["longitude"]) ;
+                                    }),
+                              );
+                            },
                           )
                       ),
                     ),
                     Center(
                       child: SmoothPageIndicator(
                         controller: hotelsPageController,
-                        count: hotels.length,
+                        count: 21,
                         effect: ScrollingDotsEffect(
                           dotColor: tGrey(),
                           activeDotColor: tPrimary(),
@@ -150,18 +208,45 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       child: Container(
                           height: mediaQueryHeight*0.322,
                           width: mediaQueryWidth,
-                          child: PageView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) => defualtCard(entertainment[index]),
-                            itemCount: entertainment.length,
-                            controller: entertainmentPageController,
+                          child: StreamBuilder(
+                            stream: entertainment ,
+                            builder: (BuildContext context,
+                                AsyncSnapshot<QuerySnapshot> snapshot){
+                              if (snapshot.hasError){
+                                return Text('somthing went wrong');
+                              }
+                              if(snapshot.connectionState==ConnectionState.waiting){
+                                return Center(child: CircularProgressIndicator());
+                              }
+                              final data = snapshot.requireData;
+                              return Container(
+                                width: mediaQueryWidth,
+                                height: mediaQueryHeight*0.320,
+                                child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: data.size,
+                                    controller: entertainmentPageController,
+                                    itemBuilder:(context, index) {
+                                      return defualtCard1(
+                                          number: data.docs[index]["number"],
+                                          name: data.docs[index]["name"],
+                                          image: data.docs[index]["image"],
+                                          rating: data.docs[index]["rating"],
+                                          distance: data.docs[index]["distance"],
+                                          location: data.docs[index]["location"],
+                                          description: data.docs[index]["description"],
+                                          latitude: data.docs[index]["latitude"],
+                                          longitude: data.docs[index]["longitude"]) ;
+                                    }),
+                              );
+                            },
                           )
                       ),
                     ),
                     Center(
                       child: SmoothPageIndicator(
                         controller: entertainmentPageController,
-                        count: entertainment.length,
+                        count: 20,
                         effect: ScrollingDotsEffect(
                           dotColor: tGrey(),
                           activeDotColor: tPrimary(),
