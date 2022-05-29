@@ -174,6 +174,7 @@ Future addToHistory({
 
 Future addToTour({
   required String name,
+  required String number,
   required String image,
   required String location,
   required String distance,
@@ -183,9 +184,10 @@ Future addToTour({
 
 
 })async {
-  FirebaseFirestore.instance.collection('tour').doc().set(
+  FirebaseFirestore.instance.collection('tour').doc(number).set(
       {
         "name": name,
+        "number": number,
         "latitude": latitude,
         "longitude": longitude,
         "image": image,

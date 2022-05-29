@@ -65,10 +65,6 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {});
     });
     getAllTour();
-    setState(() {
-
-    });
-    
     super.initState();
   }
 
@@ -186,9 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context){
-                                return const TourScreen();
-                              }));
+
                             },
                             child: Container(
                               decoration: BoxDecoration(

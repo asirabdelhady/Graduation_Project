@@ -1643,14 +1643,14 @@ Widget defualtCard (Map model, {
 
                                         child: ElevatedButton(
                                           onPressed: () {
-                                            addToTour(
+                                            /*addToTour(
                                                 name: '${model['name']}',
                                                 image: '${model['image']}',
                                                 location: '${model['googlemaplocation']}',
                                                 distance: '${model['description']}',
                                                 description: '${model['description']}',
                                                 latitude: '${model['latitude']}',
-                                                longitude: '${model['longitude']}');
+                                                longitude: '${model['longitude']}');*/
 
                                           },
                                           child: Text.rich(TextSpan(
@@ -1896,6 +1896,7 @@ Widget defualtCard1 ({
                                       onPressed: () {
                                         addToTour(
                                             name: name,
+                                            number: number,
                                             image: image,
                                             location: location,
                                             distance: location,
@@ -2106,14 +2107,14 @@ Widget favCard (Map model, {
                               children: [
                                 ElevatedButton(
                                   onPressed: () {
-                                    addToTour(
+                                   /* addToTour(
                                         name: '${model['name']}',
                                         image: '${model['image']}',
                                         location: '${model['googlemaplocation']}',
                                         distance: '${model['description']}',
                                         description: '${model['description']}',
                                         latitude: '${model['latitude']}',
-                                        longitude: '${model['longitude']}');
+                                        longitude: '${model['longitude']}');*/
 
                                   },
                                   child: Text.rich(TextSpan(
@@ -2320,14 +2321,15 @@ Widget tourCard (Map model, {
                               children: [
                                 ElevatedButton(
                                   onPressed: () {
-                                    addToTour(
+                                    /*addToTour(
+
                                         name: '${model['name']}',
                                         image: '${model['image']}',
                                         location: '${model['googlemaplocation']}',
                                         distance: '${model['description']}',
                                         description: '${model['description']}',
                                         latitude: '${model['latitude']}',
-                                        longitude: '${model['longitude']}');
+                                        longitude: '${model['longitude']}');*/
 
                                   },
                                   child: Text.rich(TextSpan(
