@@ -16,8 +16,8 @@ import 'navigation.dart';
 
 void main() async{
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    systemNavigationBarColor: Colors.blue, // navigation bar color
-    statusBarColor: Colors.pink, // status bar color
+   systemNavigationBarColor: Colors.black54, // navigation bar color
+    statusBarColor: Colors.grey, // status bar color
   ));
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
@@ -29,7 +29,7 @@ void main() async{
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(home: Navigation(),
+    return  MaterialApp(home: welcomepage(),
     debugShowCheckedModeBanner: false,
     );
   }
