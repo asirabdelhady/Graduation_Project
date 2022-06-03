@@ -3,9 +3,6 @@ import 'package:tour_guide_app/modules/weather/weather_model.dart';
 import 'package:tour_guide_app/modules/weather/weather_service.dart';
 import '../home/location_controller.dart';
 
-
-//import '../home/location_controller.dart';
-
 class WeatherController extends GetxController {
   var weather = WeatherModel(
     id: 0,

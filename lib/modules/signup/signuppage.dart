@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
-import '../../navigation.dart';
+import '../navigation/navigation.dart';
 
 class signUpPage extends StatefulWidget {
   @override
@@ -12,6 +11,7 @@ class signUpPage extends StatefulWidget {
 }
 
 class _signUpPageState extends State<signUpPage> {
+
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var nameController = TextEditingController();
@@ -174,43 +174,6 @@ class _signUpPageState extends State<signUpPage> {
                         SizedBox(
                           height: 15,
                         ),
-                        /*mainFormField(
-                          enable: password!=null&&password.isNotEmpty,
-
-                          hintText: 'Confirm Password',
-                            imagepath: 'assets/images/lock.png',
-                            TextInputType: TextInputType.visiblePassword,
-                            passorno: passorno,
-                            onChanged: (value) => confirmPassword = value,
-                            suffixicon: Icon(
-                              (passorno == false)
-                                  ? Icons.remove_red_eye
-                                  : Icons.visibility_off,
-                            ),
-                            controller: confPasswordController,
-
-                            validatorFunction: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'This field is required';
-                              }
-
-                              if (confirmPassword != password) {
-                                return 'Password does not match ';
-                              }
-
-                              return null;
-                            },
-
-                            suffixPressed: () {
-                              setState(() {
-                                passorno = !passorno;
-                              });
-                            }, onFieldSubmitted: null,
-
-                            ),*/
-                       /* SizedBox(
-                          height: mediaQueryHeight*0.055,
-                        ),*/
                         Stack(
                           children: [
                             Center(
@@ -252,28 +215,8 @@ class _signUpPageState extends State<signUpPage> {
                             ),
                           ],
                         ),
-                        /*mainButton(
-                            minWidth: mediaQueryWidth*0.2968,
-                            height: mediaQueryHeight*0.066,
-                            text: 'Sign up',
-                            fontSize: mediaQueryWidth*0.040,
-                            onPressed: () {
-                              if (formKey.currentState!.validate()) {
-                                print(nameController.text);
-                                print(emailController.text);
-                                print(passwordController.text);
-                                print(confPasswordController.text);
-                                Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) {
-                                    return Navigation();
-                                  },
-                                ));
-                              }
-                            },
-                            imagePath: 'assets/images/arrow.png')*/
                         MaterialButton(
                           onPressed: (){
-
                             FirebaseAuth.instance.createUserWithEmailAndPassword(
                                 email: emailController.text,
                                 password: passwordController.text).then((value) {
@@ -286,7 +229,8 @@ class _signUpPageState extends State<signUpPage> {
                               Fluttertoast.showToast(
                                 msg:
                                 'Email already exist or something went wrong',
-                                toastLength: Toast.LENGTH_LONG,);                            });
+                                toastLength: Toast.LENGTH_LONG,);
+                            });
                           },
                           minWidth: mediaQueryWidth*0.2968,
                           height: mediaQueryHeight*0.066,

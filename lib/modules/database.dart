@@ -1,11 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:tour_guide_app/details.dart';
-import 'package:tour_guide_app/modules/details/details_screen.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
-
 import '../shared/components/constants.dart';
 import 'home/location_controller.dart';
 
@@ -57,12 +53,12 @@ class _MyFirebaseState extends State<MyFirebase> {
                   });
                 },
                 child: Text('setstate')),
-            Container(
+            /*Container(
               height: 300,
                 width: double.infinity,
                 child: ListView.builder(
                   itemCount: attractions.length,
-                    itemBuilder: (context, index) => defualtCard(attractions[index]))),
+                    itemBuilder: (context, index) => defualtCard1(attractions[index]))),*/
             IconButton(
               onPressed: () {
                 addDistanceToAttractions();

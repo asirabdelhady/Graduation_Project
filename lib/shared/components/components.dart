@@ -1,18 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/modules/categories/category_screen.dart';
-import 'package:tour_guide_app/modules/details/details_screen.dart';
 import 'package:tour_guide_app/modules/home/homescreen.dart';
 import 'package:tour_guide_app/shared/components/constants.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 import 'package:expandable_text/expandable_text.dart';
-import 'package:tour_guide_app/models/models.dart';
-import 'package:tour_guide_app/tAttraction_model.dart';
-
 import '../../utils.dart';
-
 
 /////////////////////////////// Shared //////////////////////////////////////////////////
 
@@ -26,7 +20,7 @@ Widget defaultTitle({
 //Small title
 Widget subTitle({required String subTitle}) => Text.rich(TextSpan(
     text: subTitle,
-    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)));
+    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)));
 
 //About section in details screen
 Widget aboutDetails({required String details}) => Builder(
@@ -37,7 +31,7 @@ Widget aboutDetails({required String details}) => Builder(
     return     Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text.rich(TextSpan(
+            const Text.rich(TextSpan(
                 text: 'About',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))),
             SizedBox(
@@ -77,7 +71,7 @@ Widget detailsImage({
   required String imagePath,
 }) =>
     ClipRRect(
-        borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
+        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(30)),
         child: Image(image: AssetImage(imagePath)));
 
 //Map GestureButton
@@ -96,7 +90,7 @@ Widget mapButton(Map model) => Builder(
               height: mediaQueryHeight*0.163,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
-                image: DecorationImage(
+                image: const DecorationImage(
                   fit: BoxFit.fitWidth,
                   image: AssetImage('assets/images/Map.jpeg'),
                 ),
@@ -106,149 +100,6 @@ Widget mapButton(Map model) => Builder(
         );
   }
 );
-
-// Fav and add to tour row
-Widget likeAndAddTour({
-  favClicked = false,
-  required,
-}) =>
-    Builder(
-      builder: (context) {
-var mediaQueryHeight= MediaQuery.of(context).size.height;
-var mediaQueryWidth = MediaQuery.of(context).size.width;
-        return Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          Container(
-              width: mediaQueryWidth*0.156,
-              height: mediaQueryHeight*0.0819,
-              child: ElevatedButton(
-                onPressed: () {
-                  /*setState(() {
-                    favClicked=!favClicked;
-                  });*/
-                },
-                child: Icon(
-                  (favClicked == false)
-                      ? Icons.favorite_border_rounded
-                      : Icons.favorite,
-                  size: 20,
-                  color: Colors.white,
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: Color(0xff292D32),
-                  shape: CircleBorder(),
-                ),
-              )),
-          Container(
-              width: mediaQueryWidth*0.703,
-              height: mediaQueryHeight*0.0819,
-              child: ElevatedButton(
-                onPressed: () {},
-                child: Text.rich(TextSpan(
-                  text: 'Add to Tour',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                )),
-                style: ElevatedButton.styleFrom(
-                    shape: StadiumBorder(), primary: Color(0xff292D32)),
-              )),
-        ]);
-      }
-    );
-
-//////////////////////// Notification screen///////////////////////////////////////////////////
-
-// Notification container
-Widget notificationItem1({
-  bool notiTapped=false,
-  required String notification,
-}) => Builder(
-  builder: (context) {
-    var mediaQueryHeight= MediaQuery.of(context).size.height;
-    var mediaQueryWidth = MediaQuery.of(context).size.width;
-    return     Container(
-      padding: EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.03125),
-      width: double.infinity,
-      height: mediaQueryHeight*0.1229,
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: tGrey(),
-            offset: Offset(3,6),
-            blurRadius: 3,
-
-          ),
-        ],
-        color: notiTapped==true? tGrey(): tPrimary(),
-        borderRadius: BorderRadius.circular(35),
-      ),
-      child: Row(
-        children: [
-          Stack(children: [
-            Icon(Icons.notifications_none_rounded,
-              color: notiTapped==true? tPrimary(): Colors.white,),
-            CircleAvatar(
-              backgroundColor:notiTapped==true? Colors.transparent: Colors.red,
-              radius: 5,
-            ),
-          ],),
-          SizedBox(
-            width: mediaQueryWidth*0.03125,
-          ),
-          Expanded(
-            child: Text.rich(
-              TextSpan(text: notification, ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(color:notiTapped==true? tPrimary(): Colors.white),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-);
-
-Widget slimCardItem({
-  required String text,
-  required Color color,
-  var icon,
-  var iconColor,
-}) =>
-    Builder(
-      builder: (context) {
-        var mediaQueryHeight= MediaQuery.of(context).size.height;
-        var mediaQueryWidth = MediaQuery.of(context).size.width;
-        return Container(
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          width: double.infinity,
-          height: mediaQueryHeight*0.1229,
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(35),
-          ),
-          child: Row(
-            children: [
-              Icon(
-                icon,
-                color: iconColor,
-              ),
-              SizedBox(
-                width: mediaQueryWidth*0.03125,
-              ),
-              Expanded(
-                child: Text.rich(
-                  TextSpan(text: text),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(color: Colors.white),
-                ),
-              )
-            ],
-          ),
-        );
-      }
-    );
-
-Widget buildNotificationItem() => notificationItem1(notification: 'Lets go');
 
 ////////////////////////  Profile Screen ///////////////////////////////////////////////////
 
@@ -277,13 +128,16 @@ Widget profileHeader({
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Container(
+              child: SizedBox(
+                width: mediaQueryWidth,
                 height: mediaQueryHeight*0.170,
                 child:
-                    Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
                   Text.rich(TextSpan(
                       text: name,
-                      style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold))),
+                      style: const TextStyle(fontSize: 23, fontWeight: FontWeight.bold))),
                   Text('Age: $age'),
 
                 ]),
@@ -295,13 +149,16 @@ Widget profileHeader({
     );
 
 // profile tabs: favs, History, Review
+
 Widget profileBody() => Builder(
   builder: (context) {
+
     final Stream<QuerySnapshot> favorites = FirebaseFirestore.instance.collection('favorites').snapshots();
     final Stream<QuerySnapshot> history = FirebaseFirestore.instance.collection('history').snapshots();
+
     var mediaQueryHeight= MediaQuery.of(context).size.height;
     var mediaQueryWidth = MediaQuery.of(context).size.width;
-    return     DefaultTabController(
+    return DefaultTabController(
         length: 2, // length of tabs
         child: SafeArea(
           bottom: false,
@@ -309,7 +166,7 @@ Widget profileBody() => Builder(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Container(
-                  child: TabBar(
+                  child: const TabBar(
                     labelColor: Color(0xff292D32),
                     unselectedLabelColor: Colors.grey,
                     tabs: [
@@ -320,16 +177,16 @@ Widget profileBody() => Builder(
                 ),
                 Container(
                     height: mediaQueryHeight*0.536, //height of TabBarView
-                    decoration: BoxDecoration(
-                        border:
-                            Border(top: BorderSide(color: Colors.grey, width: 0.5))),
+                    decoration: const BoxDecoration(
+                        border: Border(
+                            top: BorderSide(color: Colors.grey, width: 0.5))),
                     child: TabBarView(children: <Widget>[
                       SingleChildScrollView(
                         child: Column(children: [
                           SizedBox(
                             height: mediaQueryHeight*0.019,
                           ),
-                          Container(
+                          SizedBox(
                             width: mediaQueryWidth,
                             height: mediaQueryHeight*0.536, //height of TabBarView
                             child: StreamBuilder(
@@ -337,13 +194,13 @@ Widget profileBody() => Builder(
                               builder: (BuildContext context,
                                   AsyncSnapshot<QuerySnapshot> snapshot){
                                 if (snapshot.hasError){
-                                  return Text('somthing went wrong');
+                                  return const Text('Something went wrong');
                                 }
                                 if(snapshot.connectionState==ConnectionState.waiting){
-                                  return Center(child: CircularProgressIndicator());
+                                  return const Center(child: CircularProgressIndicator());
                                 }
                                 final data = snapshot.requireData;
-                                return Container(
+                                return SizedBox(
                                   width: mediaQueryWidth,
                                   height: mediaQueryHeight*0.320,
                                   child: ListView.builder(
@@ -368,7 +225,7 @@ Widget profileBody() => Builder(
                             height: mediaQueryHeight*0.019,
 
                           ),
-                          Container(
+                          SizedBox(
                             width: mediaQueryWidth,
                             height: mediaQueryHeight*0.536, //height of TabBarView
                             child:StreamBuilder(
@@ -376,13 +233,13 @@ Widget profileBody() => Builder(
                               builder: (BuildContext context,
                                   AsyncSnapshot<QuerySnapshot> snapshot){
                                 if (snapshot.hasError){
-                                  return Text('somthing went wrong');
+                                  return const Text('somthing went wrong');
                                 }
                                 if(snapshot.connectionState==ConnectionState.waiting){
-                                  return Center(child: CircularProgressIndicator());
+                                  return const Center(child: CircularProgressIndicator());
                                 }
                                 final data = snapshot.requireData;
-                                return Container(
+                                return SizedBox(
                                   width: mediaQueryWidth,
                                   height: mediaQueryHeight*0.320,
                                   child: ListView.builder(
@@ -407,73 +264,6 @@ Widget profileBody() => Builder(
   }
 );
 
-Widget categoryButton({
-  Color containerColor = const Color(0xffc4c4c4), //bigcylinder
-  Color circleColor = const Color(0xFF292D32), //circle
-  Color iconColor = Colors.white, //iconColor
-  Color textColor = const Color(0xFF292D32), //text
-  required String text,
-  required IconData iconShape,
-  required var onTap,
-}) =>
-    Builder(
-      builder: (context) {
-        var mediaQueryHeight= MediaQuery.of(context).size.height;
-        var mediaQueryWidth = MediaQuery.of(context).size.width;
-        return GestureDetector(
-          onTap: onTap,
-          child: Stack(
-            children: [
-              Container(
-                width: mediaQueryWidth*0.0196,
-                height: mediaQueryHeight*0.181,
-                decoration: BoxDecoration(
-                    color: containerColor, borderRadius: BorderRadius.circular(50)),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(7, 7, 7, 0),
-                child: Container(
-                  width: mediaQueryWidth*0.156,
-                  height: mediaQueryHeight*0.081,
-                  decoration:
-                      BoxDecoration(shape: BoxShape.circle, color: circleColor),
-                ),
-              ),
-              Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                    child: Icon(
-                      iconShape,
-                      color: iconColor,
-                    ),
-                  ),
-                  SizedBox(
-                    height: mediaQueryHeight*0.040,
-                  ),
-                  Container(
-                    width: mediaQueryWidth*0.18,
-                    child: Center(
-                      child: Text(
-                        text,
-                        maxLines: 2,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: textColor,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      }
-    );
 
 Widget mainButton({
   required String imagePath,
@@ -494,9 +284,9 @@ Widget mainButton({
             height: height,
             elevation: elevation,
             color: const Color(0xFFFFFAED),
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(30.0))),
-            child: Container(
+            child: SizedBox(
               width: mediaQueryWidth*0.5,
               height: mediaQueryHeight*0.039,
               child: Row(
@@ -509,7 +299,7 @@ Widget mainButton({
                       fontSize: mediaQueryWidth*0.05,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Image.asset(
@@ -522,17 +312,6 @@ Widget mainButton({
             ),
           );
         }
-    );
-
-Widget circleBack({
-  required double width,
-  required double height,
-}) =>
-    Container(
-      width: width,
-      height: height,
-      decoration:
-          BoxDecoration(color: const Color(0xFFFFFAED), shape: BoxShape.circle),
     );
 
 Widget mainFormField({
@@ -579,7 +358,7 @@ Widget mainFormField({
                     decoration: InputDecoration(
                       hintText: hintText,
                       border: InputBorder.none,
-                      hintStyle: TextStyle(color: Colors.grey),
+                      hintStyle: const TextStyle(color: Colors.grey),
                       prefixIcon: Padding(
                         padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.043, vertical: mediaQueryHeight*0.0229),
                         child: Image.asset(
@@ -602,228 +381,6 @@ Widget mainFormField({
               ),
             ),
           ]);
-        }
-    );
-
-Widget tourPlanCard(Map model) =>
-    Builder(
-        builder: (context) {
-          var mediaQueryHeight= MediaQuery.of(context).size.height;
-          var mediaQueryWidth = MediaQuery.of(context).size.width;
-          return GestureDetector(
-            onTap:(){
-              showDialog(context: context,
-                builder: (_)=> Dialog(
-                    child: SingleChildScrollView(
-                      child:
-                      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                        Stack(
-                          children: [
-                            Container(
-                              width: mediaQueryWidth,
-                              height: mediaQueryHeight*0.227,
-                              child:ClipRRect(
-                                  borderRadius: BorderRadius.only(bottomRight: Radius.circular(30),bottomLeft: Radius.circular(30)
-                                  ),
-                                  child: Image(image: NetworkImage('${model['image']}'),
-                                    fit: BoxFit.fill,)),
-                            ),
-                            Padding(
-                              padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375, vertical: mediaQueryHeight*0.01311),
-                              child: CircleAvatar(
-                                radius: 22.5,
-                                backgroundColor: tPrimary(),
-                                child: IconButton(onPressed: () {
-                                  Navigator.pop(context);
-                                }, icon: Icon(Icons.arrow_back,
-                                  color: Colors.white,
-                                ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('${model['name']}',
-                                style: TextStyle(fontSize: 33),),
-                              SizedBox(height: mediaQueryHeight*0.019,),
-                              aboutDetails(details: '${model['description']}'),
-                              SizedBox(
-                                height: mediaQueryHeight*0.019,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  model['location'];
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                                  child: Container(
-                                    width: mediaQueryWidth*1.25,
-                                    height: mediaQueryHeight*0.163,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30),
-                                      image: const DecorationImage(
-                                        fit: BoxFit.fitWidth,
-                                        image: AssetImage('assets/images/Map.jpeg'),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: mediaQueryHeight*0.019,
-                              ),
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Container(
-
-                                        width: mediaQueryWidth*0.550,
-                                        height: mediaQueryHeight*0.081,
-
-                                        child: ElevatedButton(
-                                          onPressed: () {
-                                            /*addToFavorites(
-                                                name: '${model['name']}',
-                                                image: '${model['image']}',
-                                                location: '${model['googlemaplocation']}',
-                                                distance: '${model['description']}',
-                                                description: '${model['description']}',
-                                                latitude: '${model['latitude']}',
-                                                longitude: '${model['longitude']}')*/;
-
-                                          },
-                                          child: Text.rich(TextSpan(
-                                            text: 'Add to Favorites',
-                                            style: TextStyle(
-                                                color: Colors.white, fontSize: mediaQueryWidth*0.0525),
-                                          )),
-                                          style: ElevatedButton.styleFrom(
-                                              shape: StadiumBorder(),
-                                              primary: Color(0xff292D32)
-                                          ),
-                                        )
-                                    ),
-                                  ]),
-                              SizedBox(height: mediaQueryHeight*0.019,),
-                            ],
-                          ),
-                        )
-
-                      ],),
-                    )
-                ),
-              );
-            } ,
-            child: Stack(
-              children: [
-                Container(
-
-                  width: mediaQueryWidth*0.916,
-                  height: mediaQueryHeight*0.159,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(mediaQueryWidth*0.083),
-                    color: tSecondary(),
-                    boxShadow: [
-                      BoxShadow(
-                        color: tGrey(),
-                        offset: Offset(5, 5),
-                        blurRadius: 3,
-
-                      )
-                    ],
-                  ),
-                ),
-                Row(
-                  children: [
-                    Padding(
-                      padding:  EdgeInsets.only(bottom: mediaQueryHeight*0.037,left: mediaQueryWidth*0.027),
-                      child: Container(
-                        width: mediaQueryWidth*0.277,
-                        height: mediaQueryHeight*0.132,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(mediaQueryWidth*0.083),
-                          color: tGrey(),
-                          image: DecorationImage(
-                            image: NetworkImage('${model['image']}'),
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          height: mediaQueryHeight*0.186,
-                          width: mediaQueryWidth*0.555,
-                          child: Padding(
-                            padding:  EdgeInsets.symmetric(vertical: mediaQueryHeight*0.01311),
-                            child: Column(
-                              children: [
-                                Container(
-                                  width: mediaQueryWidth*0.486,
-                                  height: mediaQueryHeight*0.066,
-                                  child: Text(
-                                    '${model['name']}',
-                                    maxLines: 2,
-                                    style: TextStyle(fontSize: 16, color: tPrimary(),),
-                                  ),
-                                ),
-                                Row(
-                                  children: [
-                                    SizedBox(width: mediaQueryWidth*0.286,),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.only(top: mediaQueryHeight*0.0300, end: mediaQueryWidth*0.0468),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.circular(mediaQueryWidth*0.083)
-                                        ),
-                                        width: mediaQueryWidth*0.222,
-                                        height: mediaQueryHeight*0.020,
-                                        child: MaterialButton(
-                                          onPressed:  (){
-                                            addToHistory(
-                                                name: '${model['name']}',
-                                                image: '${model['image']}',
-                                                location: '${model['googlemaplocation']}',
-                                                distance: '${model['description']}',
-                                                description: '${model['description']}',
-                                                latitude: '${model['latitude']}',
-                                                longitude: '${model['longitude']}');
-                                          },
-                                          elevation: 10,
-                                          color: tPrimary(),
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                              BorderRadius.all(Radius.circular(mediaQueryWidth*0.083))),
-                                          child: Text(
-                                            'Done',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize:mediaQueryWidth*0.020 ,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          );
         }
     );
 
@@ -851,11 +408,11 @@ Widget tourPlanCard1({
                       Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                         Stack(
                           children: [
-                            Container(
+                            SizedBox(
                               width: mediaQueryWidth,
                               height: mediaQueryHeight*0.227,
                               child:ClipRRect(
-                                  borderRadius: BorderRadius.only(bottomRight: Radius.circular(30),bottomLeft: Radius.circular(30)
+                                  borderRadius: const BorderRadius.only(bottomRight: Radius.circular(30),bottomLeft: Radius.circular(30)
                                   ),
                                   child: Image(image: NetworkImage('$image'),
                                     fit: BoxFit.fill,)),
@@ -867,7 +424,7 @@ Widget tourPlanCard1({
                                 backgroundColor: tPrimary(),
                                 child: IconButton(onPressed: () {
                                   Navigator.pop(context);
-                                }, icon: Icon(Icons.arrow_back,
+                                }, icon: const Icon(Icons.arrow_back,
                                   color: Colors.white,
                                 ),
                                 ),
@@ -881,7 +438,7 @@ Widget tourPlanCard1({
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text('$name',
-                                style: TextStyle(fontSize: 33),),
+                                style: const TextStyle(fontSize: 33),),
                               SizedBox(height: mediaQueryHeight*0.019,),
                               aboutDetails(details: '$description'),
                               SizedBox(
@@ -912,7 +469,7 @@ Widget tourPlanCard1({
                               Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Container(
+                                    SizedBox(
 
                                         width: mediaQueryWidth*0.550,
                                         height: mediaQueryHeight*0.081,
@@ -936,8 +493,8 @@ Widget tourPlanCard1({
                                                 color: Colors.white, fontSize: mediaQueryWidth*0.0525),
                                           )),
                                           style: ElevatedButton.styleFrom(
-                                              shape: StadiumBorder(),
-                                              primary: Color(0xff292D32)
+                                              shape: const StadiumBorder(),
+                                              primary: const Color(0xff292D32)
                                           ),
                                         )
                                     ),
@@ -964,7 +521,7 @@ Widget tourPlanCard1({
                     boxShadow: [
                       BoxShadow(
                         color: tGrey(),
-                        offset: Offset(5, 5),
+                        offset: const Offset(5, 5),
                         blurRadius: 3,
 
                       )
@@ -990,14 +547,14 @@ Widget tourPlanCard1({
                     ),
                     Row(
                       children: [
-                        Container(
+                        SizedBox(
                           height: mediaQueryHeight*0.186,
                           width: mediaQueryWidth*0.555,
                           child: Padding(
                             padding:  EdgeInsets.symmetric(vertical: mediaQueryHeight*0.01311),
                             child: Column(
                               children: [
-                                Container(
+                                SizedBox(
                                   width: mediaQueryWidth*0.486,
                                   height: mediaQueryHeight*0.066,
                                   child: Text(
@@ -1087,11 +644,11 @@ Widget tourPlanCard2({
                       Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                         Stack(
                           children: [
-                            Container(
+                            SizedBox(
                               width: mediaQueryWidth,
                               height: mediaQueryHeight*0.227,
                               child:ClipRRect(
-                                  borderRadius: BorderRadius.only(bottomRight: Radius.circular(30),bottomLeft: Radius.circular(30)
+                                  borderRadius: const BorderRadius.only(bottomRight: Radius.circular(30),bottomLeft: Radius.circular(30)
                                   ),
                                   child: Image(image: NetworkImage('$image'),
                                     fit: BoxFit.fill,)),
@@ -1103,7 +660,7 @@ Widget tourPlanCard2({
                                 backgroundColor: tPrimary(),
                                 child: IconButton(onPressed: () {
                                   Navigator.pop(context);
-                                }, icon: Icon(Icons.arrow_back,
+                                }, icon: const Icon(Icons.arrow_back,
                                   color: Colors.white,
                                 ),
                                 ),
@@ -1117,7 +674,7 @@ Widget tourPlanCard2({
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text('$name',
-                                style: TextStyle(fontSize: 33),),
+                                style: const TextStyle(fontSize: 33),),
                               SizedBox(height: mediaQueryHeight*0.019,),
                               aboutDetails(details: '$description'),
                               SizedBox(
@@ -1148,7 +705,7 @@ Widget tourPlanCard2({
                               Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Container(
+                                    SizedBox(
 
                                         width: mediaQueryWidth*0.550,
                                         height: mediaQueryHeight*0.081,
@@ -1172,8 +729,8 @@ Widget tourPlanCard2({
                                                 color: Colors.white, fontSize: mediaQueryWidth*0.0525),
                                           )),
                                           style: ElevatedButton.styleFrom(
-                                              shape: StadiumBorder(),
-                                              primary: Color(0xff292D32)
+                                              shape: const StadiumBorder(),
+                                              primary: const Color(0xff292D32)
                                           ),
                                         )
                                     ),
@@ -1200,7 +757,7 @@ Widget tourPlanCard2({
                     boxShadow: [
                       BoxShadow(
                         color: tGrey(),
-                        offset: Offset(5, 5),
+                        offset: const Offset(5, 5),
                         blurRadius: 3,
 
                       )
@@ -1226,14 +783,14 @@ Widget tourPlanCard2({
                     ),
                     Row(
                       children: [
-                        Container(
+                        SizedBox(
                           height: mediaQueryHeight*0.186,
                           width: mediaQueryWidth*0.555,
                           child: Padding(
                             padding:  EdgeInsets.symmetric(vertical: mediaQueryHeight*0.01311),
                             child: Column(
                               children: [
-                                Container(
+                                SizedBox(
                                   width: mediaQueryWidth*0.486,
                                   height: mediaQueryHeight*0.066,
                                   child: Text(
@@ -1257,28 +814,6 @@ Widget tourPlanCard2({
         }
     );
 
-Widget homeScreenRecommendedCard({
-  required String imagePath,
-  required double height,
-  required double width,
-  required onTap,
-}) =>
-    GestureDetector(
-      onTap: onTap,
-      child: Container(
-        height: height,
-        width: width,
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(20),
-          image: DecorationImage(
-            image: AssetImage(imagePath),
-            fit: BoxFit.fill,
-          ),
-        ),
-      ),
-    );
-
 Widget categoryCard ({
   required String name,
   required String image,
@@ -1290,11 +825,11 @@ Widget categoryCard ({
       return GestureDetector(
         onTap: (){
           Navigator.push(context, MaterialPageRoute(builder: (context){
-            return CategoryScreen();
+            return const CategoryScreen();
           }));
         },
         child: Container(
-          margin: EdgeInsets.all(10),
+          margin: const EdgeInsets.all(10),
           child: Stack(
             children: [
               Container(
@@ -1341,7 +876,7 @@ Widget categoryCard ({
                               bottom: mediaQueryHeight*0.01311,
 
                             ),
-                            child: Container(
+                            child: SizedBox(
                               width: mediaQueryWidth*0.6875,
                               child: Text(name,
                                 maxLines: 2,
@@ -1355,7 +890,7 @@ Widget categoryCard ({
                             ),
                           ),
                         ],),
-                      Container(
+                      SizedBox(
                         width:mediaQueryWidth*0.75 ,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -1363,7 +898,7 @@ Widget categoryCard ({
                             SizedBox(width: mediaQueryWidth*0.0400,),
                             Row(
                               children: [
-                                Icon(Icons.location_on_rounded, color: Colors.yellow,),
+                                const Icon(Icons.location_on_rounded, color: Colors.yellow,),
                                 Text(' $places'),
 
                               ],
@@ -1380,389 +915,6 @@ Widget categoryCard ({
         ),
       );
     }
-);
-
-
-Widget detailsPage(context, Map model)=> SafeArea(
-
-  child:SingleChildScrollView(
-    child:
-    Builder(
-        builder: (context) {
-          PageController pageController = PageController();
-          var mediaQueryHeight = MediaQuery.of(context).size.height;
-          var mediaQueryWidth = MediaQuery.of(context).size.width;
-          return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Stack(
-              children: [
-                Container(
-                  width: mediaQueryWidth,
-                  height: mediaQueryHeight*0.327,
-                  child: PageView.builder(
-                    itemBuilder: (context, position)=>ClipRRect(
-                        borderRadius: BorderRadius.only(bottomRight: Radius.circular(30),bottomLeft: Radius.circular(30)
-                        ),
-
-                        child: Image(image: AssetImage('${model['image']}'),
-                          fit: BoxFit.fill,)),
-                    itemCount: 4,
-                    controller: pageController,
-
-                  ),
-                ),
-                Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375, vertical: mediaQueryHeight*0.01311),
-                  child: CircleAvatar(
-                    radius: 22.5,
-                    backgroundColor: tPrimary(),
-                    child: IconButton(onPressed: () {
-                      Navigator.pop(context);
-                    }, icon: Icon(Icons.arrow_back,
-                      color: Colors.white,
-                    ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: mediaQueryHeight*0.019,),
-            Center(
-              child: SmoothPageIndicator(controller: pageController,
-                count: 4,
-                effect: WormEffect(
-                  activeDotColor: tPrimary(),
-                ),
-
-              ),
-            ),
-            SizedBox(
-              height: mediaQueryHeight*0.019,
-            ),
-            Padding(
-              padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  defaultTitle(title: '${model['name']}'),
-                  SizedBox(height: mediaQueryHeight*0.019,),
-                  aboutDetails(details: '${model['description']}'),
-                  SizedBox(
-                    height: mediaQueryHeight*0.019,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      model['location'];
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                      child: Container(
-                        width: mediaQueryWidth*1.25,
-                        height: mediaQueryHeight*0.163,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          image: DecorationImage(
-                            fit: BoxFit.fitWidth,
-                            image: AssetImage('assets/images/Map.jpeg'),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: mediaQueryHeight*0.019,
-                  ),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                            width: mediaQueryWidth*0.156,
-                            height: mediaQueryHeight*0.081,
-                            child: ElevatedButton(
-                              onPressed: () {
-
-                              },
-                              child: Icon(Icons.favorite  ,
-                                size: mediaQueryWidth*0.0625,
-                                color: Colors.white,
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                primary: Color(0xff292D32),
-                                shape: CircleBorder(),
-                              ),
-                            )),
-                        Container(
-                            width: mediaQueryWidth*0.625,
-                            height: mediaQueryHeight*0.081,
-
-                            child: ElevatedButton(
-                              onPressed: () {
-
-                              },
-                              child: Text.rich(TextSpan(
-                                text: 'Add to Tour',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: mediaQueryWidth*0.0625),
-                              )),
-                              style: ElevatedButton.styleFrom(
-                                  shape: StadiumBorder(),
-                                  primary: Color(0xff292D32)
-                              ),
-                            )
-                        ),
-                      ]),
-                  SizedBox(height: mediaQueryHeight*0.019,),
-                ],
-              ),
-            ),
-          ]);
-        }
-    ),
-  ),
-);
-
-/*void addToTour{
-  favorites.add(favCard())
-}*/
-Widget defualtCard (Map model, {
-
-    IconData icon1 = Icons.star,
-    IconData icon3 = Icons.location_on_rounded,
-})=> Builder(
-  builder: (context) {
-    var mediaQueryHeight= MediaQuery.of(context).size.height;
-    var mediaQueryWidth = MediaQuery.of(context).size.width;
-    Widget buildImage()=> Container(
-      height: mediaQueryHeight*0.200,
-      width: mediaQueryWidth*0.85,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30),
-        image: DecorationImage(
-          image: NetworkImage('${model['image']}'),
-          fit: BoxFit.cover,
-        ),
-      ),
-    );
-    return GestureDetector(
-      onTap: (){
-        showDialog(context: context,
-            builder: (_)=> Dialog(
-                child: SingleChildScrollView(
-                  child:
-                  Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Stack(
-                      children: [
-                        Container(
-                          width: mediaQueryWidth,
-                          height: mediaQueryHeight*0.227,
-                          child:ClipRRect(
-                                borderRadius: BorderRadius.only(bottomRight: Radius.circular(30),bottomLeft: Radius.circular(30)
-                                ),
-                                child: Image(image: NetworkImage('${model['image']}'),
-                                  fit: BoxFit.fill,)),
-                        ),
-                        Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375, vertical: mediaQueryHeight*0.01311),
-                          child: CircleAvatar(
-                            radius: 22.5,
-                            backgroundColor: tPrimary(),
-                            child: IconButton(onPressed: () {
-                              Navigator.pop(context);
-                            }, icon: Icon(Icons.arrow_back,
-                              color: Colors.white,
-                            ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                        Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('${model['name']}',
-                                  style: TextStyle(fontSize: 33),),
-                              SizedBox(height: mediaQueryHeight*0.019,),
-                              aboutDetails(details: '${model['description']}'),
-                              SizedBox(
-                                height: mediaQueryHeight*0.019,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Utils.openLink(url:'${model['location']}');
-
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                                  child: Container(
-                                    width: mediaQueryWidth*1.25,
-                                    height: mediaQueryHeight*0.163,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30),
-                                      image: const DecorationImage(
-                                        fit: BoxFit.fitWidth,
-                                        image: AssetImage('assets/images/Map.jpeg'),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: mediaQueryHeight*0.019,
-                              ),
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Container(
-                                        width: mediaQueryWidth*0.156,
-                                        height: mediaQueryHeight*0.081,
-                                        child: ElevatedButton(
-                                          onPressed: () {
-                                            /*addToFavorites(
-                                                name: '${model['name']}',
-                                                image: '${model['image']}',
-                                                location: '${model['googlemaplocation']}',
-                                                distance: '${model['description']}',
-                                                description: '${model['description']}',
-                                                latitude: '${model['latitude']}',
-                                                longitude: '${model['longitude']}');*/
-                                          },
-                                          child: Icon(Icons.favorite ,
-                                            size: mediaQueryWidth*0.0625,
-                                            color: Colors.white,
-                                          ),
-                                          style: ElevatedButton.styleFrom(
-                                            primary: Color(0xff292D32),
-                                            shape: CircleBorder(),
-                                          ),
-                                        )),
-                                    Container(
-
-                                        width: mediaQueryWidth*0.500,
-                                        height: mediaQueryHeight*0.081,
-
-                                        child: ElevatedButton(
-                                          onPressed: () {
-                                            /*addToTour(
-                                                name: '${model['name']}',
-                                                image: '${model['image']}',
-                                                location: '${model['googlemaplocation']}',
-                                                distance: '${model['description']}',
-                                                description: '${model['description']}',
-                                                latitude: '${model['latitude']}',
-                                                longitude: '${model['longitude']}');*/
-
-                                          },
-                                          child: Text.rich(TextSpan(
-                                            text: 'Add to Tour',
-                                            style: TextStyle(
-                                                color: Colors.white, fontSize: mediaQueryWidth*0.0625),
-                                          )),
-                                          style: ElevatedButton.styleFrom(
-                                              shape: StadiumBorder(),
-                                              primary: Color(0xff292D32)
-                                          ),
-                                        )
-                                    ),
-                                  ]),
-                              SizedBox(height: mediaQueryHeight*0.019,),
-                            ],
-                          ),
-                        )
-
-                      ],),
-                )
-            ),
-        );
-      },
-      child: Container(
-        margin: EdgeInsets.all(10),
-        child: Stack(
-          children: [
-            Hero(
-              tag: attractions,
-                child: buildImage()
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                right: mediaQueryWidth*0.0650,
-                left: mediaQueryWidth*0.0468,
-                top: mediaQueryHeight*0.1475,
-                bottom: 0.01311,
-              ),
-              child: Container(
-                height: mediaQueryHeight*0.220,
-                width: mediaQueryWidth*0.781,
-                decoration: BoxDecoration(
-                  boxShadow: const [
-                    BoxShadow(
-                    offset: Offset(5, 5),
-                    blurRadius: 5,
-                    color: Colors.grey,
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(30),
-                  color: Colors.white,
-                ),
-                child:Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                            top: mediaQueryHeight*0.01311,
-                            left: mediaQueryWidth*0.0625,
-                            bottom: mediaQueryHeight*0.01311,
-
-                          ),
-                          child: Container(
-                            width: mediaQueryWidth*0.6875,
-                            child: Text(
-                              '${model['name']}',
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  fontSize: mediaQueryWidth*0.05,
-                                  fontWeight: FontWeight.bold
-
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],),
-                    Container(
-                      width:mediaQueryWidth*0.75 ,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children:[
-                          SizedBox(width: mediaQueryWidth*0.0400,),
-                          Row(
-                            children: [
-                              Icon(icon1, color: Colors.yellow,),
-                              Text('${model['rating']}'),
-
-                            ],
-                          ),
-                          SizedBox(width: mediaQueryWidth*0.0375,),
-                          Row(
-                            children: [
-                              Icon(icon3, color: Colors.lightBlue,),
-                              Text('${model['distance']}'),
-
-                            ],),
-                          SizedBox(width: mediaQueryWidth*0.0375,),
-
-                        ],),
-                    ),
-                  ],),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 );
 
 Widget defualtCard1 ({
@@ -1801,11 +953,11 @@ Widget defualtCard1 ({
                   Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                     Stack(
                       children: [
-                        Container(
+                        SizedBox(
                           width: mediaQueryWidth,
                           height: mediaQueryHeight*0.227,
                           child:ClipRRect(
-                              borderRadius: BorderRadius.only(bottomRight: Radius.circular(30),bottomLeft: Radius.circular(30)
+                              borderRadius: const BorderRadius.only(bottomRight: Radius.circular(30),bottomLeft: Radius.circular(30)
                               ),
                               child: Image(image: NetworkImage(image),
                                 fit: BoxFit.fill,)),
@@ -1817,7 +969,7 @@ Widget defualtCard1 ({
                             backgroundColor: tPrimary(),
                             child: IconButton(onPressed: () {
                               Navigator.pop(context);
-                            }, icon: Icon(Icons.arrow_back,
+                            }, icon: const Icon(Icons.arrow_back,
                               color: Colors.white,
                             ),
                             ),
@@ -1831,7 +983,7 @@ Widget defualtCard1 ({
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(name,
-                            style: TextStyle(fontSize: 33),),
+                            style: const TextStyle(fontSize: 33),),
                           SizedBox(height: mediaQueryHeight*0.019,),
                           aboutDetails(details: description),
                           SizedBox(
@@ -1863,7 +1015,7 @@ Widget defualtCard1 ({
                           Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Container(
+                                SizedBox(
                                     width: mediaQueryWidth*0.156,
                                     height: mediaQueryHeight*0.081,
                                     child: ElevatedButton(
@@ -1883,11 +1035,11 @@ Widget defualtCard1 ({
                                         color: Colors.white,
                                       ),
                                       style: ElevatedButton.styleFrom(
-                                        primary: Color(0xff292D32),
-                                        shape: CircleBorder(),
+                                        primary: const Color(0xff292D32),
+                                        shape: const CircleBorder(),
                                       ),
                                     )),
-                                Container(
+                                SizedBox(
 
                                     width: mediaQueryWidth*0.500,
                                     height: mediaQueryHeight*0.081,
@@ -1911,8 +1063,8 @@ Widget defualtCard1 ({
                                             color: Colors.white, fontSize: mediaQueryWidth*0.0625),
                                       )),
                                       style: ElevatedButton.styleFrom(
-                                          shape: StadiumBorder(),
-                                          primary: Color(0xff292D32)
+                                          shape: const StadiumBorder(),
+                                          primary: const Color(0xff292D32)
                                       ),
                                     )
                                 ),
@@ -1928,7 +1080,7 @@ Widget defualtCard1 ({
           );
         },
         child: Container(
-          margin: EdgeInsets.all(10),
+          margin: const EdgeInsets.all(10),
           child: Stack(
             children: [
               Hero(
@@ -1968,7 +1120,7 @@ Widget defualtCard1 ({
                               bottom: mediaQueryHeight*0.01311,
 
                             ),
-                            child: Container(
+                            child: SizedBox(
                               width: mediaQueryWidth*0.6875,
                               child: Text(name,
                                 maxLines: 2,
@@ -1982,7 +1134,7 @@ Widget defualtCard1 ({
                             ),
                           ),
                         ],),
-                      Container(
+                      SizedBox(
                         width:mediaQueryWidth*0.75 ,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -2016,435 +1168,6 @@ Widget defualtCard1 ({
     }
 );
 
-Widget favCard (Map model, {
-
-  IconData icon1 = Icons.star,
-  IconData icon3 = Icons.location_on_rounded,
-})=> Builder(
-    builder: (context) {
-      var mediaQueryHeight= MediaQuery.of(context).size.height;
-      var mediaQueryWidth = MediaQuery.of(context).size.width;
-      Widget buildImage()=> Container(
-        height: mediaQueryHeight*0.200,
-        width: mediaQueryWidth*0.85,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          image: DecorationImage(
-            image: NetworkImage('${model['image']}'),
-            fit: BoxFit.cover,
-          ),
-        ),
-      );
-      return GestureDetector(
-        onTap: (){
-          showDialog(context: context,
-            builder: (_)=> Dialog(
-                child: SingleChildScrollView(
-                  child:
-                  Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Stack(
-                      children: [
-                        Container(
-                          width: mediaQueryWidth,
-                          height: mediaQueryHeight*0.227,
-                          child:ClipRRect(
-                              borderRadius: BorderRadius.only(bottomRight: Radius.circular(30),bottomLeft: Radius.circular(30)
-                              ),
-                              child: Image(image: NetworkImage('${model['image']}'),
-                                fit: BoxFit.fill,)),
-                        ),
-                        Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375, vertical: mediaQueryHeight*0.01311),
-                          child: CircleAvatar(
-                            radius: 22.5,
-                            backgroundColor: tPrimary(),
-                            child: IconButton(onPressed: () {
-                              Navigator.pop(context);
-                            }, icon: Icon(Icons.arrow_back,
-                              color: Colors.white,
-                            ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('${model['name']}',
-                            style: TextStyle(fontSize: 33),),
-                          SizedBox(height: mediaQueryHeight*0.019,),
-                          aboutDetails(details: '${model['description']}'),
-                          SizedBox(
-                            height: mediaQueryHeight*0.019,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              model['location'];
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                              child: Container(
-                                width: mediaQueryWidth*1.25,
-                                height: mediaQueryHeight*0.163,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  image: const DecorationImage(
-                                    fit: BoxFit.fitWidth,
-                                    image: AssetImage('assets/images/Map.jpeg'),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: mediaQueryHeight*0.019,
-                          ),
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                   /* addToTour(
-                                        name: '${model['name']}',
-                                        image: '${model['image']}',
-                                        location: '${model['googlemaplocation']}',
-                                        distance: '${model['description']}',
-                                        description: '${model['description']}',
-                                        latitude: '${model['latitude']}',
-                                        longitude: '${model['longitude']}');*/
-
-                                  },
-                                  child: Text.rich(TextSpan(
-                                    text: 'Add to Tour',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: mediaQueryWidth*0.0625),
-                                  )),
-                                  style: ElevatedButton.styleFrom(
-                                      shape: StadiumBorder(),
-                                      primary: Color(0xff292D32)
-                                  ),
-                                )
-                              ]),
-                          SizedBox(height: mediaQueryHeight*0.019,),
-                        ],
-                      ),
-                    )
-
-                  ],),
-                )
-            ),
-          );
-        },
-        child: Container(
-          margin: EdgeInsets.all(10),
-          child: Stack(
-            children: [
-              Hero(
-                  tag: attractions,
-                  child: buildImage()
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                  right: mediaQueryWidth*0.0650,
-                  left: mediaQueryWidth*0.0468,
-                  top: mediaQueryHeight*0.1475,
-                  bottom: 0.01311,
-                ),
-                child: Container(
-                  height: mediaQueryHeight*0.120,
-                  width: mediaQueryWidth*0.781,
-                  decoration: BoxDecoration(
-                    boxShadow: const [
-                      BoxShadow(
-                        offset: Offset(5, 5),
-                        blurRadius: 5,
-                        color: Colors.grey,
-                      ),
-                    ],
-                    borderRadius: BorderRadius.circular(30),
-                    color: Colors.white,
-                  ),
-                  child:Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(
-                              top: mediaQueryHeight*0.01311,
-                              left: mediaQueryWidth*0.0625,
-                              bottom: mediaQueryHeight*0.01311,
-
-                            ),
-                            child: Container(
-                              width: mediaQueryWidth*0.6875,
-                              child: Text(
-                                '${model['name']}',
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    fontSize: mediaQueryWidth*0.05,
-                                    fontWeight: FontWeight.bold
-
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],),
-                      /*Container(
-                        width:mediaQueryWidth*0.75 ,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children:[
-                            SizedBox(width: mediaQueryWidth*0.0400,),
-                            Row(
-                              children: [
-                                Icon(icon1, color: Colors.yellow,),
-                                Text('${model['rating']}'),
-
-                              ],
-                            ),
-                            SizedBox(width: mediaQueryWidth*0.0375,),
-                            Row(
-                              children: [
-                                Icon(icon3, color: Colors.lightBlue,),
-                                Text('${model['distance']}'),
-
-                              ],),
-                            SizedBox(width: mediaQueryWidth*0.0375,),
-
-                          ],),
-                      ),*/
-                    ],),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-);
-
-
-
-Widget tourCard (Map model, {
-
-  IconData icon1 = Icons.star,
-  IconData icon3 = Icons.location_on_rounded,
-})=> Builder(
-    builder: (context) {
-      var mediaQueryHeight= MediaQuery.of(context).size.height;
-      var mediaQueryWidth = MediaQuery.of(context).size.width;
-      Widget buildImage()=> Container(
-        height: mediaQueryHeight*0.200,
-        width: mediaQueryWidth*0.85,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          image: DecorationImage(
-            image: NetworkImage('${model['image']}'),
-            fit: BoxFit.cover,
-          ),
-        ),
-      );
-      return GestureDetector(
-        onTap: (){
-          showDialog(context: context,
-            builder: (_)=> Dialog(
-                child: SingleChildScrollView(
-                  child:
-                  Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Stack(
-                      children: [
-                        Container(
-                          width: mediaQueryWidth,
-                          height: mediaQueryHeight*0.227,
-                          child:ClipRRect(
-                              borderRadius: BorderRadius.only(bottomRight: Radius.circular(30),bottomLeft: Radius.circular(30)
-                              ),
-                              child: Image(image: NetworkImage('${model['image']}'),
-                                fit: BoxFit.fill,)),
-                        ),
-                        Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375, vertical: mediaQueryHeight*0.01311),
-                          child: CircleAvatar(
-                            radius: 22.5,
-                            backgroundColor: tPrimary(),
-                            child: IconButton(onPressed: () {
-                              Navigator.pop(context);
-                            }, icon: Icon(Icons.arrow_back,
-                              color: Colors.white,
-                            ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('${model['name']}',
-                            style: TextStyle(fontSize: 33),),
-                          SizedBox(height: mediaQueryHeight*0.019,),
-                          aboutDetails(details: '${model['description']}'),
-                          SizedBox(
-                            height: mediaQueryHeight*0.019,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              model['location'];
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                              child: Container(
-                                width: mediaQueryWidth*1.25,
-                                height: mediaQueryHeight*0.163,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  image: const DecorationImage(
-                                    fit: BoxFit.fitWidth,
-                                    image: AssetImage('assets/images/Map.jpeg'),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: mediaQueryHeight*0.019,
-                          ),
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    /*addToTour(
-
-                                        name: '${model['name']}',
-                                        image: '${model['image']}',
-                                        location: '${model['googlemaplocation']}',
-                                        distance: '${model['description']}',
-                                        description: '${model['description']}',
-                                        latitude: '${model['latitude']}',
-                                        longitude: '${model['longitude']}');*/
-
-                                  },
-                                  child: Text.rich(TextSpan(
-                                    text: 'Add to Tour',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: mediaQueryWidth*0.0625),
-                                  )),
-                                  style: ElevatedButton.styleFrom(
-                                      shape: StadiumBorder(),
-                                      primary: Color(0xff292D32)
-                                  ),
-                                )
-                              ]),
-                          SizedBox(height: mediaQueryHeight*0.019,),
-                        ],
-                      ),
-                    )
-
-                  ],),
-                )
-            ),
-          );
-        },
-        child: Container(
-          margin: EdgeInsets.all(10),
-          child: Stack(
-            children: [
-              Hero(
-                  tag: attractions,
-                  child: buildImage()
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                  right: mediaQueryWidth*0.0650,
-                  left: mediaQueryWidth*0.0468,
-                  top: mediaQueryHeight*0.1475,
-                  bottom: 0.01311,
-                ),
-                child: Container(
-                  height: mediaQueryHeight*0.120,
-                  width: mediaQueryWidth*0.781,
-                  decoration: BoxDecoration(
-                    boxShadow: const [
-                      BoxShadow(
-                        offset: Offset(5, 5),
-                        blurRadius: 5,
-                        color: Colors.grey,
-                      ),
-                    ],
-                    borderRadius: BorderRadius.circular(30),
-                    color: Colors.white,
-                  ),
-                  child:Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(
-                              top: mediaQueryHeight*0.01311,
-                              left: mediaQueryWidth*0.0625,
-                              bottom: mediaQueryHeight*0.01311,
-
-                            ),
-                            child: Container(
-                              width: mediaQueryWidth*0.6875,
-                              child: Text(
-                                '${model['name']}',
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    fontSize: mediaQueryWidth*0.05,
-                                    fontWeight: FontWeight.bold
-
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],),
-                      Container(
-                        width:mediaQueryWidth*0.75 ,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children:[
-                            SizedBox(width: mediaQueryWidth*0.0400,),
-                            Row(
-                              children: [
-                                Icon(icon1, color: Colors.yellow,),
-                                Text('${model['rating']}'),
-
-                              ],
-                            ),
-                            SizedBox(width: mediaQueryWidth*0.0375,),
-                            Row(
-                              children: [
-                                Icon(icon3, color: Colors.lightBlue,),
-                                Text('${model['distance']}'),
-
-                              ],),
-                            SizedBox(width: mediaQueryWidth*0.0375,),
-
-                          ],),
-                      ),
-                    ],),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-);
-
-
-
 Widget backButton()=> Builder(
 
     builder: (context) {
@@ -2457,7 +1180,7 @@ Widget backButton()=> Builder(
           backgroundColor: tPrimary(),
           child: IconButton(onPressed: () {
             Navigator.pop(context);
-          }, icon: Icon(Icons.arrow_back,
+          }, icon: const Icon(Icons.arrow_back,
             color: Colors.white,
           ),
           ),
@@ -2466,334 +1189,4 @@ Widget backButton()=> Builder(
 
     }
 );
-
-Widget cardBuilderWithDotIndicator ({
-  required String placeName,
-  required String imagePath,
-  required String rating,
-  required String distance,
-  IconData icon1 = Icons.star,
-  IconData icon3 = Icons.location_on_rounded,
-})=> Builder(
-  builder: (context) {
-    var mediaQueryHeight= MediaQuery.of(context).size.height;
-    var mediaQueryWidth = MediaQuery.of(context).size.width;
-    PageController pageController = PageController(initialPage: 0);
-    return     Column(
-      children: [
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Container(
-              height: mediaQueryHeight*0.322,
-              width: mediaQueryWidth,
-              child: PageView.builder(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, position) => GestureDetector(
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context){
-                      return HomeScreen();//DetailScreen();
-                    }));
-                  },
-                  child: Container(
-                    margin: EdgeInsets.all(10),
-                    child: Stack(
-                      children: [
-                        Container(
-                          height: mediaQueryHeight*0.200,
-                          width: mediaQueryWidth*0.85,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            image: DecorationImage(
-                              image: AssetImage(imagePath),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            right: mediaQueryWidth*0.0781,
-                            left: mediaQueryWidth*0.0468,
-                            top: mediaQueryHeight*0.1475,
-                            bottom: 0.01311,
-                          ),
-                          child: Container(
-                            height: mediaQueryHeight*0.120,
-                            width: mediaQueryWidth*0.781,
-                            decoration: BoxDecoration(
-                              boxShadow: const [
-                                BoxShadow(
-                                  offset: Offset(5, 5),
-                                  blurRadius: 5,
-                                  color: Colors.grey,
-                                ),
-                              ],
-                              borderRadius: BorderRadius.circular(30),
-                              color: Colors.white,
-                            ),
-                            child:Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                        top: mediaQueryHeight*0.01311,
-                                        left: mediaQueryWidth*0.0625,
-                                        bottom: mediaQueryHeight*0.01311,
-
-                                      ),
-                                      child: Container(
-                                        width: mediaQueryWidth*0.6875,
-                                        child: Text(
-                                          placeName,
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              fontSize: mediaQueryWidth*0.05,
-                                              fontWeight: FontWeight.bold
-
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],),
-                                Container(
-                                  width:mediaQueryWidth*0.75 ,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children:[
-                                      SizedBox(width: mediaQueryWidth*0.0400,),
-                                      Row(
-                                        children: [
-                                          Icon(icon1, color: Colors.yellow,),
-                                          Text('4.9'),
-
-                                        ],
-                                      ),
-                                      SizedBox(width: mediaQueryWidth*0.0375,),
-                                      Row(
-                                        children: [
-                                          Icon(icon3, color: Colors.lightBlue,),
-                                          Text('26 Km'),
-
-                                        ],),
-                                      SizedBox(width: mediaQueryWidth*0.0375,),
-
-                                    ],),
-                                ),
-                              ],),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                itemCount: 3,
-                controller: pageController,
-              )
-          ),
-        ),
-        Center(
-          child: SmoothPageIndicator(
-            controller: pageController,
-            count: 3,
-            effect: WormEffect(
-              dotColor: tGrey(),
-              activeDotColor: tPrimary(),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-);
-
-Widget stepperCard ({
-  required String placeName,
-  required String imagePath,
-  IconData icon1 = Icons.star,
-  IconData icon3 = Icons.location_on_rounded,
-  // mediaQueryHeight*0.200 + mediaQueryHeight*0.120
-  //mediaQueryWidth*0.85+ mediaQueryWidth*0.781
-
-
-
-})=> Builder(
-    builder: (context) {
-      var mediaQueryHeight= MediaQuery.of(context).size.height;
-      var mediaQueryWidth = MediaQuery.of(context).size.width;
-      return GestureDetector(
-        onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context){
-            return HomeScreen();//DetailScreen();
-          }));
-        },
-        child: Container(
-          margin: EdgeInsets.symmetric(vertical:0.0163, horizontal: mediaQueryWidth*0.03125),
-          child: Stack(
-            children: [
-              Container(
-                height: mediaQueryHeight*0.200,
-                width: mediaQueryWidth*0.95,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  image: DecorationImage(
-                    image: AssetImage(imagePath),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                  right: mediaQueryWidth*0.0781,
-                  left: mediaQueryWidth*0.0468,
-                  top: mediaQueryHeight*0.1475,
-                  bottom: 0.01311,
-                ),
-                child: Container(
-                  height: mediaQueryHeight*0.1639,
-                  width: mediaQueryWidth*0.718,
-                  decoration: BoxDecoration(
-                    boxShadow: const [
-                      BoxShadow(
-                        offset: Offset(5, 5),
-                        blurRadius: 5,
-                        color: Colors.grey,
-                      ),
-                    ],
-                    borderRadius: BorderRadius.circular(30),
-                    color: Colors.white,
-                  ),
-                  child:Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding:  EdgeInsets.only(
-                              top: mediaQueryHeight*0.01311,
-                              left: mediaQueryWidth*0.0625,
-                              bottom: mediaQueryHeight*0.01311,
-
-                            ),
-                            child: Container(
-                              width: mediaQueryWidth*0.468,
-                              child: Text(
-                                placeName,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold
-
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],),
-                      Container(
-                        width:mediaQueryWidth*0.75 ,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children:[
-                            SizedBox(width: mediaQueryWidth*0.0400,),
-                            Row(
-                              children: [
-                                Icon(icon1, color: Colors.yellow,),
-                                Text('4.9'),
-
-                              ],
-                            ),
-                            SizedBox(width: mediaQueryWidth*0.0375,),
-                            Row(
-                              children: [
-                                Icon(icon3, color: Colors.lightBlue,),
-                                Text('26 Km'),
-
-                              ],),
-                            SizedBox(width: mediaQueryWidth*0.0375,),
-
-                          ],),
-                      ),
-                    ],),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-);
-
-Widget buildTodayItem() =>
-    Builder(
-        builder: (context) {
-          var mediaQueryHeight= MediaQuery.of(context).size.height;
-          var mediaQueryWidth = MediaQuery.of(context).size.width;
-          return Container(
-            width: mediaQueryWidth*0.166,
-            //height: mediaQueryHeight*0.2,
-
-            child:
-            Column(
-              children: [
-                Stack(
-                  alignment: AlignmentDirectional.bottomCenter,
-                  children: [
-                    Container(
-                      child: Column(
-                        children: [
-                          SizedBox(height: mediaQueryHeight*0.026,),
-                          Text('09:00 AM',
-                            style: TextStyle(color: Colors.black,
-                                fontSize: mediaQueryHeight*0.014
-                            ),
-                          ),
-                          SizedBox(height: mediaQueryHeight*0.006,),
-                          Icon(Icons.cloud_outlined, color: Colors.black,
-
-                          ),
-                          SizedBox(height: mediaQueryHeight*0.006,),
-                          Padding(
-                            padding:  EdgeInsetsDirectional.only(
-                              bottom: mediaQueryHeight*0.006,
-                            ),
-                            child: CircleAvatar(
-                              child:
-                              Text('15° C',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              radius: 25.0,
-                              backgroundColor: tPrimary(),
-                            ),
-                          ),
-
-                        ],
-                      ),
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(50),
-                        color: tGrey(),
-                      ),
-                      width: mediaQueryWidth*0.25,
-                      height: mediaQueryHeight*0.182,
-                    ),
-                   /* Padding(
-                      padding:  EdgeInsetsDirectional.only(
-                        bottom: mediaQueryHeight*0.006,
-                      ),
-                      child: CircleAvatar(
-                        child:
-                        Text('15° C',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        radius: 25.0,
-                        backgroundColor: tPrimary(),
-                      ),
-                    ),*/
-                  ],
-                ),
-              ],
-            ),
-          );
-        }
-    );
 

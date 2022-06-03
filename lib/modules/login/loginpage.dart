@@ -5,7 +5,7 @@ import 'package:tour_guide_app/shared/styles/colors.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../../navigation.dart';
+import '../navigation/navigation.dart';
 
 class loginPage extends StatefulWidget {
   @override
@@ -13,15 +13,19 @@ class loginPage extends StatefulWidget {
 }
 
 class _loginPageState extends State<loginPage> {
+
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
   bool passorno = true;
   String password = '';
+
   @override
   Widget build(BuildContext context) {
+
     var mediaQueryHeight = MediaQuery.of(context).size.height;
     var mediaQueryWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -88,12 +92,10 @@ class _loginPageState extends State<loginPage> {
                                   if (value == null || value.isEmpty) {
                                     return 'This field is required';
                                   }
-
                                   // using regular expression
                                   if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
                                     return "Please enter a valid email address";
                                   }
-
                                   // the email is valid
                                   return null;
                                 },
@@ -118,7 +120,6 @@ class _loginPageState extends State<loginPage> {
                                 validatorFunction: (value) {
                                   RegExp regex =
                                   RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
-
                                   if (!regex.hasMatch(value)) {
                                     ElevatedButton(
                                       // color: Colors.orange,
@@ -137,7 +138,6 @@ class _loginPageState extends State<loginPage> {
                                       toastLength: Toast.LENGTH_LONG,
                                     );
                                   }
-
                                 },
                                 suffixPressed: () {
                                   setState(() {
@@ -147,25 +147,6 @@ class _loginPageState extends State<loginPage> {
                             SizedBox(
                               height: mediaQueryHeight * 0.0655,
                             ),
-                            /*mainButton(
-                                minWidth: mediaQueryWidth*0.2968,
-                                height: mediaQueryHeight*0.066,
-                                text: 'Login',
-                                fontSize: mediaQueryWidth*0.40,
-
-                                onPressed: () {
-                                  if (formKey.currentState!.validate()) {
-                                    print(emailController.text);
-                                    print(passwordController.text);
-
-                                    Navigator.push(context, MaterialPageRoute(
-                                      builder: (context) {
-                                        return Navigation();
-                                      },
-                                    ));
-                                  }
-                                },
-                                imagePath: 'assets/images/arrow.png')*/
                             MaterialButton(
                               onPressed: () {
                                 FirebaseAuth.instance

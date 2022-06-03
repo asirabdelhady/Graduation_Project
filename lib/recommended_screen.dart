@@ -1,53 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:tour_guide_app/models/models.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
-import 'package:tour_guide_app/shared/components/constants.dart';
-import 'package:tour_guide_app/shared/styles/colors.dart';
-class UtilsRecommended{
-  static List <RecommendedPlaces> getRecommendedPlaces(){
-    return [
-      RecommendedPlaces(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      RecommendedPlaces(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      RecommendedPlaces(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      RecommendedPlaces(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      RecommendedPlaces(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-      RecommendedPlaces(
-          placeName: 'They Pyramids',
-          imagePath: 'assets/images/Pyramids.jpg',
-          distance: '26 Km',
-          rating: '4.8'
-      ),
-    ];
-  }
-}
 
 class RecommendedScreen extends StatelessWidget{
   const RecommendedScreen({Key? key}) : super(key: key);
@@ -56,11 +9,6 @@ class RecommendedScreen extends StatelessWidget{
   Widget build(BuildContext context) {
     var mediaQueryHeight = MediaQuery.of(context).size.height;
     var mediaQueryWidth = MediaQuery.of(context).size.width;
-
-    List<RecommendedPlaces> recommendedPlaces = UtilsRecommended.getRecommendedPlaces();
-
-    PageController recommendedPageController =PageController(initialPage: 0);
-
 
     final Stream<QuerySnapshot> attractions = FirebaseFirestore.instance.collection('tAttraction').snapshots();
     return Scaffold(

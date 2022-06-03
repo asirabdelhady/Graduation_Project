@@ -58,7 +58,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
     var mediaQueryHeight = MediaQuery.of(context).size.height;
     var mediaQueryWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      //extendBody: true,
       body: Stack(
         children: [
           Container(
@@ -185,48 +184,3 @@ class _NotificationScreenState extends State<NotificationScreen> {
     );
   }
 }
-/* Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children:[
-            defaultTitle(title: 'Tour Plan', fontWeight: FontWeight.bold),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.025),
-              child: ElevatedButton(
-
-                style: ElevatedButton.styleFrom(
-                  shape: StadiumBorder(),
-                  primary: tPrimary(),
-                ),
-                child: Text('Read All'),
-                onPressed :(){
-                  setState(() {
-                    notiTapped=true;
-                  });
-                },
-              ),
-            ),
-          ]),*/
-/*appBar: AppBar(
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        actions: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.025),
-            child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-                shape: StadiumBorder(),
-                primary: tPrimary(),
-              ),
-              child: Text('Read All'),
-              onPressed :(){
-                setState(() {
-                  notiTapped=true;
-                });
-              },
-            ),
-          ),
-        ],
-        title:  Text('Notifications',
-          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: mediaQueryWidth*0.093),),
-        backgroundColor: Colors.white,),*/

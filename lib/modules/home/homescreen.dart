@@ -1,20 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:im_stepper/stepper.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/models/models.dart';
 import 'package:tour_guide_app/modules/categories/category_screen.dart';
-import 'package:tour_guide_app/modules/details/details_screen.dart';
-import 'package:tour_guide_app/recommended_screen.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
 import 'package:tour_guide_app/shared/components/constants.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
-
-import '../tour/tour_screen.dart';
 import 'location_controller.dart';
 
 class UtilsCategories{
@@ -40,6 +33,7 @@ class UtilsCategories{
 
   }
 }
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -50,12 +44,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   List<Categories> categories = UtilsCategories.getCategories();
-//////////////
-  int activeStep = 5; // Initial step set to 5.
-
-  int upperBound = 6; // upperBound MUST BE total number of icons minus 1.
-  ///////////////
-
   final Stream<QuerySnapshot> attractions = FirebaseFirestore.instance.collection('tAttraction').snapshots();
 
   @override
@@ -64,10 +52,9 @@ class _HomeScreenState extends State<HomeScreen> {
       print("completed");
       setState(() {});
     });
-    getAllTour();
+    //getAllTour();
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var mediaQueryWidth=MediaQuery.of(context).size.width;
     PageController categoriesPageController = PageController(initialPage: 0);
     PageController recommendedPageController = PageController(initialPage: 0);
+
     return Scaffold(
       body: Stack(
         children: [
@@ -83,7 +71,6 @@ class _HomeScreenState extends State<HomeScreen> {
             height: mediaQueryHeight,
             width: mediaQueryWidth,
             color: Colors.white,
-
           ),
           SafeArea(
             bottom: false,
@@ -180,68 +167,53 @@ class _HomeScreenState extends State<HomeScreen> {
                     Row(
                       children: [
                         Expanded(
-                          child: GestureDetector(
-                            onTap: () {
-
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(mediaQueryWidth*0.125),
-                              ),
-                              height: mediaQueryHeight*0.2459,
-                              width: double.infinity,
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(mediaQueryWidth*0.025, 0, 0, 0),
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Container(
-                                    ///////////////////////////////////
-
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children:  [
-                                          Padding(
-                                            padding: EdgeInsetsDirectional.only(start: 20.0,top: 8),
-                                            child: Text('My Tour',
-                                              style: TextStyle(
-                                                  fontSize: 22,
-                                                  fontWeight: FontWeight.bold
-                                              ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(mediaQueryWidth*0.125),
+                            ),
+                            height: mediaQueryHeight*0.2459,
+                            width: double.infinity,
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(mediaQueryWidth*0.025, 0, 0, 0),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Container(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children:  [
+                                        const Padding(
+                                          padding: EdgeInsetsDirectional.only(start: 20.0,top: 8),
+                                          child: Text('My Tour',
+                                            style: TextStyle(
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.bold
                                             ),
                                           ),
-
-                                          Padding(
-                                            padding: EdgeInsetsDirectional.only(start:20.0, top: 8),
-                                            child: Text('Next stop,',
-                                              style: TextStyle(
-                                                fontSize: 18,
-                                              ),),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsetsDirectional.only(start:20.0, top: 8),
-                                            child: (tour.isEmpty)?Text('Go Home...',
-                                              maxLines: 1,
-                                              style: TextStyle(
-                                                fontSize: 27,
-                                              ),
-                                            ):Text('${tour[0]['name']}',
-                                              maxLines: 1,
-                                              style: TextStyle(
-                                                fontSize: 27,
-                                              ),),
-                                          ),
-
-
-                                        ],
-                                      )
-
-                                    //////////////////////////////////
-
-
-
-                                  ),
+                                        ),
+                                        const Padding(
+                                          padding: EdgeInsetsDirectional.only(start:20.0, top: 8),
+                                          child: Text('Next stop,',
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                            ),),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsetsDirectional.only(start:20.0, top: 8),
+                                          child: (tour.isEmpty)?const Text('Go Home...',
+                                            maxLines: 1,
+                                            style: TextStyle(
+                                              fontSize: 27,
+                                            ),
+                                          ):Text('${tour[0]['name']}',
+                                            maxLines: 1,
+                                            style: const TextStyle(
+                                              fontSize: 27,
+                                            ),),
+                                        ),
+                                      ],
+                                    )
                                 ),
                               ),
                             ),
@@ -254,7 +226,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         subTitle(subTitle: 'Recommended (nearby)'),
-
                       ],
                     ),
                     SizedBox(height: mediaQueryHeight*0.039,),
@@ -267,10 +238,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           builder: (BuildContext context,
                               AsyncSnapshot<QuerySnapshot> snapshot){
                             if (snapshot.hasError){
-                              return Text('somthing went wrong');
+                              return const Text('Something went wrong');
                             }
                             if(snapshot.connectionState==ConnectionState.waiting){
-                              return Center(child: CircularProgressIndicator());
+                              return const Center(child: CircularProgressIndicator());
                             }
                             final data = snapshot.requireData;
                             return Container(
@@ -315,7 +286,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           width: mediaQueryWidth*0.1875,
                           child: ElevatedButton(onPressed: (){
                             Navigator.push(context, MaterialPageRoute(builder: (context){
-                               return CategoryScreen();
+                               return const CategoryScreen();
 
                             }));
                           },
@@ -365,10 +336,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     );
-
-    }
-  // Returns the next button
-
+  }
 
 
 }
