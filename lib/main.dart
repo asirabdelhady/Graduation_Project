@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tour_guide_app/calculating_distance.dart';
 import 'package:tour_guide_app/modules/categories/category_screen.dart';
 import 'package:tour_guide_app/modules/home/homescreen.dart';
 import 'package:tour_guide_app/modules/welcome/welcomepage.dart';
