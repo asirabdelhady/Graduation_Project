@@ -204,7 +204,6 @@ Widget profileBody() => Builder(
                                   width: mediaQueryWidth,
                                   height: mediaQueryHeight*0.320,
                                   child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
                                       itemCount: data.size,
                                       itemBuilder:(context, index) {
                                         return tourPlanCard2(
@@ -243,7 +242,6 @@ Widget profileBody() => Builder(
                                   width: mediaQueryWidth,
                                   height: mediaQueryHeight*0.320,
                                   child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
                                       itemCount: data.size,
                                       itemBuilder:(context, index) {
                                         return tourPlanCard2(

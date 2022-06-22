@@ -52,7 +52,13 @@ class _HomeScreenState extends State<HomeScreen> {
       print("completed");
       setState(() {});
     });
-    //getAllTour();
+    setState(() {
+      getAllAttractions();
+      getAllEntertainment();
+      getAllHotels();
+      getAllTour();
+
+    });
     super.initState();
   }
 
