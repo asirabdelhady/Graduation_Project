@@ -8,7 +8,7 @@ class Utils {
   static List<Notifications> getNotifications() {
     return [
       Notifications(
-        notification: "You are 2 Km away from the Pyramids",
+        notification: "You are 1 Km away from the Pyramids",
       ),
       Notifications(
         notification: "You are 3 Km away from the Pyramids",
@@ -23,7 +23,7 @@ class Utils {
         notification: "You are 6 Km away from the Pyramids",
       ),
       Notifications(
-        notification: "You are 2 Km away from the Pyramids",
+        notification: "You are 4 Km away from the Pyramids",
       ),
       Notifications(
         notification: "You are 3 Km away from the Pyramids",
@@ -105,7 +105,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             separatorBuilder: (context, index) => SizedBox(
                                   height: mediaQueryHeight * 0.0196,
                                 ),
-                            itemCount: notifications.length,
+                            itemCount: 1,
                             itemBuilder: (context, index) {
                               return Dismissible(
                                 key: Key(notifications[index].notification),

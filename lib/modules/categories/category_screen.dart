@@ -5,6 +5,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
 import 'package:tour_guide_app/shared/styles/colors.dart';
 
+import '../Search/search_screen.dart';
+
 class CategoryScreen extends StatefulWidget{
   const CategoryScreen({Key? key}) : super(key: key);
 
@@ -52,9 +54,24 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   children: [
                     backButton(),
                     defaultTitle(title: 'Categories'),
+                    SizedBox(width: 4,),
+                    Container(
+                      width: 360*0.125,
+                      height: 752*0.0655,
+                      decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(10)
+                      ),
+                      child: IconButton( color: Colors.white,
+                        icon: const Icon(Icons.search),
+                        onPressed: ()  {
+                          Navigator.push(context, MaterialPageRoute(builder: (_)=> SearchScreen()));
+                        },
+                      ),
+                    ),
                   ],
                 ),
-                Container(
+                /*Container(
                   height: mediaQueryHeight*0.06,
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -70,7 +87,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       prefixIcon: Icon(Icons.search_rounded),
                     ),
                   ),
-                ),
+                ),*/
                 SizedBox(height: mediaQueryHeight*0.039,),
                 Column(
                   children: [

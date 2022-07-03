@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tour_guide_app/models/models.dart';
+import 'package:tour_guide_app/modules/Search/search_screen.dart';
 import 'package:tour_guide_app/modules/categories/category_screen.dart';
 import 'package:tour_guide_app/shared/components/components.dart';
 import 'package:tour_guide_app/shared/components/constants.dart';
@@ -142,12 +143,26 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                             )
-                          ],)
+                          ],),
+                        Container(
+                          width: 360*0.125,
+                          height: 752*0.0655,
+                          decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(10)
+                          ),
+                          child: IconButton( color: Colors.white,
+                            icon: const Icon(Icons.search),
+                            onPressed: ()  {
+                            Navigator.push(context, MaterialPageRoute(builder: (_)=> SearchScreen()));
+                            },
+                          ),
+                        ),
                       ],
                     ),
                     Row(
                       children: [
-                        Expanded(
+                       /* Expanded(
                           child: Container(
                               decoration: BoxDecoration(
                                 color: Colors.transparent,
@@ -159,6 +174,12 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: mediaQueryHeight*0.06,
                               width: double.infinity,
                               child: TextFormField(
+                               onChanged: (val) {
+                  setState(() {
+                    inputText = val;
+                    print(inputText);
+                  });
+                },
                                 decoration: InputDecoration(
                                   hintText: 'Search',
                                   hintStyle: TextStyle(color: tGrey()),
@@ -166,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   border: InputBorder.none,
                                 ),
                               )),
-                        ),
+                        ),*/
                       ],
                     ), //search
                     SizedBox(height:mediaQueryHeight*0.016,),
