@@ -18,104 +18,15 @@ class WeatherPage extends StatelessWidget {
     var day = DateFormat.d().format(DateTime.now());
     var month = DateFormat.LLLL().format(DateTime.now());
     TextEditingController cityText = TextEditingController();
-    //cityText='Cairo' as TextEditingController;
 
      handleSearchCity() {
       c.fetchWeather(cityText.text);
-      // Close keyboard after enter
       FocusScopeNode currentFocus = FocusScope.of(context);
       if (!currentFocus.hasPrimaryFocus) {
         currentFocus.unfocus();
       }
     }
 
-    /*THIS IS DROPDOWN Widget pickCity() {
-      return Container(
-        margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
-        child: Row(
-          children: [
-            Icon(
-              Icons.location_on_outlined,
-              color: Colors.white,
-            ),
-            SizedBox(width: 20),
-            Obx(
-              () => Container(
-                width: width * 0.35,
-                child: DropdownButton(
-                  items: c.city
-                      .map(
-                        (e) => DropdownMenuItem(
-                          value: e,
-                          child: Text(e),
-                        ),
-                      )
-                      .toList(),
-                  icon: Icon(
-                    Icons.arrow_drop_down_rounded,
-                    color: Colors.white,
-                  ),
-                  isExpanded: true,
-                  dropdownColor: Colors.lightBlue,
-                  underline: Container(
-                    height: 0,
-                  ),
-                  value: c.dropdownValue.value,
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                  ),
-                  onChanged: (String? value) {
-                    c.dropdownValue.value = value!;
-                    c.fetchWeather(value);
-                  },
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
-    }
-*/
-
-    /*Widget searchCity() {
-      return Container(
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-          border: Border.all(
-            color: tGrey(),
-          ),
-          borderRadius: BorderRadius.circular(360*0.125),
-        ),
-        margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
-        width: double.infinity,
-        child: Row(
-          children: [
-            Icon(
-              Icons.search_outlined,
-              color: tPrimary(),
-              size: 30,
-            ),
-            SizedBox(width: 5),
-            Expanded(
-              child: TextField(
-                controller: cityText,
-                textInputAction: TextInputAction.done,
-                onEditingComplete: () {
-                  handleSearchCity();
-                },
-                style: TextStyle(color: tGrey(), fontSize: 22),
-                decoration: InputDecoration(
-                  hintText: 'Search City',
-                  hintStyle: TextStyle(color:tGrey(), fontSize: 22),
-                  border: InputBorder.none,
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
-    }*/
 
     Widget weatherIcon() {
       return Center(

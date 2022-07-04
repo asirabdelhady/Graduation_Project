@@ -44,9 +44,17 @@ Future addDistanceToEntertainment()async{
     );
   }
 
+}
 
+Future addElementToCollection()async{
+    FirebaseFirestore.instance.collection('entertainment').get().then((value) {
+      value.docs.forEach((element) {
+        FirebaseFirestore.instance.collection('All').add(element.data());
+      });
+    }).then((value) => print('Added'));
 
 }
+
 
 double calculateDistance(lat1, lon1, lat2, lon2){
   var p = 0.017453292519943295;

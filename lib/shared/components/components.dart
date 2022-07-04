@@ -129,7 +129,7 @@ Widget profileHeader({
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: SizedBox(
-                width: mediaQueryWidth,
+                width: mediaQueryWidth-157,
                 height: mediaQueryHeight*0.170,
                 child:
                     Column(
@@ -963,12 +963,13 @@ Widget defualtCard1 ({
                         Padding(
                           padding:  EdgeInsets.symmetric(horizontal: mediaQueryWidth*0.0375, vertical: mediaQueryHeight*0.01311),
                           child: CircleAvatar(
-                            radius: 22.5,
+                            radius: 15,
                             backgroundColor: tPrimary(),
                             child: IconButton(onPressed: () {
                               Navigator.pop(context);
-                            }, icon: const Icon(Icons.arrow_back,
+                            }, icon: const Icon(Icons.close,
                               color: Colors.white,
+                              size: 15,
                             ),
                             ),
                           ),
@@ -989,14 +990,14 @@ Widget defualtCard1 ({
                           ),
                           GestureDetector(
                             onTap: () {
-                              Utils.openLink(url:'https://www.google.com/maps/place/The+Great+Pyramid+of+Giza/@29.9792345,31.1342019,17z/data=!3m1!4b1!4m6!3m5!1s0x14584587ac8f291b:0x810c2f3fa2a52424!8m2!3d29.9792345!4d31.1342019!16zL20vMDM2bWs?authuser=0&hl=en');
+                              Utils.openLink(url:location);
 
                             },
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 12.0),
                               child: Container(
                                 width: mediaQueryWidth*1.25,
-                                height: mediaQueryHeight*0.163,
+                                height: mediaQueryHeight*0.143,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30),
                                   image: const DecorationImage(

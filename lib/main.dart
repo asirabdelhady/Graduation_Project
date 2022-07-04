@@ -6,6 +6,7 @@ import 'package:tour_guide_app/modules/home/homescreen.dart';
 import 'package:tour_guide_app/modules/welcome/welcomepage.dart';
 import 'package:tour_guide_app/search/search.dart';
 import 'package:tour_guide_app/shared/components/constants.dart';
+import 'package:tour_guide_app/testgoefencing.dart';
 import 'modules/database.dart';
 import 'modules/login/loginpage.dart';
 import 'modules/signup/signuppage.dart';
@@ -27,7 +28,7 @@ void main() async{
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(home: Navigation(),
+    return  MaterialApp(home: welcomepage(),
     debugShowCheckedModeBanner: false,
     );
   }

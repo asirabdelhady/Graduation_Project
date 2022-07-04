@@ -189,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               )),
                         ),*/
                       ],
-                    ), //search
+                    ),
                     SizedBox(height:mediaQueryHeight*0.016,),
                     Row(
                       children: [

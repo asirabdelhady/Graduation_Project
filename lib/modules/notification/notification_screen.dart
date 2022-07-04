@@ -90,7 +90,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     ),
                   ),
                 ]),
-                SingleChildScrollView(
+                /*SingleChildScrollView(
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: mediaQueryWidth * 0.0375),
@@ -175,7 +175,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       ),
                     ]),
                   ),
-                ),
+                ),*/ // Notification
               ],
             ),
           ),

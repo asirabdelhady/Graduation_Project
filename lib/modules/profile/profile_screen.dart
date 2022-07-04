@@ -41,7 +41,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         defaultTitle(title: 'Profile', fontWeight: FontWeight.bold),
                     ]),
                      SizedBox(height: mediaQueryHeight*0.0180),
-                    profileHeader(imagePath: 'assets/images/kisspng-computer-icons-user-profile-info-5acde51ebdcc36.0919547315234429747774.png', name: 'Asir', age: 21),
+                    profileHeader(
+                        imagePath: 'assets/images/kisspng-computer-icons-user-profile-info-5acde51ebdcc36.0919547315234429747774.png',
+                        name: 'Asir Abdelhady',
+                        age: 21
+                    ),
                     profileBody(),
 
                   ]),
